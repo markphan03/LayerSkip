@@ -113,6 +113,10 @@ def main(args: Arguments, generate_arguments: GenerateArguments, generation_conf
         prompt=sys.stdin.read()
         print(colorama.Style.RESET_ALL, end=" ")
 
+        # An empty read indicates EOF; stop instead of generating repeatedly.
+        if not prompt.strip():
+            break
+
         try:
             response: GenerationResult = generator.generate(
                 prompt=prompt,
