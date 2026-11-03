@@ -109,7 +109,7 @@ def main(args: Arguments, generate_arguments: GenerateArguments, generation_conf
         print("======================================================================")
         print()
 
-        print(colorama.Fore.BLUE, end="")
+        print(colorama.Fore.LIGHTBLUE_EX, end="")
         prompt=sys.stdin.read()
         print(colorama.Style.RESET_ALL, end=" ")
 
@@ -147,11 +147,13 @@ def main(args: Arguments, generate_arguments: GenerateArguments, generation_conf
 
 def process_cli_arguments() -> Tuple[Arguments, GenerateArguments, GenerationConfig]:
     parser = transformers.HfArgumentParser((Arguments, GenerateArguments, GenerationConfig))
+    print(parser)
+
     (
         general_arguments,
         generate_arguments,
         generation_config,
-    ) = parser.parse_args_into_dataclasses(return_remaining_strings=False)
+    ) = parser.parse_args_into_dataclasses(args=['--model', 'facebook/layerskip-llama3.2-1B', '--sample', 'True', '--max_steps', '512'],return_remaining_strings=False)
 
     if general_arguments.model_args:
         general_arguments.model_args = simple_parse_args_string(general_arguments.model_args)
@@ -161,5 +163,9 @@ def process_cli_arguments() -> Tuple[Arguments, GenerateArguments, GenerationCon
     return general_arguments, generate_arguments, generation_config
 
 if __name__ == "__main__":
+    print(sys.argv[:])
     args, benchmark_arguments, generation_config = process_cli_arguments()
+    print(type(args), args)
+    print(type(benchmark_arguments), benchmark_arguments)
+    print(type(generation_config), generation_config)
     main(args, benchmark_arguments, generation_config)
