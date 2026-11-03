@@ -298,9 +298,12 @@ def extract_batch(model, sequences, batch_id, features, packed, args):
         alpha = adaptive_alpha(confidence, args)
         already_matched = torch.zeros(len(block), dtype=torch.bool, device=head_device)
         common = {
+            "layer": None,
             "batch_id": pa.array([batch_id] * len(block), type=pa.int64()),
             "batch_slot": pa.array([b for b, _ in block], type=pa.int32()),
             "sequence_id": pa.array([sequences[b].sequence_id for b, _ in block], type=pa.int64()),
+            # add input_ids
+            "input_ids": pa.array([sequences[b].token_ids for b, _ in block], type=pa.list_(pa.int32())),
             "position": pa.array([p for _, p in block], type=pa.int32()),
             "token_id": pa.array([sequences[b].token_ids[p] for b, p in block], type=pa.int32()),
             "real_target": pa.array([sequences[b].real_targets[p] for b, p in block], type=pa.int32()),
