@@ -9,6 +9,14 @@ Reference summaries are never supplied. A KV cache reuses the prompt and earlier
 tokens during decoding. Parquet and CSV are written.
 """
 
+
+# ./.venv/bin/python create_layer_dataset_v2.py \
+#   --model facebook/layerskip-llama2-7B \
+#   --max-documents 1 \
+#   --max-new-tokens 16 \
+#   --device cpu \
+#   --output-dir layer_example
+
 import argparse
 import csv
 import gc
