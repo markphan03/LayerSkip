@@ -50,7 +50,7 @@ Under `<output-dir>/<timestamp>/v3/train/`, both Parquet and CSV are saved:
 | --- | --- |
 | `cnn_dm_train_*` | One row per generation step and layer |
 | `cnn_dm_sequences_train_*` | One row per document with its prompt and generated output |
-| `manifest.json` | Schema version 3, settings, counts, truncation and shard lists |
+| `manifest.json` | Schema version 4, settings, hidden dimension/dtype, counts, truncation and shard lists |
 
 Prediction columns:
 
@@ -58,6 +58,11 @@ Prediction columns:
 - `generation_step`: zero-based next-token generation step.
 - `position`: last position of that step's input, zero-based.
 - `layer`, `output_token_id`: 1-based layer number and its prediction.
+- `hidden_output`: raw decoder output vector at the last input position, before
+  final normalization and the vocabulary head. The final layer also stores its
+  raw output. Parquet uses a fixed-size float32 list of `hidden_size` elements;
+  CSV uses a JSON list in one cell. Values computed at lower model precision
+  are converted to float32 for storage, without recovering lost precision.
 - `label_match`: 1 if the prediction matches the final layer at the same step, else 0.
 
 Rows are grouped by document, generation step, then layer. For example, step 0
@@ -68,6 +73,8 @@ reference summary. It is offline supervision, not an inference-time feature.
 The sequences file stores `document_id`, `sequence_id`, `input_ids` (the prompt),
 `generated_token_ids` (including EOS if generated), and `truncated_article_tokens`.
 Lists are JSON cells in CSV. Numeric IDs are not decoded into text.
+Hidden vectors substantially increase output size. For hidden size 4096,
+32 layers and 16 generated tokens, vectors alone occupy 8 MiB before compression.
 
 Join on `sequence_id` to reconstruct a prediction's exact input:
 

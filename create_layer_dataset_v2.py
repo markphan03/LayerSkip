@@ -190,7 +190,8 @@ def predict_layers(model, input_ids, past_key_values=None, use_cache=False):
         normalized = (output.last_hidden_state[:, -1, :] if index == len(captured) - 1
                       else norm(raw.to(norm_device)))
         predictions.append(int(head(normalized.to(head.weight.device)).argmax(-1).item()))
-    return predictions, output.past_key_values if use_cache else None
+    hidden_vectors = [hidden[0].float().tolist() for hidden in captured]
+    return predictions, hidden_vectors, output.past_key_values if use_cache else None
 
 
 def collect_document(model, tokenizer, record, sequence_id, features, packed, args):
@@ -201,7 +202,7 @@ def collect_document(model, tokenizer, record, sequence_id, features, packed, ar
     for generation_step in range(args.max_new_tokens):
         # Prefill the prompt once; cached decoding consumes only the latest token.
         step_input = prompt if generation_step == 0 else [generated[-1]]
-        predictions, past_key_values = predict_layers(
+        predictions, hidden_vectors, past_key_values = predict_layers(
             model, step_input, past_key_values=past_key_values, use_cache=True,
         )
         final_token = predictions[-1]
@@ -211,6 +212,9 @@ def collect_document(model, tokenizer, record, sequence_id, features, packed, ar
             "position": pa.array([len(prompt) + generation_step - 1] * len(predictions), type=pa.int32()),
             "layer": pa.array(range(1, len(predictions) + 1), type=pa.int32()),
             "output_token_id": pa.array(predictions, type=pa.int32()),
+            "hidden_output": pa.array(
+                hidden_vectors, type=pa.list_(pa.float32(), len(hidden_vectors[0])),
+            ),
             "label_match": pa.array([int(token == final_token) for token in predictions], type=pa.uint8()),
         }))
         generated.append(final_token)
@@ -294,7 +298,10 @@ def process_split(model, tokenizer, version, split, args):
         "version": VERSIONS[version], "dataset_config": VERSIONS[version], "split": SPLITS[split],
         "arguments": {key: str(value) if isinstance(value, Path) else value for key, value in vars(args).items()},
         "context_size": args.context_size,
-        "mode": "full_model_greedy_generation", "schema_version": 3,
+        "mode": "full_model_greedy_generation", "schema_version": 4,
+        "hidden_size": model.config.hidden_size,
+        "hidden_output": "raw decoder output at last input position, before final normalization",
+        "hidden_dtype": "float32",
         "num_layers": len(model.model.layers),
         "layer_numbering": "1-based decoder layers; final layer included",
         "prediction": "argmax(lm_head(final_norm(layer_output))) at last input position",

@@ -80,7 +80,11 @@ def test_predict_layers_matches_hidden_states_and_removes_hooks():
     torch.manual_seed(0)
     model = tiny_model()
     inputs = [1, 4, 5]
-    predictions, _ = predict_layers(model, inputs)
+    predictions, hidden_vectors, _ = predict_layers(model, inputs)
+    raw_final = []
+    handle = model.model.norm.register_forward_pre_hook(
+        lambda module, inputs: raw_final.append(inputs[0].detach().clone())
+    )
     with torch.inference_mode():
         result = model.model(torch.tensor([inputs]), output_hidden_states=True, use_cache=False)
         expected = []
@@ -89,7 +93,11 @@ def test_predict_layers_matches_hidden_states_and_removes_hooks():
             if index < 3:
                 hidden = model.model.norm(hidden)
             expected.append(model.lm_head(hidden).argmax(-1).item())
+    handle.remove()
     assert predictions == expected
+    expected_raw = [state[0, -1].float() for state in result.hidden_states[1:-1]]
+    expected_raw.append(raw_final[0][0, -1].float())
+    torch.testing.assert_close(torch.tensor(hidden_vectors), torch.stack(expected_raw))
     assert all(not layer._forward_hooks for layer in model.model.layers)
 
 
@@ -113,7 +121,7 @@ def test_generation_uses_final_token_and_labels_every_match(monkeypatch, last_to
             assert len(context) == 1
         full_context = (past_key_values or []) + list(context)
         contexts.append(full_context)
-        return next(outputs), full_context
+        return next(outputs), [[0.1, 0.2]] * 3, full_context
 
     monkeypatch.setattr(extractor, "predict_layers", predict)
     features, packed = Collector(), Collector()
@@ -141,7 +149,7 @@ def test_eos_stops_generation_after_recording_all_layers(monkeypatch):
 
     def predict(model, context, **kwargs):
         contexts.append(context)
-        return [7, 2, 2], None
+        return [7, 2, 2], [[0.1, 0.2]] * 3, None
 
     monkeypatch.setattr(extractor, "predict_layers", predict)
     features, packed = Collector(), Collector()
@@ -191,12 +199,12 @@ def test_split_writes_manifest_parquet_and_csv(tmp_path, monkeypatch):
     monkeypatch.setattr(extractor, 'load_records', lambda *args: iter([
         {'id': 'doc', 'article': 'article', 'highlights': 'excluded'},
     ]))
-    monkeypatch.setattr(extractor, 'predict_layers', lambda *args, **kwargs: ([2, 3, 2], None))
+    monkeypatch.setattr(extractor, 'predict_layers', lambda *args, **kwargs: ([2, 3, 2], [[0.1] * 16] * 3, None))
     extractor.process_split(tiny_model(), tokenizer_stub(), 'v3', 'train', args)
     root = tmp_path / 'v3' / 'train'
     manifest = json.loads((root / 'manifest.json').read_text())
     assert manifest['status'] == 'complete'
-    assert manifest['schema_version'] == 3
+    assert manifest['schema_version'] == 4
     assert manifest['documents'] == manifest['generated_tokens'] == 1
     for key in ('feature_shards', 'sequence_shards'):
         for shard in manifest[key]:
@@ -205,6 +213,10 @@ def test_split_writes_manifest_parquet_and_csv(tmp_path, monkeypatch):
                 csv_rows = list(csv.DictReader(stream))
             assert len(rows) == len(csv_rows) == shard['rows']
             if key == 'feature_shards':
+                assert manifest['hidden_size'] == 16
+                assert len(rows[0]['hidden_output']) == 16
+                assert json.loads(csv_rows[0]['hidden_output']) == rows[0]['hidden_output']
+                assert pq.read_table(root / shard['file']).schema.field('hidden_output').type == pa.list_(pa.float32(), 16)
                 assert [r['label_match'] for r in rows] == [1, 0, 1]
                 assert [r['label_match'] for r in csv_rows] == ['1', '0', '1']
 
@@ -216,15 +228,16 @@ def test_cached_predictions_and_labels_match_full_prefix_at_every_layer():
     cache = None
     for step in range(5):
         step_input = prefix if step == 0 else [prefix[-1]]
-        cached, cache = predict_layers(model, step_input, past_key_values=cache, use_cache=True)
-        full, _ = predict_layers(model, prefix)
+        cached, cached_hidden, cache = predict_layers(model, step_input, past_key_values=cache, use_cache=True)
+        full, full_hidden, _ = predict_layers(model, prefix)
         assert cached == full
+        torch.testing.assert_close(torch.tensor(cached_hidden), torch.tensor(full_hidden), atol=1e-6, rtol=1e-5)
         assert [int(t == cached[-1]) for t in cached] == [int(t == full[-1]) for t in full]
         assert cache.get_seq_length() == len(prefix)
         prefix = prefix + [cached[-1]]
     # A new document must begin with a new cache, independent of the previous one.
-    fresh, fresh_cache = predict_layers(model, [1, 3], use_cache=True)
-    reference, _ = predict_layers(model, [1, 3])
+    fresh, _, fresh_cache = predict_layers(model, [1, 3], use_cache=True)
+    reference, _, _ = predict_layers(model, [1, 3])
     assert fresh == reference
     assert fresh_cache.get_seq_length() == 2
 
