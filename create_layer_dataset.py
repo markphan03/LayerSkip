@@ -1,45 +1,27 @@
-"""Stream CNN/DailyMail into context batches and per-token, per-layer Parquet.
+"""Extract next-token predictions from every decoder layer on CNN/DailyMail.
 
-Example (downloads and inference only occur when explicitly executed):
+Example (defaults to the training split):
     python create_layer_dataset.py --model facebook/layerskip-llama2-7B \
-        --output-dir layer_data --context-size 1024 --batch-size 2
+        --output-dir layer_data --max-documents 3
 
-Download just the test split, without loading a model:
-    python create_layer_dataset.py --download-only --split test --output-dir cnn_data
-
-CNN/DailyMail configurations (1.0.0, 2.0.0, 3.0.0) each contain train,
-validation, and test. The default configuration is 3.0.0. Select others with
---configs 1.0.0 2.0.0 3.0.0; the earlier --versions v1 v2 v3 spelling also works.
-
-Requires the repository dependencies and pyarrow (a datasets dependency).
-Supported models expose model.layers, model.norm and an output embedding head,
-as Llama/LayerSkip and Mistral do. Intermediate distributions use the logit lens:
-apply the final normalization and LM head to each decoder layer's raw output.
-
-Each feature row describes a prediction AFTER the input token at `position`.
-`real_target` is the next input token, including across chunk boundaries, or
--100 at the end of a document. Padding produces no feature rows. Synthetic
-summary repetitions are explicitly marked. This is teacher-forced extraction,
-not autoregressive text generation.
-
-Vector columns are little-endian binary arrays, avoiding Python float lists:
-    np.frombuffer(row['distribution'], dtype='<f4')  # default probability dtype
-    np.frombuffer(row['hidden_output'], dtype='<f2') # default hidden dtype
-For float8 hidden outputs, reconstruct using
-    torch.frombuffer(bytearray(blob), dtype=torch.uint8).view(torch.float8_e4m3fn)
-Each split's manifest records dimensions, dtypes, label formulas, and shards.
+Teacher-forced extraction: inputs contain the article and reference summary.
+Chunks are independent contexts, with no overlap or cache across chunks.
+Prediction rows contain sequence_id, position, layer, and output_token_id.
+The input for a row is sequence.input_ids[:position + 1]; sequences are saved
+once in separate Parquet files. Layer numbers are 1-based, including the final
+layer. No labels, hidden vectors, or probability distributions are stored.
 """
 
 import argparse
+import csv
 import gc
 import itertools
 import json
 import math
-import sys
 from dataclasses import dataclass
+from datetime import datetime
 from pathlib import Path
 
-import numpy as np
 import pyarrow as pa
 import pyarrow.parquet as pq
 import torch
@@ -47,7 +29,6 @@ from datasets import load_dataset
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 
-IGNORE_INDEX = -100
 VERSIONS = {"v1": "1.0.0", "v2": "2.0.0", "v3": "3.0.0"}
 SPLITS = {"train": "train", "val": "validation", "test": "test"}
 
@@ -102,52 +83,41 @@ class Sequence:
     sequence_id: int
     chunk_index: int
     token_ids: list
-    real_targets: list
-    is_summary: list
-    is_synthetic: list
     length: int
 
 
 def document_sequences(record, tokenizer, context_size):
-    """Drop tails below 10%; repeat summary up to 90%; right-pad to context."""
-    prefix = "[Prompt]\nSummarize the following document:\n" + record["article"]
-    prefix += "\n\n[Answer]\nAnswer:\n"
-    prompt = tokenizer.encode(prefix, add_special_tokens=False)
+    """Keep every token, without repetition; right-pad only for batching."""
+    text = f"Article: {record['article']}\nSummary: {record['highlights']}"
+    tokens = tokenizer.encode(text, add_special_tokens=False)
     if tokenizer.bos_token_id is not None:
-        prompt.insert(0, tokenizer.bos_token_id)
-    summary = tokenizer.encode(record["highlights"], add_special_tokens=False)
-    tokens = prompt + summary + [tokenizer.eos_token_id]
-    summary_flags = [False] * len(prompt) + [True] * (len(summary) + 1)
-    fill_to = math.ceil(0.9 * context_size)
+        tokens.insert(0, tokenizer.bos_token_id)
+    tokens.append(tokenizer.eos_token_id)
     for chunk_index, start in enumerate(range(0, len(tokens), context_size)):
         ids = tokens[start:start + context_size]
-        flags = summary_flags[start:start + context_size]
-        original_length = len(ids)
-        if original_length < 0.1 * context_size:
-            continue
-        synthetic = [False] * original_length
-        if original_length < fill_to:
-            # Empty summaries use EOS as a defined fallback filler.
-            filler = summary or [tokenizer.eos_token_id]
-            count = fill_to - original_length
-            ids += list(itertools.islice(itertools.cycle(filler), count))
-            flags += [True] * count
-            synthetic += [True] * count
-        targets = ids[1:] + [IGNORE_INDEX]
-        if original_length == context_size and start + context_size < len(tokens):
-            targets[-1] = tokens[start + context_size]
-        # EOS terminates the real document; artificial filler is never its target.
-        if start + original_length == len(tokens):
-            targets[original_length - 1] = IGNORE_INDEX
-        length = len(ids)
-        padding = context_size - length
         yield Sequence(
             document_id=str(record["id"]), sequence_id=-1, chunk_index=chunk_index,
-            token_ids=ids + [tokenizer.pad_token_id] * padding,
-            real_targets=targets + [IGNORE_INDEX] * padding,
-            is_summary=flags + [False] * padding,
-            is_synthetic=synthetic + [False] * padding, length=length,
+            token_ids=ids + [tokenizer.pad_token_id] * (context_size - len(ids)),
+            length=len(ids),
         )
+
+
+def export_parquet_csv(path):
+    """Write a spreadsheet-readable copy, streaming one record batch at a time."""
+    destination = path.with_suffix(".csv")
+    temporary = destination.with_suffix(".csv.partial")
+    parquet = pq.ParquetFile(path)
+    with temporary.open("w", newline="", encoding="utf-8-sig") as stream:
+        writer = csv.writer(stream)
+        writer.writerow(parquet.schema_arrow.names)
+        for batch in parquet.iter_batches(batch_size=1024):
+            for row in batch.to_pylist():
+                writer.writerow([
+                    json.dumps(value) if isinstance(value, (list, dict)) else value
+                    for value in row.values()
+                ])
+    temporary.replace(destination)
+    return destination
 
 
 class ShardWriter:
@@ -184,35 +154,13 @@ class ShardWriter:
         self.writer.close()
         self.writer = None
         self.temporary.rename(self.path)
+        csv_path = export_parquet_csv(self.path)
         self.shards.append({
             "file": self.path.name, "rows": self.rows,
+            "csv_file": csv_path.name,
             "uncompressed_bytes": self.bytes, "file_bytes": self.path.stat().st_size,
         })
         self.rows = self.bytes = 0
-
-
-def binary_vectors(tensor, dtype):
-    if dtype == "float8_e4m3fn":
-        maximum = torch.finfo(torch.float8_e4m3fn).max
-        array = tensor.float().clamp(-maximum, maximum).to(torch.float8_e4m3fn)
-        array = array.contiguous().view(torch.uint8).cpu().numpy()
-    else:
-        array = tensor.float().cpu().numpy().astype(
-            "<f2" if dtype == "float16" else "<f4", copy=False,
-        )
-    return pa.array([row.tobytes() for row in array], type=pa.binary())
-
-
-def scalar_array(tensor, arrow_type):
-    return pa.array(tensor.detach().cpu().numpy(), type=arrow_type)
-
-
-def adaptive_alpha(confidence, args):
-    if args.alpha_mode == "fixed":
-        return torch.full_like(confidence, args.alpha)
-    # Piecewise linear, monotone: p <= .2 -> .6; p = .9 -> .9; p = 1 -> 1.
-    middle = 0.6 + (confidence - 0.2) * (0.3 / 0.7)
-    return torch.where(confidence < 0.9, middle.clamp(min=0.6), confidence)
 
 
 def capture_layers(model, sequences, args):
@@ -246,105 +194,47 @@ def capture_layers(model, sequences, args):
     return captured, final_hidden
 
 
-def sequence_table(sequences, batch_id):
+def sequence_table(sequences):
     return pa.table({
-        "batch_id": pa.array([batch_id] * len(sequences), type=pa.int64()),
-        "batch_slot": pa.array(range(len(sequences)), type=pa.int32()),
         "document_id": pa.array([s.document_id for s in sequences], type=pa.string()),
         "sequence_id": pa.array([s.sequence_id for s in sequences], type=pa.int64()),
         "chunk_index": pa.array([s.chunk_index for s in sequences], type=pa.int32()),
-        "length": pa.array([s.length for s in sequences], type=pa.int32()),
-        "token_ids": pa.array([s.token_ids for s in sequences], type=pa.list_(pa.int32())),
-        "real_targets": pa.array([s.real_targets for s in sequences], type=pa.list_(pa.int32())),
-        "attention_mask": pa.array(
-            [[1] * s.length + [0] * (len(s.token_ids) - s.length) for s in sequences],
-            type=pa.list_(pa.uint8()),
+        "input_ids": pa.array(
+            [s.token_ids[:s.length] for s in sequences], type=pa.list_(pa.int32()),
         ),
-        "is_summary": pa.array([s.is_summary for s in sequences], type=pa.list_(pa.bool_())),
-        "is_synthetic": pa.array([s.is_synthetic for s in sequences], type=pa.list_(pa.bool_())),
     })
 
 
 @torch.inference_mode()
-def extract_batch(model, sequences, batch_id, features, packed, args):
+def extract_batch(model, sequences, features, packed, args):
+    """Record each layer's greedy next-token prediction for each real position."""
     captured, final_hidden = capture_layers(model, sequences, args)
-    packed.write(sequence_table(sequences, batch_id))
+    packed.write(sequence_table(sequences))
     head = model.get_output_embeddings()
     head_device = head.weight.device
     norm = model.model.norm
     norm_device = next(norm.parameters()).device
     positions = [(b, p) for b, s in enumerate(sequences) for p in range(s.length)]
-    vocab_size = head.weight.shape[0]
-    hidden_size = head.weight.shape[1]
-    # Bound projection workspace and serialized tables, independently of batch size.
-    per_token = 40 * vocab_size + 8 * hidden_size
-    budget = min(args.max_host_memory_gb * 2**30, available_memory() - args.reserve_bytes)
-    shard_limit = args.max_shard_mb * 2**20
-    stored_row_bytes = vocab_size * (2 if args.distribution_dtype == "float16" else 4)
-    stored_row_bytes += hidden_size * {"float8_e4m3fn": 1, "float16": 2, "float32": 4}[args.hidden_dtype] + 512
-    if budget < per_token:
-        raise MemoryError("Insufficient host memory for one projected token; reduce batch/context size.")
-    if shard_limit < stored_row_bytes:
-        raise ValueError("--max-shard-mb cannot hold one feature row; increase it.")
-    block_size = min(args.projection_tokens, int(budget // per_token), int(shard_limit // stored_row_bytes))
-    for start in range(0, len(positions), block_size):
-        block = positions[start:start + block_size]
+    for start in range(0, len(positions), args.projection_tokens):
+        block = positions[start:start + args.projection_tokens]
         batch_indices = torch.tensor([b for b, _ in block])
         token_positions = torch.tensor([p for _, p in block])
-        reference_hidden = final_hidden[batch_indices, token_positions].to(head_device)
-        final_logp = head(reference_hidden).float().log_softmax(-1)
-        final_probs = final_logp.exp()
-        confidence, final_prediction = final_probs.max(-1)
-        alpha = adaptive_alpha(confidence, args)
-        already_matched = torch.zeros(len(block), dtype=torch.bool, device=head_device)
         common = {
-            "layer": None,
-            "batch_id": pa.array([batch_id] * len(block), type=pa.int64()),
-            "batch_slot": pa.array([b for b, _ in block], type=pa.int32()),
             "sequence_id": pa.array([sequences[b].sequence_id for b, _ in block], type=pa.int64()),
-            # add input_ids
-            "input_ids": pa.array([sequences[b].token_ids for b, _ in block], type=pa.list_(pa.int32())),
             "position": pa.array([p for _, p in block], type=pa.int32()),
-            "token_id": pa.array([sequences[b].token_ids[p] for b, p in block], type=pa.int32()),
-            "real_target": pa.array([sequences[b].real_targets[p] for b, p in block], type=pa.int32()),
-            "is_summary": pa.array([sequences[b].is_summary[p] for b, p in block], type=pa.bool_()),
-            "is_synthetic": pa.array([sequences[b].is_synthetic[p] for b, p in block], type=pa.bool_()),
-            "full_model_prediction": scalar_array(final_prediction, pa.int32()),
-            "full_model_confidence": scalar_array(confidence, pa.float32()),
-            "alpha": scalar_array(alpha, pa.float32()),
         }
         for layer_index, hidden in enumerate(captured):
-            raw = hidden[batch_indices, token_positions]
             if layer_index == len(captured) - 1:
-                logp = final_logp
+                normalized = final_hidden[batch_indices, token_positions].to(head_device)
             else:
-                normalized = norm(raw.to(norm_device)).to(head_device)
-                logp = head(normalized).float().log_softmax(-1)
-            probabilities = logp.exp()
-            top_probs, top_ids = probabilities.topk(min(10, vocab_size), dim=-1)
-            prediction = probabilities.argmax(-1)
-            matches = prediction.eq(final_prediction)
-            first_match = matches & ~already_matched
-            already_matched |= matches
-            reference_probability = probabilities.gather(1, final_prediction[:, None]).squeeze(1)
-            # Relative to THIS layer's argmax probability, using the final model's token.
-            alpha_match = reference_probability >= alpha * probabilities.max(-1).values
-            kl = (final_probs * (final_logp - logp)).sum(-1).clamp_min(0)
-            columns = dict(common)
-            columns.update({
+                raw = hidden[batch_indices, token_positions].to(norm_device)
+                normalized = norm(raw).to(head_device)
+            predictions = head(normalized).argmax(-1).cpu().numpy()
+            features.write(pa.table({
+                **common,
                 "layer": pa.array([layer_index + 1] * len(block), type=pa.int32()),
-                "hidden_output": binary_vectors(raw, args.hidden_dtype),
-                "distribution": binary_vectors(probabilities, args.distribution_dtype),
-                "kl_to_final": scalar_array(kl, pa.float32()),
-                "top10_token_ids": pa.array(top_ids.cpu().tolist(), type=pa.list_(pa.int32())),
-                "top10_probabilities": pa.array(top_probs.cpu().tolist(), type=pa.list_(pa.float32())),
-                "layer_prediction": scalar_array(prediction, pa.int32()),
-                "final_token_probability": scalar_array(reference_probability, pa.float32()),
-                "label_match": scalar_array(matches.to(torch.uint8), pa.uint8()),
-                "label_first_match": scalar_array(first_match.to(torch.uint8), pa.uint8()),
-                "label_alpha": scalar_array(alpha_match.to(torch.uint8), pa.uint8()),
-            })
-            features.write(pa.table(columns))
+                "output_token_id": pa.array(predictions, type=pa.int32()),
+            }))
     del captured, final_hidden
 
 
@@ -416,18 +306,13 @@ def process_split(model, tokenizer, version, split, args):
         "version": VERSIONS[version], "dataset_config": VERSIONS[version], "split": SPLITS[split],
         "arguments": {key: str(value) if isinstance(value, Path) else value for key, value in vars(args).items()},
         "context_size": args.context_size, "requested_batch_size": args.batch_size,
-        "last_batch": "keep smaller batch", "ignore_index": IGNORE_INDEX,
-        "hidden_dtype": args.hidden_dtype, "distribution_dtype": args.distribution_dtype,
-        "vector_encoding": "little-endian contiguous binary; float8 uses raw E4M3FN bytes, clipped to finite range",
-        "hidden_size": model.config.hidden_size, "vocab_size": model.get_output_embeddings().weight.shape[0],
-        "num_layers": len(model.model.layers), "layer_numbering": "1-based decoder layers; embedding excluded",
-        "hidden_output": "raw decoder output before final normalization",
-        "distribution": "softmax(lm_head(final_norm(raw_hidden)))",
-        "kl_to_final": "KL(final || layer), natural logarithm; computed in float32",
-        "label_match": "layer argmax equals final argmax",
-        "label_first_match": "first matching layer per sequence position, including final layer",
-        "label_alpha": "p_layer(final_argmax) >= alpha * max(p_layer)",
-        "alpha_rule": "fixed --alpha or monotone interpolation (.2,.6), (.9,.9), (1,1), clipped below at .6",
+        "mode": "teacher_forced",
+        "num_layers": len(model.model.layers),
+        "layer_numbering": "1-based decoder layers; final layer included",
+        "prediction": "argmax(lm_head(final_norm(layer_output)))",
+        "input": "sequence input_ids[:position + 1]; positions are zero-based",
+        "chunking": "independent nonoverlapping contexts; all tails kept; no synthetic tokens",
+        "prompt_template": "Article: {article}\\nSummary: {highlights}",
         "special_tokens": {"bos": tokenizer.bos_token_id, "eos": tokenizer.eos_token_id, "pad": tokenizer.pad_token_id},
         "documents": 0, "sequences": 0, "batches": 0,
     }
@@ -447,7 +332,7 @@ def process_split(model, tokenizer, version, split, args):
         return capacity
 
     def flush():
-        extract_batch(model, batch, metadata["batches"], features, packed, args)
+        extract_batch(model, batch, features, packed, args)
         metadata["batches"] += 1
         metadata["sequences"] += len(batch)
         batch.clear()
@@ -493,24 +378,23 @@ def parse_args():
     )
     parser.add_argument(
         "--splits", "--split", dest="splits", nargs="+", type=split_alias,
-        choices=SPLITS, default=list(SPLITS),
-        help="Splits to process (default: all); validation is an alias for val",
+        choices=SPLITS, default=["train"],
+        help="Splits to process (default: train); validation is an alias for val",
     )
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--name", default="cnn_dm")
     parser.add_argument("--context-size", type=int, default=1024)
     parser.add_argument("--batch-size", type=int, default=2)
-    parser.add_argument("--projection-tokens", type=int, default=16)
+    parser.add_argument(
+        "--projection-tokens", type=int, default=1,
+        help="Positions projected together (default: 1, writes all layers for each token together)",
+    )
     parser.add_argument("--max-host-memory-gb", type=float, default=4)
     parser.add_argument("--memory-reserve-gb", type=float, default=1)
     parser.add_argument("--max-shard-mb", type=float, default=256)
     parser.add_argument("--max-documents", type=int, help="Optional limit per version/split")
     parser.add_argument("--device", default="auto", help="auto, cpu, cuda, or cuda:N")
     parser.add_argument("--model-dtype", choices=["auto", "float32", "float16", "bfloat16"], default="auto")
-    parser.add_argument("--hidden-dtype", choices=["float8_e4m3fn", "float16", "float32"], default="float16")
-    parser.add_argument("--distribution-dtype", choices=["float16", "float32"], default="float32")
-    parser.add_argument("--alpha-mode", choices=["adaptive", "fixed"], default="adaptive")
-    parser.add_argument("--alpha", type=float, default=0.8, help="Used with --alpha-mode fixed")
     args = parser.parse_args()
     if not args.download_only and not args.model:
         parser.error("--model is required unless --download-only is supplied")
@@ -523,8 +407,6 @@ def parse_args():
         parser.error("--memory-reserve-gb must be finite and nonnegative")
     if args.max_documents is not None and args.max_documents < 1:
         parser.error("--max-documents must be positive")
-    if not 0 <= args.alpha <= 1:
-        parser.error("--alpha must lie in [0, 1]")
     if not args.name or Path(args.name).name != args.name or args.name in {".", ".."}:
         parser.error("--name must be a filename prefix without directories")
     if len(set(args.versions)) != len(args.versions) or len(set(args.splits)) != len(args.splits):
@@ -533,14 +415,24 @@ def parse_args():
     return args
 
 
+def create_run_directory(output_dir):
+    """Reserve a unique timestamped directory without overwriting previous runs."""
+    timestamp = datetime.now().astimezone().strftime("%Y-%m-%d_%H-%M-%S_%f%z")
+    output_dir.mkdir(parents=True, exist_ok=True)
+    for suffix in itertools.count():
+        name = timestamp if suffix == 0 else f"{timestamp}_{suffix}"
+        directory = output_dir / name
+        try:
+            directory.mkdir()
+        except FileExistsError:
+            continue
+        return directory
+
+
 def main():
     args = parse_args()
-    if sys.byteorder != "little":
-        raise RuntimeError("This writer requires a little-endian host.")
-    for version in args.versions:
-        for split in args.splits:
-            if (args.output_dir / version / split).exists():
-                raise FileExistsError(f"Output already exists: {args.output_dir / version / split}")
+    args.output_dir = create_run_directory(args.output_dir)
+    print(f"Run output directory: {args.output_dir.resolve()}", flush=True)
     if args.download_only:
         for version in args.versions:
             for split in args.splits:

@@ -1,0 +1,9 @@
+# Local Python environment and generated caches
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Generated dataset examples
+/layer_example/
+/layer_example_*/
