@@ -1,0 +1,142 @@
+(layer_skip) markphan24@VirgilAI:~/LayerSkip$   python eval_ee_cnn.py \
+    --checkpoint checkpoints/ee_cnn/final.pt \
+    --split test \
+    --threshold 0.5 \
+    --output ee_metrics.json
+    
+Loading checkpoint shards: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:01<00:00,  1.54it/s]
+Checkpoint: checkpoints/ee_cnn/final.pt | Split: test | Threshold: 0.5
+Teacher-forced summary tokens + EOS. All Llama layers run for attention context and the final-layer baseline; exit depth is not a speed measurement.
+Dataset indices [0, 1, 2, 3, 4, 5, 6, 7] | Documents: 8 | Tokens: 471 | Early-exit accuracy: 44.1614% | Final-layer accuracy: 61.7834%
+Dataset indices [8, 9, 10, 11, 12, 13, 14, 15] | Documents: 16 | Tokens: 888 | Early-exit accuracy: 44.2568% | Final-layer accuracy: 61.0360%
+Dataset indices [16, 17, 18, 19, 20, 21, 22, 23] | Documents: 24 | Tokens: 1362 | Early-exit accuracy: 43.5389% | Final-layer accuracy: 60.3524%
+Dataset indices [24, 25, 26, 27, 28, 29, 30, 31] | Documents: 32 | Tokens: 1747 | Early-exit accuracy: 44.2473% | Final-layer accuracy: 60.6754%
+Dataset indices [32, 33, 34, 35, 36, 37, 38, 39] | Documents: 40 | Tokens: 2142 | Early-exit accuracy: 43.9776% | Final-layer accuracy: 60.4108%
+Dataset indices [40, 41, 42, 43, 44, 45, 46, 47] | Documents: 48 | Tokens: 2511 | Early-exit accuracy: 43.8869% | Final-layer accuracy: 60.6930%
+Dataset indices [48, 49, 50, 51, 52, 53, 54, 55] | Documents: 56 | Tokens: 2912 | Early-exit accuracy: 43.9560% | Final-layer accuracy: 60.7143%
+Dataset indices [56, 57, 58, 59, 60, 61, 62, 63] | Documents: 64 | Tokens: 3344 | Early-exit accuracy: 44.4378% | Final-layer accuracy: 60.7057%
+Dataset indices [64, 65, 66, 67, 68, 69, 70, 71] | Documents: 72 | Tokens: 3742 | Early-exit accuracy: 44.2811% | Final-layer accuracy: 60.3153%
+Dataset indices [72, 73, 74, 75, 76, 77, 78, 79] | Documents: 80 | Tokens: 4164 | Early-exit accuracy: 44.4044% | Final-layer accuracy: 60.6148%
+Dataset indices [80, 81, 82, 83, 84, 85, 86, 87] | Documents: 88 | Tokens: 4597 | Early-exit accuracy: 44.2898% | Final-layer accuracy: 60.8223%
+Dataset indices [88, 89, 90, 91, 92, 93, 94, 95] | Documents: 96 | Tokens: 4963 | Early-exit accuracy: 44.2273% | Final-layer accuracy: 60.8100%
+Dataset indices [96, 97, 98, 99, 100, 101, 102, 103] | Documents: 104 | Tokens: 5410 | Early-exit accuracy: 44.0665% | Final-layer accuracy: 60.6470%
+Dataset indices [104, 105, 106, 107, 108, 109, 110, 111] | Documents: 112 | Tokens: 5808 | Early-exit accuracy: 43.8877% | Final-layer accuracy: 60.4167%
+Dataset indices [112, 113, 114, 115, 116, 117, 118, 119] | Documents: 120 | Tokens: 6235 | Early-exit accuracy: 43.6247% | Final-layer accuracy: 60.6095%
+Dataset indices [120, 121, 122, 123, 124, 125, 126, 127] | Documents: 128 | Tokens: 6639 | Early-exit accuracy: 43.7566% | Final-layer accuracy: 60.6266%
+Dataset indices [128, 129, 130, 131, 132, 133, 134, 135] | Documents: 136 | Tokens: 7013 | Early-exit accuracy: 43.8757% | Final-layer accuracy: 60.5590%
+Dataset indices [136, 137, 138, 139, 140, 141, 142, 143] | Documents: 144 | Tokens: 7488 | Early-exit accuracy: 43.9770% | Final-layer accuracy: 60.5502%
+Dataset indices [144, 145, 146, 147, 148, 149, 150, 151] | Documents: 152 | Tokens: 7913 | Early-exit accuracy: 43.7761% | Final-layer accuracy: 60.2426%
+Dataset indices [152, 153, 154, 155, 156, 157, 158, 159] | Documents: 160 | Tokens: 8314 | Early-exit accuracy: 43.7575% | Final-layer accuracy: 60.2718%
+Dataset indices [160, 161, 162, 163, 164, 165, 166, 167] | Documents: 168 | Tokens: 8758 | Early-exit accuracy: 43.8913% | Final-layer accuracy: 60.4590%
+Dataset indices [168, 169, 170, 171, 172, 173, 174, 175] | Documents: 176 | Tokens: 9149 | Early-exit accuracy: 43.9392% | Final-layer accuracy: 60.5203%
+Dataset indices [176, 177, 178, 179, 180, 181, 182, 183] | Documents: 184 | Tokens: 9527 | Early-exit accuracy: 43.9278% | Final-layer accuracy: 60.3863%
+Dataset indices [184, 185, 186, 187, 188, 189, 190, 191] | Documents: 192 | Tokens: 10061 | Early-exit accuracy: 43.4549% | Final-layer accuracy: 60.0537%
+Dataset indices [192, 193, 194, 195, 196, 197, 198, 199] | Documents: 200 | Tokens: 10576 | Early-exit accuracy: 43.6082% | Final-layer accuracy: 60.2213%
+Dataset indices [200, 201, 202, 203, 204, 205, 206, 207] | Documents: 208 | Tokens: 10972 | Early-exit accuracy: 43.6019% | Final-layer accuracy: 60.1440%
+Dataset indices [208, 209, 210, 211, 212, 213, 214, 215] | Documents: 216 | Tokens: 11378 | Early-exit accuracy: 43.6456% | Final-layer accuracy: 60.1600%
+Dataset indices [216, 217, 218, 219, 220, 221, 222, 223] | Documents: 224 | Tokens: 11882 | Early-exit accuracy: 43.8394% | Final-layer accuracy: 60.3097%
+Dataset indices [224, 225, 226, 227, 228, 229, 230, 231] | Documents: 232 | Tokens: 12280 | Early-exit accuracy: 43.8681% | Final-layer accuracy: 60.3909%
+Dataset indices [232, 233, 234, 235, 236, 237, 238, 239] | Documents: 240 | Tokens: 12671 | Early-exit accuracy: 43.8876% | Final-layer accuracy: 60.4135%
+Dataset indices [240, 241, 242, 243, 244, 245, 246, 247] | Documents: 248 | Tokens: 13098 | Early-exit accuracy: 43.9991% | Final-layer accuracy: 60.4978%
+Dataset indices [248, 249, 250, 251, 252, 253, 254, 255] | Documents: 256 | Tokens: 13565 | Early-exit accuracy: 44.1283% | Final-layer accuracy: 60.4571%
+Dataset indices [256, 257, 258, 259, 260, 261, 262, 263] | Documents: 264 | Tokens: 13994 | Early-exit accuracy: 44.1689% | Final-layer accuracy: 60.4902%
+Dataset indices [264, 265, 266, 267, 268, 269, 270, 271] | Documents: 272 | Tokens: 14497 | Early-exit accuracy: 44.4368% | Final-layer accuracy: 60.6746%
+Dataset indices [272, 273, 274, 275, 276, 277, 278, 279] | Documents: 280 | Tokens: 14884 | Early-exit accuracy: 44.3698% | Final-layer accuracy: 60.5953%
+Dataset indices [280, 281, 282, 283, 284, 285, 286, 287] | Documents: 288 | Tokens: 15301 | Early-exit accuracy: 44.3239% | Final-layer accuracy: 60.6039%
+Dataset indices [288, 289, 290, 291, 292, 293, 294, 295] | Documents: 296 | Tokens: 15712 | Early-exit accuracy: 44.2464% | Final-layer accuracy: 60.5206%
+Dataset indices [296, 297, 298, 299, 300, 301, 302, 303] | Documents: 304 | Tokens: 16126 | Early-exit accuracy: 44.3817% | Final-layer accuracy: 60.7404%
+Dataset indices [304, 305, 306, 307, 308, 309, 310, 311] | Documents: 312 | Tokens: 16550 | Early-exit accuracy: 44.3444% | Final-layer accuracy: 60.7795%
+Dataset indices [312, 313, 314, 315, 316, 317, 318, 319] | Documents: 320 | Tokens: 16948 | Early-exit accuracy: 44.3887% | Final-layer accuracy: 60.7918%
+Dataset indices [320, 321, 322, 323, 324, 325, 326, 327] | Documents: 328 | Tokens: 17431 | Early-exit accuracy: 44.4266% | Final-layer accuracy: 60.7940%
+Dataset indices [328, 329, 330, 331, 332, 333, 334, 335] | Documents: 336 | Tokens: 17959 | Early-exit accuracy: 44.5459% | Final-layer accuracy: 60.9054%
+Dataset indices [336, 337, 338, 339, 340, 341, 342, 343] | Documents: 344 | Tokens: 18395 | Early-exit accuracy: 44.6426% | Final-layer accuracy: 61.0003%
+Dataset indices [344, 345, 346, 347, 348, 349, 350, 351] | Documents: 352 | Tokens: 18840 | Early-exit accuracy: 44.5223% | Final-layer accuracy: 60.8546%
+Dataset indices [352, 353, 354, 355, 356, 357, 358, 359] | Documents: 360 | Tokens: 19183 | Early-exit accuracy: 44.6020% | Final-layer accuracy: 60.9498%
+Dataset indices [360, 361, 362, 363, 364, 365, 366, 367] | Documents: 368 | Tokens: 19586 | Early-exit accuracy: 44.5624% | Final-layer accuracy: 60.9313%
+Dataset indices [368, 369, 370, 371, 372, 373, 374, 375] | Documents: 376 | Tokens: 20004 | Early-exit accuracy: 44.5961% | Final-layer accuracy: 60.9728%
+Dataset indices [376, 377, 378, 379, 380, 381, 382, 383] | Documents: 384 | Tokens: 20473 | Early-exit accuracy: 44.6442% | Final-layer accuracy: 61.0658%
+Dataset indices [384, 385, 386, 387, 388, 389, 390, 391] | Documents: 392 | Tokens: 20915 | Early-exit accuracy: 44.6235% | Final-layer accuracy: 60.9993%
+Dataset indices [392, 393, 394, 395, 396, 397, 398, 399] | Documents: 400 | Tokens: 21371 | Early-exit accuracy: 44.5791% | Final-layer accuracy: 60.9939%
+Dataset indices [400, 401, 402, 403, 404, 405, 406, 407] | Documents: 408 | Tokens: 21818 | Early-exit accuracy: 44.6191% | Final-layer accuracy: 61.0688%
+Dataset indices [408, 409, 410, 411, 412, 413, 414, 415] | Documents: 416 | Tokens: 22250 | Early-exit accuracy: 44.5843% | Final-layer accuracy: 61.0202%
+Dataset indices [416, 417, 418, 419, 420, 421, 422, 423] | Documents: 424 | Tokens: 22678 | Early-exit accuracy: 44.6027% | Final-layer accuracy: 61.0636%
+Dataset indices [424, 425, 426, 427, 428, 429, 430, 431] | Documents: 432 | Tokens: 23169 | Early-exit accuracy: 44.6459% | Final-layer accuracy: 61.1205%
+Dataset indices [432, 433, 434, 435, 436, 437, 438, 439] | Documents: 440 | Tokens: 23683 | Early-exit accuracy: 44.5889% | Final-layer accuracy: 61.0185%
+Dataset indices [440, 441, 442, 443, 444, 445, 446, 447] | Documents: 448 | Tokens: 24128 | Early-exit accuracy: 44.5540% | Final-layer accuracy: 60.9624%
+Dataset indices [448, 449, 450, 451, 452, 453, 454, 455] | Documents: 456 | Tokens: 24540 | Early-exit accuracy: 44.5599% | Final-layer accuracy: 60.9413%
+Dataset indices [456, 457, 458, 459, 460, 461, 462, 463] | Documents: 464 | Tokens: 24930 | Early-exit accuracy: 44.5888% | Final-layer accuracy: 60.9747%
+Dataset indices [464, 465, 466, 467, 468, 469, 470, 471] | Documents: 472 | Tokens: 25400 | Early-exit accuracy: 44.6496% | Final-layer accuracy: 61.0157%
+Dataset indices [472, 473, 474, 475, 476, 477, 478, 479] | Documents: 480 | Tokens: 25788 | Early-exit accuracy: 44.6564% | Final-layer accuracy: 61.0439%
+Dataset indices [480, 481, 482, 483, 484, 485, 486, 487] | Documents: 488 | Tokens: 26212 | Early-exit accuracy: 44.6360% | Final-layer accuracy: 60.9911%
+Dataset indices [488, 489, 490, 491, 492, 493, 494, 495] | Documents: 496 | Tokens: 26675 | Early-exit accuracy: 44.6336% | Final-layer accuracy: 60.9972%
+Dataset indices [496, 497, 498, 499, 500, 501, 502, 503] | Documents: 504 | Tokens: 27075 | Early-exit accuracy: 44.6500% | Final-layer accuracy: 60.9861%
+Dataset indices [504, 505, 506, 507, 508, 509, 510, 511] | Documents: 512 | Tokens: 27459 | Early-exit accuracy: 44.6630% | Final-layer accuracy: 60.9964%
+Dataset indices [512, 513, 514, 515, 516, 517, 518, 519] | Documents: 520 | Tokens: 27871 | Early-exit accuracy: 44.6952% | Final-layer accuracy: 61.0240%
+Dataset indices [520, 521, 522, 523, 524, 525, 526, 527] | Documents: 528 | Tokens: 28183 | Early-exit accuracy: 44.6652% | Final-layer accuracy: 61.0545%
+Dataset indices [528, 529, 530, 531, 532, 533, 534, 535] | Documents: 536 | Tokens: 28574 | Early-exit accuracy: 44.6000% | Final-layer accuracy: 61.0310%
+Dataset indices [536, 537, 538, 539, 540, 541, 542, 543] | Documents: 544 | Tokens: 28988 | Early-exit accuracy: 44.6288% | Final-layer accuracy: 61.0460%
+Dataset indices [544, 545, 546, 547, 548, 549, 550, 551] | Documents: 552 | Tokens: 29363 | Early-exit accuracy: 44.5697% | Final-layer accuracy: 61.0258%
+Dataset indices [552, 553, 554, 555, 556, 557, 558, 559] | Documents: 560 | Tokens: 29745 | Early-exit accuracy: 44.5554% | Final-layer accuracy: 60.9985%
+Dataset indices [560, 561, 562, 563, 564, 565, 566, 567] | Documents: 568 | Tokens: 30182 | Early-exit accuracy: 44.5365% | Final-layer accuracy: 60.9801%
+Dataset indices [568, 569, 570, 571, 572, 573, 574, 575] | Documents: 576 | Tokens: 30630 | Early-exit accuracy: 44.4629% | Final-layer accuracy: 60.9435%
+Dataset indices [576, 577, 578, 579, 580, 581, 582, 583] | Documents: 584 | Tokens: 31019 | Early-exit accuracy: 44.4856% | Final-layer accuracy: 60.9691%
+Dataset indices [584, 585, 586, 587, 588, 589, 590, 591] | Documents: 592 | Tokens: 31473 | Early-exit accuracy: 44.5842% | Final-layer accuracy: 61.0746%
+Dataset indices [592, 593, 594, 595, 596, 597, 598, 599] | Documents: 600 | Tokens: 31889 | Early-exit accuracy: 44.4918% | Final-layer accuracy: 61.0806%
+Dataset indices [600, 601, 602, 603, 604, 605, 606, 607] | Documents: 608 | Tokens: 32379 | Early-exit accuracy: 44.5042% | Final-layer accuracy: 61.1477%
+Dataset indices [608, 609, 610, 611, 612, 613, 614, 615] | Documents: 616 | Tokens: 32749 | Early-exit accuracy: 44.4441% | Final-layer accuracy: 61.0858%
+Dataset indices [616, 617, 618, 619, 620, 621, 622, 623] | Documents: 624 | Tokens: 33139 | Early-exit accuracy: 44.4220% | Final-layer accuracy: 61.0972%
+Dataset indices [624, 625, 626, 627, 628, 629, 630, 631] | Documents: 632 | Tokens: 33585 | Early-exit accuracy: 44.4722% | Final-layer accuracy: 61.1583%
+Dataset indices [632, 633, 634, 635, 636, 637, 638, 639] | Documents: 640 | Tokens: 33941 | Early-exit accuracy: 44.4654% | Final-layer accuracy: 61.1679%
+Dataset indices [640, 641, 642, 643, 644, 645, 646, 647] | Documents: 648 | Tokens: 34218 | Early-exit accuracy: 44.4620% | Final-layer accuracy: 61.1549%
+Dataset indices [648, 649, 650, 651, 652, 653, 654, 655] | Documents: 656 | Tokens: 34643 | Early-exit accuracy: 44.4274% | Final-layer accuracy: 61.1321%
+Dataset indices [656, 657, 658, 659, 660, 661, 662, 663] | Documents: 664 | Tokens: 35047 | Early-exit accuracy: 44.3747% | Final-layer accuracy: 61.1037%
+Dataset indices [664, 665, 666, 667, 668, 669, 670, 671] | Documents: 672 | Tokens: 35393 | Early-exit accuracy: 44.3675% | Final-layer accuracy: 61.0770%
+Dataset indices [672, 673, 674, 675, 676, 677, 678, 679] | Documents: 680 | Tokens: 35756 | Early-exit accuracy: 44.3870% | Final-layer accuracy: 61.0863%
+Dataset indices [680, 681, 682, 683, 684, 685, 686, 687] | Documents: 688 | Tokens: 36234 | Early-exit accuracy: 44.3865% | Final-layer accuracy: 61.0642%
+Dataset indices [688, 689, 690, 691, 692, 693, 694, 695] | Documents: 696 | Tokens: 36700 | Early-exit accuracy: 44.3869% | Final-layer accuracy: 61.0872%
+Dataset indices [696, 697, 698, 699, 700, 701, 702, 703] | Documents: 704 | Tokens: 37093 | Early-exit accuracy: 44.2914% | Final-layer accuracy: 61.0277%
+Dataset indices [704, 705, 706, 707, 708, 709, 710, 711] | Documents: 712 | Tokens: 37476 | Early-exit accuracy: 44.2817% | Final-layer accuracy: 60.9990%
+Dataset indices [712, 713, 714, 715, 716, 717, 718, 719] | Documents: 720 | Tokens: 37883 | Early-exit accuracy: 44.2600% | Final-layer accuracy: 61.0221%
+Dataset indices [720, 721, 722, 723, 724, 725, 726, 727] | Documents: 728 | Tokens: 38274 | Early-exit accuracy: 44.2676% | Final-layer accuracy: 60.9866%
+Dataset indices [728, 729, 730, 731, 732, 733, 734, 735] | Documents: 736 | Tokens: 38684 | Early-exit accuracy: 44.2095% | Final-layer accuracy: 60.9011%
+Dataset indices [736, 737, 738, 739, 740, 741, 742, 743] | Documents: 744 | Tokens: 39141 | Early-exit accuracy: 44.2554% | Final-layer accuracy: 60.9668%
+Dataset indices [744, 745, 746, 747, 748, 749, 750, 751] | Documents: 752 | Tokens: 39576 | Early-exit accuracy: 44.2516% | Final-layer accuracy: 60.9713%
+Dataset indices [752, 753, 754, 755, 756, 757, 758, 759] | Documents: 760 | Tokens: 40027 | Early-exit accuracy: 44.2326% | Final-layer accuracy: 60.9464%
+Dataset indices [760, 761, 762, 763, 764, 765, 766, 767] | Documents: 768 | Tokens: 40415 | Early-exit accuracy: 44.2014% | Final-layer accuracy: 60.9205%
+Dataset indices [768, 769, 770, 771, 772, 773, 774, 775] | Documents: 776 | Tokens: 40801 | Early-exit accuracy: 44.1901% | Final-layer accuracy: 60.9103%
+Dataset indices [776, 777, 778, 779, 780, 781, 782, 783] | Documents: 784 | Tokens: 41226 | Early-exit accuracy: 44.2148% | Final-layer accuracy: 60.9276%
+Dataset indices [784, 785, 786, 787, 788, 789, 790, 791] | Documents: 792 | Tokens: 41657 | Early-exit accuracy: 44.2183% | Final-layer accuracy: 60.9165%
+Dataset indices [792, 793, 794, 795, 796, 797, 798, 799] | Documents: 800 | Tokens: 42140 | Early-exit accuracy: 44.2335% | Final-layer accuracy: 60.9326%
+Dataset indices [800, 801, 802, 803, 804, 805, 806, 807] | Documents: 808 | Tokens: 42559 | Early-exit accuracy: 44.2280% | Final-layer accuracy: 60.9154%
+Dataset indices [808, 809, 810, 811, 812, 813, 814, 815] | Documents: 816 | Tokens: 43021 | Early-exit accuracy: 44.2644% | Final-layer accuracy: 60.9702%
+Dataset indices [816, 817, 818, 819, 820, 821, 822, 823] | Documents: 824 | Tokens: 43485 | Early-exit accuracy: 44.2543% | Final-layer accuracy: 60.9957%
+Dataset indices [824, 825, 826, 827, 828, 829, 830, 831] | Documents: 832 | Tokens: 43963 | Early-exit accuracy: 44.2486% | Final-layer accuracy: 61.0013%
+Dataset indices [832, 833, 834, 835, 836, 837, 838, 839] | Documents: 840 | Tokens: 44475 | Early-exit accuracy: 44.2406% | Final-layer accuracy: 60.9848%
+Dataset indices [840, 841, 842, 843, 844, 845, 846, 847] | Documents: 848 | Tokens: 44872 | Early-exit accuracy: 44.2213% | Final-layer accuracy: 60.9846%
+Dataset indices [848, 849, 850, 851, 852, 853, 854, 855] | Documents: 856 | Tokens: 45335 | Early-exit accuracy: 44.2131% | Final-layer accuracy: 61.0367%
+Dataset indices [856, 857, 858, 859, 860, 861, 862, 863] | Documents: 864 | Tokens: 45728 | Early-exit accuracy: 44.1742% | Final-layer accuracy: 61.0436%
+Dataset indices [864, 865, 866, 867, 868, 869, 870, 871] | Documents: 872 | Tokens: 46199 | Early-exit accuracy: 44.1698% | Final-layer accuracy: 61.0706%
+Dataset indices [872, 873, 874, 875, 876, 877, 878, 879] | Documents: 880 | Tokens: 46666 | Early-exit accuracy: 44.2656% | Final-layer accuracy: 61.1259%
+Dataset indices [880, 881, 882, 883, 884, 885, 886, 887] | Documents: 888 | Tokens: 47117 | Early-exit accuracy: 44.2749% | Final-layer accuracy: 61.1499%
+Dataset indices [888, 889, 890, 891, 892, 893, 894, 895] | Documents: 896 | Tokens: 47614 | Early-exit accuracy: 44.2664% | Final-layer accuracy: 61.1648%
+Dataset indices [896, 897, 898, 899, 900, 901, 902, 903] | Documents: 904 | Tokens: 48017 | Early-exit accuracy: 44.2447% | Final-layer accuracy: 61.1721%
+Dataset indices [904, 905, 906, 907, 908, 909, 910, 911] | Documents: 912 | Tokens: 48419 | Early-exit accuracy: 44.2368% | Final-layer accuracy: 61.1805%
+Dataset indices [912, 913, 914, 915, 916, 917, 918, 919] | Documents: 920 | Tokens: 48891 | Early-exit accuracy: 44.2310% | Final-layer accuracy: 61.2403%
+Dataset indices [920, 921, 922, 923, 924, 925, 926, 927] | Documents: 928 | Tokens: 49270 | Early-exit accuracy: 44.2298% | Final-layer accuracy: 61.1955%
+Dataset indices [928, 929, 930, 931, 932, 933, 934, 935] | Documents: 936 | Tokens: 49648 | Early-exit accuracy: 44.2072% | Final-layer accuracy: 61.1968%
+Dataset indices [936, 937, 938, 939, 940, 941, 942, 943] | Documents: 944 | Tokens: 50054 | Early-exit accuracy: 44.2262% | Final-layer accuracy: 61.2039%
+Dataset indices [944, 945, 946, 947, 948, 949, 950, 951] | Documents: 952 | Tokens: 50427 | Early-exit accuracy: 44.2184% | Final-layer accuracy: 61.2093%
+Dataset indices [952, 953, 954, 955, 956, 957, 958, 959] | Documents: 960 | Tokens: 50893 | Early-exit accuracy: 44.2006% | Final-layer accuracy: 61.1931%
+Dataset indices [960, 961, 962, 963, 964, 965, 966, 967] | Documents: 968 | Tokens: 51308 | Early-exit accuracy: 44.1861% | Final-layer accuracy: 61.1795%
+Dataset indices [968, 969, 970, 971, 972, 973, 974, 975] | Documents: 976 | Tokens: 51705 | Early-exit accuracy: 44.1872% | Final-layer accuracy: 61.1508%
+Dataset indices [976, 977, 978, 979, 980, 981, 982, 983] | Documents: 984 | Tokens: 52073 | Early-exit accuracy: 44.1899% | Final-layer accuracy: 61.1180%
+Dataset indices [984, 985, 986, 987, 988, 989, 990, 991] | Documents: 992 | Tokens: 52464 | Early-exit accuracy: 44.1712% | Final-layer accuracy: 61.1009%
+Dataset indices [992, 993, 994, 995, 996, 997, 998, 999] | Documents: 1000 | Tokens: 52945 | Early-exit accuracy: 44.1685% | Final-layer accuracy: 61.1276%
+
+Evaluated 1000 documents, 52945 tokens including EOS.
+Early-exit next-token accuracy: 44.1685% (23385/52945)
+Final-layer next-token accuracy: 61.1276% (32364/52945)
+Agreement with final layer: 60.5723%
+Early-exit rate: 99.9509%
+Mean exit layer: 7.34/32
+Exit layer counts (1-based): {'1': 0, '2': 1270, '3': 7942, '4': 11213, '5': 3340, '6': 2383, '7': 9798, '8': 3499, '9': 2187, '10': 956, '11': 590, '12': 2004, '13': 1412, '14': 1046, '15': 1136, '16': 638, '17': 978, '18': 651, '19': 395, '20': 426, '21': 332, '22': 182, '23': 184, '24': 83, '25': 71, '26': 42, '27': 48, '28': 43, '29': 18, '30': 24, '31': 28, '32': 26}
