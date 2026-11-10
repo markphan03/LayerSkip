@@ -1,0 +1,424 @@
+Command: python train_ee_cnn.py --max-documents 1000 --save-every 10
+
+(layer_skip) markphan24@VirgilAI:~/LayerSkip$ python train_ee_cnn.py --max-documents 1000 --save-every 10
+Loading checkpoint shards: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:02<00:00,  1.02it/s]
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 0
+Epoch 1/3 | Batch 1 | Dataset indices [0, 1, 2, 3, 4, 5, 6, 7] | Loss: 0.713847
+Epoch 1/3 | Batch 2 | Dataset indices [8, 9, 10, 11, 12, 13, 14, 15] | Loss: 0.545204
+Epoch 1/3 | Batch 3 | Dataset indices [16, 17, 18, 19, 20, 21, 22, 23] | Loss: 0.481518
+Epoch 1/3 | Batch 4 | Dataset indices [24, 25, 26, 27, 28, 29, 30, 31] | Loss: 0.469193
+Epoch 1/3 | Batch 5 | Dataset indices [32, 33, 34, 35, 36, 37, 38, 39] | Loss: 0.501026
+Epoch 1/3 | Batch 6 | Dataset indices [40, 41, 42, 43, 44, 45, 46, 47] | Loss: 0.447372
+Epoch 1/3 | Batch 7 | Dataset indices [48, 49, 50, 51, 52, 53, 54, 55] | Loss: 0.467702
+Epoch 1/3 | Batch 8 | Dataset indices [56, 57, 58, 59, 60, 61, 62, 63] | Loss: 0.472460
+Epoch 1/3 | Batch 9 | Dataset indices [64, 65, 66, 67, 68, 69, 70, 71] | Loss: 0.470823
+Epoch 1/3 | Batch 10 | Dataset indices [72, 73, 74, 75, 76, 77, 78, 79] | Loss: 0.431267
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 80
+Epoch 1/3 | Batch 11 | Dataset indices [80, 81, 82, 83, 84, 85, 86, 87] | Loss: 0.432611
+Epoch 1/3 | Batch 12 | Dataset indices [88, 89, 90, 91, 92, 93, 94, 95] | Loss: 0.408931
+Epoch 1/3 | Batch 13 | Dataset indices [96, 97, 98, 99, 100, 101, 102, 103] | Loss: 0.408620
+Epoch 1/3 | Batch 14 | Dataset indices [104, 105, 106, 107, 108, 109, 110, 111] | Loss: 0.383496
+Epoch 1/3 | Batch 15 | Dataset indices [112, 113, 114, 115, 116, 117, 118, 119] | Loss: 0.387308
+Epoch 1/3 | Batch 16 | Dataset indices [120, 121, 122, 123, 124, 125, 126, 127] | Loss: 0.418775
+Epoch 1/3 | Batch 17 | Dataset indices [128, 129, 130, 131, 132, 133, 134, 135] | Loss: 0.419038
+Epoch 1/3 | Batch 18 | Dataset indices [136, 137, 138, 139, 140, 141, 142, 143] | Loss: 0.364623
+Epoch 1/3 | Batch 19 | Dataset indices [144, 145, 146, 147, 148, 149, 150, 151] | Loss: 0.405514
+Epoch 1/3 | Batch 20 | Dataset indices [152, 153, 154, 155, 156, 157, 158, 159] | Loss: 0.418102
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 160
+Epoch 1/3 | Batch 21 | Dataset indices [160, 161, 162, 163, 164, 165, 166, 167] | Loss: 0.384127
+Epoch 1/3 | Batch 22 | Dataset indices [168, 169, 170, 171, 172, 173, 174, 175] | Loss: 0.396111
+Epoch 1/3 | Batch 23 | Dataset indices [176, 177, 178, 179, 180, 181, 182, 183] | Loss: 0.365765
+Epoch 1/3 | Batch 24 | Dataset indices [184, 185, 186, 187, 188, 189, 190, 191] | Loss: 0.355086
+Epoch 1/3 | Batch 25 | Dataset indices [192, 193, 194, 195, 196, 197, 198, 199] | Loss: 0.372582
+Epoch 1/3 | Batch 26 | Dataset indices [200, 201, 202, 203, 204, 205, 206, 207] | Loss: 0.376600
+Epoch 1/3 | Batch 27 | Dataset indices [208, 209, 210, 211, 212, 213, 214, 215] | Loss: 0.375234
+Epoch 1/3 | Batch 28 | Dataset indices [216, 217, 218, 219, 220, 221, 222, 223] | Loss: 0.388795
+Epoch 1/3 | Batch 29 | Dataset indices [224, 225, 226, 227, 228, 229, 230, 231] | Loss: 0.378106
+Epoch 1/3 | Batch 30 | Dataset indices [232, 233, 234, 235, 236, 237, 238, 239] | Loss: 0.419977
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 240
+Epoch 1/3 | Batch 31 | Dataset indices [240, 241, 242, 243, 244, 245, 246, 247] | Loss: 0.408602
+Epoch 1/3 | Batch 32 | Dataset indices [248, 249, 250, 251, 252, 253, 254, 255] | Loss: 0.394701
+Epoch 1/3 | Batch 33 | Dataset indices [256, 257, 258, 259, 260, 261, 262, 263] | Loss: 0.353812
+Epoch 1/3 | Batch 34 | Dataset indices [264, 265, 266, 267, 268, 269, 270, 271] | Loss: 0.355669
+Epoch 1/3 | Batch 35 | Dataset indices [272, 273, 274, 275, 276, 277, 278, 279] | Loss: 0.357992
+Epoch 1/3 | Batch 36 | Dataset indices [280, 281, 282, 283, 284, 285, 286, 287] | Loss: 0.387983
+Epoch 1/3 | Batch 37 | Dataset indices [288, 289, 290, 291, 292, 293, 294, 295] | Loss: 0.353274
+Epoch 1/3 | Batch 38 | Dataset indices [296, 297, 298, 299, 300, 301, 302, 303] | Loss: 0.367920
+Epoch 1/3 | Batch 39 | Dataset indices [304, 305, 306, 307, 308, 309, 310, 311] | Loss: 0.370640
+Epoch 1/3 | Batch 40 | Dataset indices [312, 313, 314, 315, 316, 317, 318, 319] | Loss: 0.390828
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 320
+Epoch 1/3 | Batch 41 | Dataset indices [320, 321, 322, 323, 324, 325, 326, 327] | Loss: 0.389561
+Epoch 1/3 | Batch 42 | Dataset indices [328, 329, 330, 331, 332, 333, 334, 335] | Loss: 0.371705
+Epoch 1/3 | Batch 43 | Dataset indices [336, 337, 338, 339, 340, 341, 342, 343] | Loss: 0.390405
+Epoch 1/3 | Batch 44 | Dataset indices [344, 345, 346, 347, 348, 349, 350, 351] | Loss: 0.373167
+Epoch 1/3 | Batch 45 | Dataset indices [352, 353, 354, 355, 356, 357, 358, 359] | Loss: 0.381034
+Epoch 1/3 | Batch 46 | Dataset indices [360, 361, 362, 363, 364, 365, 366, 367] | Loss: 0.377636
+Epoch 1/3 | Batch 47 | Dataset indices [368, 369, 370, 371, 372, 373, 374, 375] | Loss: 0.395283
+Epoch 1/3 | Batch 48 | Dataset indices [376, 377, 378, 379, 380, 381, 382, 383] | Loss: 0.325269
+Epoch 1/3 | Batch 49 | Dataset indices [384, 385, 386, 387, 388, 389, 390, 391] | Loss: 0.357995
+Epoch 1/3 | Batch 50 | Dataset indices [392, 393, 394, 395, 396, 397, 398, 399] | Loss: 0.357061
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 400
+Epoch 1/3 | Batch 51 | Dataset indices [400, 401, 402, 403, 404, 405, 406, 407] | Loss: 0.344752
+Epoch 1/3 | Batch 52 | Dataset indices [408, 409, 410, 411, 412, 413, 414, 415] | Loss: 0.362378
+Epoch 1/3 | Batch 53 | Dataset indices [416, 417, 418, 419, 420, 421, 422, 423] | Loss: 0.388410
+Epoch 1/3 | Batch 54 | Dataset indices [424, 425, 426, 427, 428, 429, 430, 431] | Loss: 0.360860
+Epoch 1/3 | Batch 55 | Dataset indices [432, 433, 434, 435, 436, 437, 438, 439] | Loss: 0.348058
+Epoch 1/3 | Batch 56 | Dataset indices [440, 441, 442, 443, 444, 445, 446, 447] | Loss: 0.379346
+Epoch 1/3 | Batch 57 | Dataset indices [448, 449, 450, 451, 452, 453, 454, 455] | Loss: 0.371275
+Epoch 1/3 | Batch 58 | Dataset indices [456, 457, 458, 459, 460, 461, 462, 463] | Loss: 0.370915
+Epoch 1/3 | Batch 59 | Dataset indices [464, 465, 466, 467, 468, 469, 470, 471] | Loss: 0.380905
+Epoch 1/3 | Batch 60 | Dataset indices [472, 473, 474, 475, 476, 477, 478, 479] | Loss: 0.350630
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 480
+Epoch 1/3 | Batch 61 | Dataset indices [480, 481, 482, 483, 484, 485, 486, 487] | Loss: 0.370704
+Epoch 1/3 | Batch 62 | Dataset indices [488, 489, 490, 491, 492, 493, 494, 495] | Loss: 0.346893
+Epoch 1/3 | Batch 63 | Dataset indices [496, 497, 498, 499, 500, 501, 502, 503] | Loss: 0.324783
+Epoch 1/3 | Batch 64 | Dataset indices [504, 505, 506, 507, 508, 509, 510, 511] | Loss: 0.337711
+Epoch 1/3 | Batch 65 | Dataset indices [512, 513, 514, 515, 516, 517, 518, 519] | Loss: 0.376112
+Epoch 1/3 | Batch 66 | Dataset indices [520, 521, 522, 523, 524, 525, 526, 527] | Loss: 0.355458
+Epoch 1/3 | Batch 67 | Dataset indices [528, 529, 530, 531, 532, 533, 534, 535] | Loss: 0.348936
+Epoch 1/3 | Batch 68 | Dataset indices [536, 537, 538, 539, 540, 541, 542, 543] | Loss: 0.346248
+Epoch 1/3 | Batch 69 | Dataset indices [544, 545, 546, 547, 548, 549, 550, 551] | Loss: 0.352694
+Epoch 1/3 | Batch 70 | Dataset indices [552, 553, 554, 555, 556, 557, 558, 559] | Loss: 0.344186
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 560
+Epoch 1/3 | Batch 71 | Dataset indices [560, 561, 562, 563, 564, 565, 566, 567] | Loss: 0.349651
+Epoch 1/3 | Batch 72 | Dataset indices [568, 569, 570, 571, 572, 573, 574, 575] | Loss: 0.357643
+Epoch 1/3 | Batch 73 | Dataset indices [576, 577, 578, 579, 580, 581, 582, 583] | Loss: 0.355287
+Epoch 1/3 | Batch 74 | Dataset indices [584, 585, 586, 587, 588, 589, 590, 591] | Loss: 0.370257
+Epoch 1/3 | Batch 75 | Dataset indices [592, 593, 594, 595, 596, 597, 598, 599] | Loss: 0.364976
+Epoch 1/3 | Batch 76 | Dataset indices [600, 601, 602, 603, 604, 605, 606, 607] | Loss: 0.367436
+Epoch 1/3 | Batch 77 | Dataset indices [608, 609, 610, 611, 612, 613, 614, 615] | Loss: 0.335603
+Epoch 1/3 | Batch 78 | Dataset indices [616, 617, 618, 619, 620, 621, 622, 623] | Loss: 0.327994
+Epoch 1/3 | Batch 79 | Dataset indices [624, 625, 626, 627, 628, 629, 630, 631] | Loss: 0.397083
+Epoch 1/3 | Batch 80 | Dataset indices [632, 633, 634, 635, 636, 637, 638, 639] | Loss: 0.337924
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 640
+Epoch 1/3 | Batch 81 | Dataset indices [640, 641, 642, 643, 644, 645, 646, 647] | Loss: 0.373709
+Epoch 1/3 | Batch 82 | Dataset indices [648, 649, 650, 651, 652, 653, 654, 655] | Loss: 0.366828
+Epoch 1/3 | Batch 83 | Dataset indices [656, 657, 658, 659, 660, 661, 662, 663] | Loss: 0.367844
+Epoch 1/3 | Batch 84 | Dataset indices [664, 665, 666, 667, 668, 669, 670, 671] | Loss: 0.314898
+Epoch 1/3 | Batch 85 | Dataset indices [672, 673, 674, 675, 676, 677, 678, 679] | Loss: 0.339402
+Epoch 1/3 | Batch 86 | Dataset indices [680, 681, 682, 683, 684, 685, 686, 687] | Loss: 0.361321
+Epoch 1/3 | Batch 87 | Dataset indices [688, 689, 690, 691, 692, 693, 694, 695] | Loss: 0.330190
+Epoch 1/3 | Batch 88 | Dataset indices [696, 697, 698, 699, 700, 701, 702, 703] | Loss: 0.338076
+Epoch 1/3 | Batch 89 | Dataset indices [704, 705, 706, 707, 708, 709, 710, 711] | Loss: 0.370719
+Epoch 1/3 | Batch 90 | Dataset indices [712, 713, 714, 715, 716, 717, 718, 719] | Loss: 0.352281
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 720
+Epoch 1/3 | Batch 91 | Dataset indices [720, 721, 722, 723, 724, 725, 726, 727] | Loss: 0.320089
+Epoch 1/3 | Batch 92 | Dataset indices [728, 729, 730, 731, 732, 733, 734, 735] | Loss: 0.350663
+Epoch 1/3 | Batch 93 | Dataset indices [736, 737, 738, 739, 740, 741, 742, 743] | Loss: 0.316371
+Epoch 1/3 | Batch 94 | Dataset indices [744, 745, 746, 747, 748, 749, 750, 751] | Loss: 0.358112
+Epoch 1/3 | Batch 95 | Dataset indices [752, 753, 754, 755, 756, 757, 758, 759] | Loss: 0.357456
+Epoch 1/3 | Batch 96 | Dataset indices [760, 761, 762, 763, 764, 765, 766, 767] | Loss: 0.339482
+Epoch 1/3 | Batch 97 | Dataset indices [768, 769, 770, 771, 772, 773, 774, 775] | Loss: 0.325215
+Epoch 1/3 | Batch 98 | Dataset indices [776, 777, 778, 779, 780, 781, 782, 783] | Loss: 0.322241
+Epoch 1/3 | Batch 99 | Dataset indices [784, 785, 786, 787, 788, 789, 790, 791] | Loss: 0.346815
+Epoch 1/3 | Batch 100 | Dataset indices [792, 793, 794, 795, 796, 797, 798, 799] | Loss: 0.321077
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 800
+Epoch 1/3 | Batch 101 | Dataset indices [800, 801, 802, 803, 804, 805, 806, 807] | Loss: 0.376058
+Epoch 1/3 | Batch 102 | Dataset indices [808, 809, 810, 811, 812, 813, 814, 815] | Loss: 0.359462
+Epoch 1/3 | Batch 103 | Dataset indices [816, 817, 818, 819, 820, 821, 822, 823] | Loss: 0.377491
+Epoch 1/3 | Batch 104 | Dataset indices [824, 825, 826, 827, 828, 829, 830, 831] | Loss: 0.362890
+Epoch 1/3 | Batch 105 | Dataset indices [832, 833, 834, 835, 836, 837, 838, 839] | Loss: 0.366461
+Epoch 1/3 | Batch 106 | Dataset indices [840, 841, 842, 843, 844, 845, 846, 847] | Loss: 0.325714
+Epoch 1/3 | Batch 107 | Dataset indices [848, 849, 850, 851, 852, 853, 854, 855] | Loss: 0.339834
+Epoch 1/3 | Batch 108 | Dataset indices [856, 857, 858, 859, 860, 861, 862, 863] | Loss: 0.365812
+Epoch 1/3 | Batch 109 | Dataset indices [864, 865, 866, 867, 868, 869, 870, 871] | Loss: 0.354498
+Epoch 1/3 | Batch 110 | Dataset indices [872, 873, 874, 875, 876, 877, 878, 879] | Loss: 0.332658
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 880
+Epoch 1/3 | Batch 111 | Dataset indices [880, 881, 882, 883, 884, 885, 886, 887] | Loss: 0.344564
+Epoch 1/3 | Batch 112 | Dataset indices [888, 889, 890, 891, 892, 893, 894, 895] | Loss: 0.335791
+Epoch 1/3 | Batch 113 | Dataset indices [896, 897, 898, 899, 900, 901, 902, 903] | Loss: 0.343349
+Epoch 1/3 | Batch 114 | Dataset indices [904, 905, 906, 907, 908, 909, 910, 911] | Loss: 0.354993
+Epoch 1/3 | Batch 115 | Dataset indices [912, 913, 914, 915, 916, 917, 918, 919] | Loss: 0.363996
+Epoch 1/3 | Batch 116 | Dataset indices [920, 921, 922, 923, 924, 925, 926, 927] | Loss: 0.394226
+Epoch 1/3 | Batch 117 | Dataset indices [928, 929, 930, 931, 932, 933, 934, 935] | Loss: 0.330002
+Epoch 1/3 | Batch 118 | Dataset indices [936, 937, 938, 939, 940, 941, 942, 943] | Loss: 0.331549
+Epoch 1/3 | Batch 119 | Dataset indices [944, 945, 946, 947, 948, 949, 950, 951] | Loss: 0.325089
+Epoch 1/3 | Batch 120 | Dataset indices [952, 953, 954, 955, 956, 957, 958, 959] | Loss: 0.346343
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 960
+Epoch 1/3 | Batch 121 | Dataset indices [960, 961, 962, 963, 964, 965, 966, 967] | Loss: 0.365149
+Epoch 1/3 | Batch 122 | Dataset indices [968, 969, 970, 971, 972, 973, 974, 975] | Loss: 0.347133
+Epoch 1/3 | Batch 123 | Dataset indices [976, 977, 978, 979, 980, 981, 982, 983] | Loss: 0.376396
+Epoch 1/3 | Batch 124 | Dataset indices [984, 985, 986, 987, 988, 989, 990, 991] | Loss: 0.338648
+Epoch 1/3 | Batch 125 | Dataset indices [992, 993, 994, 995, 996, 997, 998, 999] | Loss: 0.367527
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/epoch_0001.pt | next dataset index: 0
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 0
+Epoch 2/3 | Batch 1 | Dataset indices [0, 1, 2, 3, 4, 5, 6, 7] | Loss: 0.336329
+Epoch 2/3 | Batch 2 | Dataset indices [8, 9, 10, 11, 12, 13, 14, 15] | Loss: 0.365756
+Epoch 2/3 | Batch 3 | Dataset indices [16, 17, 18, 19, 20, 21, 22, 23] | Loss: 0.340847
+Epoch 2/3 | Batch 4 | Dataset indices [24, 25, 26, 27, 28, 29, 30, 31] | Loss: 0.353059
+Epoch 2/3 | Batch 5 | Dataset indices [32, 33, 34, 35, 36, 37, 38, 39] | Loss: 0.366534
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 40
+Epoch 2/3 | Batch 6 | Dataset indices [40, 41, 42, 43, 44, 45, 46, 47] | Loss: 0.318268
+Epoch 2/3 | Batch 7 | Dataset indices [48, 49, 50, 51, 52, 53, 54, 55] | Loss: 0.351807
+Epoch 2/3 | Batch 8 | Dataset indices [56, 57, 58, 59, 60, 61, 62, 63] | Loss: 0.359183
+Epoch 2/3 | Batch 9 | Dataset indices [64, 65, 66, 67, 68, 69, 70, 71] | Loss: 0.354790
+Epoch 2/3 | Batch 10 | Dataset indices [72, 73, 74, 75, 76, 77, 78, 79] | Loss: 0.336972
+Epoch 2/3 | Batch 11 | Dataset indices [80, 81, 82, 83, 84, 85, 86, 87] | Loss: 0.347846
+Epoch 2/3 | Batch 12 | Dataset indices [88, 89, 90, 91, 92, 93, 94, 95] | Loss: 0.337288
+Epoch 2/3 | Batch 13 | Dataset indices [96, 97, 98, 99, 100, 101, 102, 103] | Loss: 0.345830
+Epoch 2/3 | Batch 14 | Dataset indices [104, 105, 106, 107, 108, 109, 110, 111] | Loss: 0.330936
+Epoch 2/3 | Batch 15 | Dataset indices [112, 113, 114, 115, 116, 117, 118, 119] | Loss: 0.334785
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 120
+Epoch 2/3 | Batch 16 | Dataset indices [120, 121, 122, 123, 124, 125, 126, 127] | Loss: 0.357561
+Epoch 2/3 | Batch 17 | Dataset indices [128, 129, 130, 131, 132, 133, 134, 135] | Loss: 0.352852
+Epoch 2/3 | Batch 18 | Dataset indices [136, 137, 138, 139, 140, 141, 142, 143] | Loss: 0.299853
+Epoch 2/3 | Batch 19 | Dataset indices [144, 145, 146, 147, 148, 149, 150, 151] | Loss: 0.344477
+Epoch 2/3 | Batch 20 | Dataset indices [152, 153, 154, 155, 156, 157, 158, 159] | Loss: 0.360449
+Epoch 2/3 | Batch 21 | Dataset indices [160, 161, 162, 163, 164, 165, 166, 167] | Loss: 0.322181
+Epoch 2/3 | Batch 22 | Dataset indices [168, 169, 170, 171, 172, 173, 174, 175] | Loss: 0.349519
+Epoch 2/3 | Batch 23 | Dataset indices [176, 177, 178, 179, 180, 181, 182, 183] | Loss: 0.316091
+Epoch 2/3 | Batch 24 | Dataset indices [184, 185, 186, 187, 188, 189, 190, 191] | Loss: 0.311497
+Epoch 2/3 | Batch 25 | Dataset indices [192, 193, 194, 195, 196, 197, 198, 199] | Loss: 0.336115
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 200
+Epoch 2/3 | Batch 26 | Dataset indices [200, 201, 202, 203, 204, 205, 206, 207] | Loss: 0.340517
+Epoch 2/3 | Batch 27 | Dataset indices [208, 209, 210, 211, 212, 213, 214, 215] | Loss: 0.333397
+Epoch 2/3 | Batch 28 | Dataset indices [216, 217, 218, 219, 220, 221, 222, 223] | Loss: 0.344049
+Epoch 2/3 | Batch 29 | Dataset indices [224, 225, 226, 227, 228, 229, 230, 231] | Loss: 0.329523
+Epoch 2/3 | Batch 30 | Dataset indices [232, 233, 234, 235, 236, 237, 238, 239] | Loss: 0.375775
+Epoch 2/3 | Batch 31 | Dataset indices [240, 241, 242, 243, 244, 245, 246, 247] | Loss: 0.351778
+Epoch 2/3 | Batch 32 | Dataset indices [248, 249, 250, 251, 252, 253, 254, 255] | Loss: 0.362556
+Epoch 2/3 | Batch 33 | Dataset indices [256, 257, 258, 259, 260, 261, 262, 263] | Loss: 0.322246
+Epoch 2/3 | Batch 34 | Dataset indices [264, 265, 266, 267, 268, 269, 270, 271] | Loss: 0.319484
+Epoch 2/3 | Batch 35 | Dataset indices [272, 273, 274, 275, 276, 277, 278, 279] | Loss: 0.324630
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 280
+Epoch 2/3 | Batch 36 | Dataset indices [280, 281, 282, 283, 284, 285, 286, 287] | Loss: 0.344962
+Epoch 2/3 | Batch 37 | Dataset indices [288, 289, 290, 291, 292, 293, 294, 295] | Loss: 0.314435
+Epoch 2/3 | Batch 38 | Dataset indices [296, 297, 298, 299, 300, 301, 302, 303] | Loss: 0.325989
+Epoch 2/3 | Batch 39 | Dataset indices [304, 305, 306, 307, 308, 309, 310, 311] | Loss: 0.337748
+Epoch 2/3 | Batch 40 | Dataset indices [312, 313, 314, 315, 316, 317, 318, 319] | Loss: 0.354050
+Epoch 2/3 | Batch 41 | Dataset indices [320, 321, 322, 323, 324, 325, 326, 327] | Loss: 0.347298
+Epoch 2/3 | Batch 42 | Dataset indices [328, 329, 330, 331, 332, 333, 334, 335] | Loss: 0.330047
+Epoch 2/3 | Batch 43 | Dataset indices [336, 337, 338, 339, 340, 341, 342, 343] | Loss: 0.353460
+Epoch 2/3 | Batch 44 | Dataset indices [344, 345, 346, 347, 348, 349, 350, 351] | Loss: 0.337452
+Epoch 2/3 | Batch 45 | Dataset indices [352, 353, 354, 355, 356, 357, 358, 359] | Loss: 0.339460
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 360
+Epoch 2/3 | Batch 46 | Dataset indices [360, 361, 362, 363, 364, 365, 366, 367] | Loss: 0.342507
+Epoch 2/3 | Batch 47 | Dataset indices [368, 369, 370, 371, 372, 373, 374, 375] | Loss: 0.361147
+Epoch 2/3 | Batch 48 | Dataset indices [376, 377, 378, 379, 380, 381, 382, 383] | Loss: 0.291524
+Epoch 2/3 | Batch 49 | Dataset indices [384, 385, 386, 387, 388, 389, 390, 391] | Loss: 0.330277
+Epoch 2/3 | Batch 50 | Dataset indices [392, 393, 394, 395, 396, 397, 398, 399] | Loss: 0.320988
+Epoch 2/3 | Batch 51 | Dataset indices [400, 401, 402, 403, 404, 405, 406, 407] | Loss: 0.320562
+Epoch 2/3 | Batch 52 | Dataset indices [408, 409, 410, 411, 412, 413, 414, 415] | Loss: 0.332077
+Epoch 2/3 | Batch 53 | Dataset indices [416, 417, 418, 419, 420, 421, 422, 423] | Loss: 0.357674
+Epoch 2/3 | Batch 54 | Dataset indices [424, 425, 426, 427, 428, 429, 430, 431] | Loss: 0.328008
+Epoch 2/3 | Batch 55 | Dataset indices [432, 433, 434, 435, 436, 437, 438, 439] | Loss: 0.322797
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 440
+Epoch 2/3 | Batch 56 | Dataset indices [440, 441, 442, 443, 444, 445, 446, 447] | Loss: 0.343598
+Epoch 2/3 | Batch 57 | Dataset indices [448, 449, 450, 451, 452, 453, 454, 455] | Loss: 0.341598
+Epoch 2/3 | Batch 58 | Dataset indices [456, 457, 458, 459, 460, 461, 462, 463] | Loss: 0.339817
+Epoch 2/3 | Batch 59 | Dataset indices [464, 465, 466, 467, 468, 469, 470, 471] | Loss: 0.353688
+Epoch 2/3 | Batch 60 | Dataset indices [472, 473, 474, 475, 476, 477, 478, 479] | Loss: 0.321785
+Epoch 2/3 | Batch 61 | Dataset indices [480, 481, 482, 483, 484, 485, 486, 487] | Loss: 0.339335
+Epoch 2/3 | Batch 62 | Dataset indices [488, 489, 490, 491, 492, 493, 494, 495] | Loss: 0.317288
+Epoch 2/3 | Batch 63 | Dataset indices [496, 497, 498, 499, 500, 501, 502, 503] | Loss: 0.298619
+Epoch 2/3 | Batch 64 | Dataset indices [504, 505, 506, 507, 508, 509, 510, 511] | Loss: 0.312386
+Epoch 2/3 | Batch 65 | Dataset indices [512, 513, 514, 515, 516, 517, 518, 519] | Loss: 0.342626
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 520
+Epoch 2/3 | Batch 66 | Dataset indices [520, 521, 522, 523, 524, 525, 526, 527] | Loss: 0.327097
+Epoch 2/3 | Batch 67 | Dataset indices [528, 529, 530, 531, 532, 533, 534, 535] | Loss: 0.321728
+Epoch 2/3 | Batch 68 | Dataset indices [536, 537, 538, 539, 540, 541, 542, 543] | Loss: 0.316353
+Epoch 2/3 | Batch 69 | Dataset indices [544, 545, 546, 547, 548, 549, 550, 551] | Loss: 0.325014
+Epoch 2/3 | Batch 70 | Dataset indices [552, 553, 554, 555, 556, 557, 558, 559] | Loss: 0.313543
+Epoch 2/3 | Batch 71 | Dataset indices [560, 561, 562, 563, 564, 565, 566, 567] | Loss: 0.323436
+Epoch 2/3 | Batch 72 | Dataset indices [568, 569, 570, 571, 572, 573, 574, 575] | Loss: 0.329757
+Epoch 2/3 | Batch 73 | Dataset indices [576, 577, 578, 579, 580, 581, 582, 583] | Loss: 0.325623
+Epoch 2/3 | Batch 74 | Dataset indices [584, 585, 586, 587, 588, 589, 590, 591] | Loss: 0.340873
+Epoch 2/3 | Batch 75 | Dataset indices [592, 593, 594, 595, 596, 597, 598, 599] | Loss: 0.335883
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 600
+Epoch 2/3 | Batch 76 | Dataset indices [600, 601, 602, 603, 604, 605, 606, 607] | Loss: 0.340027
+Epoch 2/3 | Batch 77 | Dataset indices [608, 609, 610, 611, 612, 613, 614, 615] | Loss: 0.306850
+Epoch 2/3 | Batch 78 | Dataset indices [616, 617, 618, 619, 620, 621, 622, 623] | Loss: 0.303358
+Epoch 2/3 | Batch 79 | Dataset indices [624, 625, 626, 627, 628, 629, 630, 631] | Loss: 0.369374
+Epoch 2/3 | Batch 80 | Dataset indices [632, 633, 634, 635, 636, 637, 638, 639] | Loss: 0.309327
+Epoch 2/3 | Batch 81 | Dataset indices [640, 641, 642, 643, 644, 645, 646, 647] | Loss: 0.341053
+Epoch 2/3 | Batch 82 | Dataset indices [648, 649, 650, 651, 652, 653, 654, 655] | Loss: 0.340966
+Epoch 2/3 | Batch 83 | Dataset indices [656, 657, 658, 659, 660, 661, 662, 663] | Loss: 0.342071
+Epoch 2/3 | Batch 84 | Dataset indices [664, 665, 666, 667, 668, 669, 670, 671] | Loss: 0.287145
+Epoch 2/3 | Batch 85 | Dataset indices [672, 673, 674, 675, 676, 677, 678, 679] | Loss: 0.311984
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 680
+Epoch 2/3 | Batch 86 | Dataset indices [680, 681, 682, 683, 684, 685, 686, 687] | Loss: 0.331323
+Epoch 2/3 | Batch 87 | Dataset indices [688, 689, 690, 691, 692, 693, 694, 695] | Loss: 0.305425
+Epoch 2/3 | Batch 88 | Dataset indices [696, 697, 698, 699, 700, 701, 702, 703] | Loss: 0.311999
+Epoch 2/3 | Batch 89 | Dataset indices [704, 705, 706, 707, 708, 709, 710, 711] | Loss: 0.334901
+Epoch 2/3 | Batch 90 | Dataset indices [712, 713, 714, 715, 716, 717, 718, 719] | Loss: 0.324152
+Epoch 2/3 | Batch 91 | Dataset indices [720, 721, 722, 723, 724, 725, 726, 727] | Loss: 0.298271
+Epoch 2/3 | Batch 92 | Dataset indices [728, 729, 730, 731, 732, 733, 734, 735] | Loss: 0.326874
+Epoch 2/3 | Batch 93 | Dataset indices [736, 737, 738, 739, 740, 741, 742, 743] | Loss: 0.298512
+Epoch 2/3 | Batch 94 | Dataset indices [744, 745, 746, 747, 748, 749, 750, 751] | Loss: 0.336782
+Epoch 2/3 | Batch 95 | Dataset indices [752, 753, 754, 755, 756, 757, 758, 759] | Loss: 0.329418
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 760
+Epoch 2/3 | Batch 96 | Dataset indices [760, 761, 762, 763, 764, 765, 766, 767] | Loss: 0.317645
+Epoch 2/3 | Batch 97 | Dataset indices [768, 769, 770, 771, 772, 773, 774, 775] | Loss: 0.301378
+Epoch 2/3 | Batch 98 | Dataset indices [776, 777, 778, 779, 780, 781, 782, 783] | Loss: 0.301215
+Epoch 2/3 | Batch 99 | Dataset indices [784, 785, 786, 787, 788, 789, 790, 791] | Loss: 0.325197
+Epoch 2/3 | Batch 100 | Dataset indices [792, 793, 794, 795, 796, 797, 798, 799] | Loss: 0.300823
+Epoch 2/3 | Batch 101 | Dataset indices [800, 801, 802, 803, 804, 805, 806, 807] | Loss: 0.348602
+Epoch 2/3 | Batch 102 | Dataset indices [808, 809, 810, 811, 812, 813, 814, 815] | Loss: 0.334967
+Epoch 2/3 | Batch 103 | Dataset indices [816, 817, 818, 819, 820, 821, 822, 823] | Loss: 0.355884
+Epoch 2/3 | Batch 104 | Dataset indices [824, 825, 826, 827, 828, 829, 830, 831] | Loss: 0.339392
+Epoch 2/3 | Batch 105 | Dataset indices [832, 833, 834, 835, 836, 837, 838, 839] | Loss: 0.338352
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 840
+Epoch 2/3 | Batch 106 | Dataset indices [840, 841, 842, 843, 844, 845, 846, 847] | Loss: 0.303737
+Epoch 2/3 | Batch 107 | Dataset indices [848, 849, 850, 851, 852, 853, 854, 855] | Loss: 0.315699
+Epoch 2/3 | Batch 108 | Dataset indices [856, 857, 858, 859, 860, 861, 862, 863] | Loss: 0.339919
+Epoch 2/3 | Batch 109 | Dataset indices [864, 865, 866, 867, 868, 869, 870, 871] | Loss: 0.331857
+Epoch 2/3 | Batch 110 | Dataset indices [872, 873, 874, 875, 876, 877, 878, 879] | Loss: 0.314369
+Epoch 2/3 | Batch 111 | Dataset indices [880, 881, 882, 883, 884, 885, 886, 887] | Loss: 0.321838
+Epoch 2/3 | Batch 112 | Dataset indices [888, 889, 890, 891, 892, 893, 894, 895] | Loss: 0.312054
+Epoch 2/3 | Batch 113 | Dataset indices [896, 897, 898, 899, 900, 901, 902, 903] | Loss: 0.323190
+Epoch 2/3 | Batch 114 | Dataset indices [904, 905, 906, 907, 908, 909, 910, 911] | Loss: 0.332613
+Epoch 2/3 | Batch 115 | Dataset indices [912, 913, 914, 915, 916, 917, 918, 919] | Loss: 0.341510
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 920
+Epoch 2/3 | Batch 116 | Dataset indices [920, 921, 922, 923, 924, 925, 926, 927] | Loss: 0.369924
+Epoch 2/3 | Batch 117 | Dataset indices [928, 929, 930, 931, 932, 933, 934, 935] | Loss: 0.309064
+Epoch 2/3 | Batch 118 | Dataset indices [936, 937, 938, 939, 940, 941, 942, 943] | Loss: 0.312614
+Epoch 2/3 | Batch 119 | Dataset indices [944, 945, 946, 947, 948, 949, 950, 951] | Loss: 0.311112
+Epoch 2/3 | Batch 120 | Dataset indices [952, 953, 954, 955, 956, 957, 958, 959] | Loss: 0.320594
+Epoch 2/3 | Batch 121 | Dataset indices [960, 961, 962, 963, 964, 965, 966, 967] | Loss: 0.342144
+Epoch 2/3 | Batch 122 | Dataset indices [968, 969, 970, 971, 972, 973, 974, 975] | Loss: 0.328032
+Epoch 2/3 | Batch 123 | Dataset indices [976, 977, 978, 979, 980, 981, 982, 983] | Loss: 0.353114
+Epoch 2/3 | Batch 124 | Dataset indices [984, 985, 986, 987, 988, 989, 990, 991] | Loss: 0.312565
+Epoch 2/3 | Batch 125 | Dataset indices [992, 993, 994, 995, 996, 997, 998, 999] | Loss: 0.344953
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 1000
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/epoch_0002.pt | next dataset index: 0
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 0
+Epoch 3/3 | Batch 1 | Dataset indices [0, 1, 2, 3, 4, 5, 6, 7] | Loss: 0.316344
+Epoch 3/3 | Batch 2 | Dataset indices [8, 9, 10, 11, 12, 13, 14, 15] | Loss: 0.344683
+Epoch 3/3 | Batch 3 | Dataset indices [16, 17, 18, 19, 20, 21, 22, 23] | Loss: 0.321814
+Epoch 3/3 | Batch 4 | Dataset indices [24, 25, 26, 27, 28, 29, 30, 31] | Loss: 0.332071
+Epoch 3/3 | Batch 5 | Dataset indices [32, 33, 34, 35, 36, 37, 38, 39] | Loss: 0.346674
+Epoch 3/3 | Batch 6 | Dataset indices [40, 41, 42, 43, 44, 45, 46, 47] | Loss: 0.298597
+Epoch 3/3 | Batch 7 | Dataset indices [48, 49, 50, 51, 52, 53, 54, 55] | Loss: 0.330941
+Epoch 3/3 | Batch 8 | Dataset indices [56, 57, 58, 59, 60, 61, 62, 63] | Loss: 0.334685
+Epoch 3/3 | Batch 9 | Dataset indices [64, 65, 66, 67, 68, 69, 70, 71] | Loss: 0.333834
+Epoch 3/3 | Batch 10 | Dataset indices [72, 73, 74, 75, 76, 77, 78, 79] | Loss: 0.313576
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 80
+Epoch 3/3 | Batch 11 | Dataset indices [80, 81, 82, 83, 84, 85, 86, 87] | Loss: 0.325048
+Epoch 3/3 | Batch 12 | Dataset indices [88, 89, 90, 91, 92, 93, 94, 95] | Loss: 0.316020
+Epoch 3/3 | Batch 13 | Dataset indices [96, 97, 98, 99, 100, 101, 102, 103] | Loss: 0.326927
+Epoch 3/3 | Batch 14 | Dataset indices [104, 105, 106, 107, 108, 109, 110, 111] | Loss: 0.318008
+Epoch 3/3 | Batch 15 | Dataset indices [112, 113, 114, 115, 116, 117, 118, 119] | Loss: 0.313761
+Epoch 3/3 | Batch 16 | Dataset indices [120, 121, 122, 123, 124, 125, 126, 127] | Loss: 0.331652
+Epoch 3/3 | Batch 17 | Dataset indices [128, 129, 130, 131, 132, 133, 134, 135] | Loss: 0.333931
+Epoch 3/3 | Batch 18 | Dataset indices [136, 137, 138, 139, 140, 141, 142, 143] | Loss: 0.284010
+Epoch 3/3 | Batch 19 | Dataset indices [144, 145, 146, 147, 148, 149, 150, 151] | Loss: 0.325200
+Epoch 3/3 | Batch 20 | Dataset indices [152, 153, 154, 155, 156, 157, 158, 159] | Loss: 0.341671
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 160
+Epoch 3/3 | Batch 21 | Dataset indices [160, 161, 162, 163, 164, 165, 166, 167] | Loss: 0.297858
+Epoch 3/3 | Batch 22 | Dataset indices [168, 169, 170, 171, 172, 173, 174, 175] | Loss: 0.330247
+Epoch 3/3 | Batch 23 | Dataset indices [176, 177, 178, 179, 180, 181, 182, 183] | Loss: 0.301020
+Epoch 3/3 | Batch 24 | Dataset indices [184, 185, 186, 187, 188, 189, 190, 191] | Loss: 0.294881
+Epoch 3/3 | Batch 25 | Dataset indices [192, 193, 194, 195, 196, 197, 198, 199] | Loss: 0.320099
+Epoch 3/3 | Batch 26 | Dataset indices [200, 201, 202, 203, 204, 205, 206, 207] | Loss: 0.323132
+Epoch 3/3 | Batch 27 | Dataset indices [208, 209, 210, 211, 212, 213, 214, 215] | Loss: 0.316704
+Epoch 3/3 | Batch 28 | Dataset indices [216, 217, 218, 219, 220, 221, 222, 223] | Loss: 0.327795
+Epoch 3/3 | Batch 29 | Dataset indices [224, 225, 226, 227, 228, 229, 230, 231] | Loss: 0.312092
+Epoch 3/3 | Batch 30 | Dataset indices [232, 233, 234, 235, 236, 237, 238, 239] | Loss: 0.353877
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 240
+Epoch 3/3 | Batch 31 | Dataset indices [240, 241, 242, 243, 244, 245, 246, 247] | Loss: 0.325588
+Epoch 3/3 | Batch 32 | Dataset indices [248, 249, 250, 251, 252, 253, 254, 255] | Loss: 0.342381
+Epoch 3/3 | Batch 33 | Dataset indices [256, 257, 258, 259, 260, 261, 262, 263] | Loss: 0.309172
+Epoch 3/3 | Batch 34 | Dataset indices [264, 265, 266, 267, 268, 269, 270, 271] | Loss: 0.304611
+Epoch 3/3 | Batch 35 | Dataset indices [272, 273, 274, 275, 276, 277, 278, 279] | Loss: 0.305991
+Epoch 3/3 | Batch 36 | Dataset indices [280, 281, 282, 283, 284, 285, 286, 287] | Loss: 0.325010
+Epoch 3/3 | Batch 37 | Dataset indices [288, 289, 290, 291, 292, 293, 294, 295] | Loss: 0.292109
+Epoch 3/3 | Batch 38 | Dataset indices [296, 297, 298, 299, 300, 301, 302, 303] | Loss: 0.308858
+Epoch 3/3 | Batch 39 | Dataset indices [304, 305, 306, 307, 308, 309, 310, 311] | Loss: 0.322651
+Epoch 3/3 | Batch 40 | Dataset indices [312, 313, 314, 315, 316, 317, 318, 319] | Loss: 0.331986
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 320
+Epoch 3/3 | Batch 41 | Dataset indices [320, 321, 322, 323, 324, 325, 326, 327] | Loss: 0.327665
+Epoch 3/3 | Batch 42 | Dataset indices [328, 329, 330, 331, 332, 333, 334, 335] | Loss: 0.308830
+Epoch 3/3 | Batch 43 | Dataset indices [336, 337, 338, 339, 340, 341, 342, 343] | Loss: 0.336387
+Epoch 3/3 | Batch 44 | Dataset indices [344, 345, 346, 347, 348, 349, 350, 351] | Loss: 0.319107
+Epoch 3/3 | Batch 45 | Dataset indices [352, 353, 354, 355, 356, 357, 358, 359] | Loss: 0.317902
+Epoch 3/3 | Batch 46 | Dataset indices [360, 361, 362, 363, 364, 365, 366, 367] | Loss: 0.322927
+Epoch 3/3 | Batch 47 | Dataset indices [368, 369, 370, 371, 372, 373, 374, 375] | Loss: 0.341646
+Epoch 3/3 | Batch 48 | Dataset indices [376, 377, 378, 379, 380, 381, 382, 383] | Loss: 0.274500
+Epoch 3/3 | Batch 49 | Dataset indices [384, 385, 386, 387, 388, 389, 390, 391] | Loss: 0.315588
+Epoch 3/3 | Batch 50 | Dataset indices [392, 393, 394, 395, 396, 397, 398, 399] | Loss: 0.303923
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 400
+Epoch 3/3 | Batch 51 | Dataset indices [400, 401, 402, 403, 404, 405, 406, 407] | Loss: 0.305194
+Epoch 3/3 | Batch 52 | Dataset indices [408, 409, 410, 411, 412, 413, 414, 415] | Loss: 0.314700
+Epoch 3/3 | Batch 53 | Dataset indices [416, 417, 418, 419, 420, 421, 422, 423] | Loss: 0.336158
+Epoch 3/3 | Batch 54 | Dataset indices [424, 425, 426, 427, 428, 429, 430, 431] | Loss: 0.310085
+Epoch 3/3 | Batch 55 | Dataset indices [432, 433, 434, 435, 436, 437, 438, 439] | Loss: 0.304891
+Epoch 3/3 | Batch 56 | Dataset indices [440, 441, 442, 443, 444, 445, 446, 447] | Loss: 0.322743
+Epoch 3/3 | Batch 57 | Dataset indices [448, 449, 450, 451, 452, 453, 454, 455] | Loss: 0.326090
+Epoch 3/3 | Batch 58 | Dataset indices [456, 457, 458, 459, 460, 461, 462, 463] | Loss: 0.323151
+Epoch 3/3 | Batch 59 | Dataset indices [464, 465, 466, 467, 468, 469, 470, 471] | Loss: 0.336462
+Epoch 3/3 | Batch 60 | Dataset indices [472, 473, 474, 475, 476, 477, 478, 479] | Loss: 0.302693
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 480
+Epoch 3/3 | Batch 61 | Dataset indices [480, 481, 482, 483, 484, 485, 486, 487] | Loss: 0.320480
+Epoch 3/3 | Batch 62 | Dataset indices [488, 489, 490, 491, 492, 493, 494, 495] | Loss: 0.298543
+Epoch 3/3 | Batch 63 | Dataset indices [496, 497, 498, 499, 500, 501, 502, 503] | Loss: 0.285050
+Epoch 3/3 | Batch 64 | Dataset indices [504, 505, 506, 507, 508, 509, 510, 511] | Loss: 0.296349
+Epoch 3/3 | Batch 65 | Dataset indices [512, 513, 514, 515, 516, 517, 518, 519] | Loss: 0.323041
+Epoch 3/3 | Batch 66 | Dataset indices [520, 521, 522, 523, 524, 525, 526, 527] | Loss: 0.308639
+Epoch 3/3 | Batch 67 | Dataset indices [528, 529, 530, 531, 532, 533, 534, 535] | Loss: 0.306506
+Epoch 3/3 | Batch 68 | Dataset indices [536, 537, 538, 539, 540, 541, 542, 543] | Loss: 0.300015
+Epoch 3/3 | Batch 69 | Dataset indices [544, 545, 546, 547, 548, 549, 550, 551] | Loss: 0.308002
+Epoch 3/3 | Batch 70 | Dataset indices [552, 553, 554, 555, 556, 557, 558, 559] | Loss: 0.296967
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 560
+Epoch 3/3 | Batch 71 | Dataset indices [560, 561, 562, 563, 564, 565, 566, 567] | Loss: 0.308948
+Epoch 3/3 | Batch 72 | Dataset indices [568, 569, 570, 571, 572, 573, 574, 575] | Loss: 0.312129
+Epoch 3/3 | Batch 73 | Dataset indices [576, 577, 578, 579, 580, 581, 582, 583] | Loss: 0.308469
+Epoch 3/3 | Batch 74 | Dataset indices [584, 585, 586, 587, 588, 589, 590, 591] | Loss: 0.323336
+Epoch 3/3 | Batch 75 | Dataset indices [592, 593, 594, 595, 596, 597, 598, 599] | Loss: 0.318346
+Epoch 3/3 | Batch 76 | Dataset indices [600, 601, 602, 603, 604, 605, 606, 607] | Loss: 0.322046
+Epoch 3/3 | Batch 77 | Dataset indices [608, 609, 610, 611, 612, 613, 614, 615] | Loss: 0.291794
+Epoch 3/3 | Batch 78 | Dataset indices [616, 617, 618, 619, 620, 621, 622, 623] | Loss: 0.286274
+Epoch 3/3 | Batch 79 | Dataset indices [624, 625, 626, 627, 628, 629, 630, 631] | Loss: 0.348304
+Epoch 3/3 | Batch 80 | Dataset indices [632, 633, 634, 635, 636, 637, 638, 639] | Loss: 0.291515
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 640
+Epoch 3/3 | Batch 81 | Dataset indices [640, 641, 642, 643, 644, 645, 646, 647] | Loss: 0.321950
+Epoch 3/3 | Batch 82 | Dataset indices [648, 649, 650, 651, 652, 653, 654, 655] | Loss: 0.323725
+Epoch 3/3 | Batch 83 | Dataset indices [656, 657, 658, 659, 660, 661, 662, 663] | Loss: 0.325294
+Epoch 3/3 | Batch 84 | Dataset indices [664, 665, 666, 667, 668, 669, 670, 671] | Loss: 0.271437
+Epoch 3/3 | Batch 85 | Dataset indices [672, 673, 674, 675, 676, 677, 678, 679] | Loss: 0.294818
+Epoch 3/3 | Batch 86 | Dataset indices [680, 681, 682, 683, 684, 685, 686, 687] | Loss: 0.309323
+Epoch 3/3 | Batch 87 | Dataset indices [688, 689, 690, 691, 692, 693, 694, 695] | Loss: 0.291052
+Epoch 3/3 | Batch 88 | Dataset indices [696, 697, 698, 699, 700, 701, 702, 703] | Loss: 0.295045
+Epoch 3/3 | Batch 89 | Dataset indices [704, 705, 706, 707, 708, 709, 710, 711] | Loss: 0.311464
+Epoch 3/3 | Batch 90 | Dataset indices [712, 713, 714, 715, 716, 717, 718, 719] | Loss: 0.305197
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 720
+Epoch 3/3 | Batch 91 | Dataset indices [720, 721, 722, 723, 724, 725, 726, 727] | Loss: 0.282978
+Epoch 3/3 | Batch 92 | Dataset indices [728, 729, 730, 731, 732, 733, 734, 735] | Loss: 0.310434
+Epoch 3/3 | Batch 93 | Dataset indices [736, 737, 738, 739, 740, 741, 742, 743] | Loss: 0.284891
+Epoch 3/3 | Batch 94 | Dataset indices [744, 745, 746, 747, 748, 749, 750, 751] | Loss: 0.320553
+Epoch 3/3 | Batch 95 | Dataset indices [752, 753, 754, 755, 756, 757, 758, 759] | Loss: 0.312672
+Epoch 3/3 | Batch 96 | Dataset indices [760, 761, 762, 763, 764, 765, 766, 767] | Loss: 0.303781
+Epoch 3/3 | Batch 97 | Dataset indices [768, 769, 770, 771, 772, 773, 774, 775] | Loss: 0.285745
+Epoch 3/3 | Batch 98 | Dataset indices [776, 777, 778, 779, 780, 781, 782, 783] | Loss: 0.287745
+Epoch 3/3 | Batch 99 | Dataset indices [784, 785, 786, 787, 788, 789, 790, 791] | Loss: 0.308971
+Epoch 3/3 | Batch 100 | Dataset indices [792, 793, 794, 795, 796, 797, 798, 799] | Loss: 0.286726
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 800
+Epoch 3/3 | Batch 101 | Dataset indices [800, 801, 802, 803, 804, 805, 806, 807] | Loss: 0.328071
+Epoch 3/3 | Batch 102 | Dataset indices [808, 809, 810, 811, 812, 813, 814, 815] | Loss: 0.316956
+Epoch 3/3 | Batch 103 | Dataset indices [816, 817, 818, 819, 820, 821, 822, 823] | Loss: 0.337560
+Epoch 3/3 | Batch 104 | Dataset indices [824, 825, 826, 827, 828, 829, 830, 831] | Loss: 0.321354
+Epoch 3/3 | Batch 105 | Dataset indices [832, 833, 834, 835, 836, 837, 838, 839] | Loss: 0.318397
+Epoch 3/3 | Batch 106 | Dataset indices [840, 841, 842, 843, 844, 845, 846, 847] | Loss: 0.289815
+Epoch 3/3 | Batch 107 | Dataset indices [848, 849, 850, 851, 852, 853, 854, 855] | Loss: 0.298965
+Epoch 3/3 | Batch 108 | Dataset indices [856, 857, 858, 859, 860, 861, 862, 863] | Loss: 0.320177
+Epoch 3/3 | Batch 109 | Dataset indices [864, 865, 866, 867, 868, 869, 870, 871] | Loss: 0.314051
+Epoch 3/3 | Batch 110 | Dataset indices [872, 873, 874, 875, 876, 877, 878, 879] | Loss: 0.300753
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 880
+Epoch 3/3 | Batch 111 | Dataset indices [880, 881, 882, 883, 884, 885, 886, 887] | Loss: 0.303618
+Epoch 3/3 | Batch 112 | Dataset indices [888, 889, 890, 891, 892, 893, 894, 895] | Loss: 0.294257
+Epoch 3/3 | Batch 113 | Dataset indices [896, 897, 898, 899, 900, 901, 902, 903] | Loss: 0.303363
+Epoch 3/3 | Batch 114 | Dataset indices [904, 905, 906, 907, 908, 909, 910, 911] | Loss: 0.316796
+Epoch 3/3 | Batch 115 | Dataset indices [912, 913, 914, 915, 916, 917, 918, 919] | Loss: 0.325997
+Epoch 3/3 | Batch 116 | Dataset indices [920, 921, 922, 923, 924, 925, 926, 927] | Loss: 0.352362
+Epoch 3/3 | Batch 117 | Dataset indices [928, 929, 930, 931, 932, 933, 934, 935] | Loss: 0.291454
+Epoch 3/3 | Batch 118 | Dataset indices [936, 937, 938, 939, 940, 941, 942, 943] | Loss: 0.298654
+Epoch 3/3 | Batch 119 | Dataset indices [944, 945, 946, 947, 948, 949, 950, 951] | Loss: 0.299337
+Epoch 3/3 | Batch 120 | Dataset indices [952, 953, 954, 955, 956, 957, 958, 959] | Loss: 0.303754
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 960
+Epoch 3/3 | Batch 121 | Dataset indices [960, 961, 962, 963, 964, 965, 966, 967] | Loss: 0.324582
+Epoch 3/3 | Batch 122 | Dataset indices [968, 969, 970, 971, 972, 973, 974, 975] | Loss: 0.312983
+Epoch 3/3 | Batch 123 | Dataset indices [976, 977, 978, 979, 980, 981, 982, 983] | Loss: 0.333921
+Epoch 3/3 | Batch 124 | Dataset indices [984, 985, 986, 987, 988, 989, 990, 991] | Loss: 0.293105
+Epoch 3/3 | Batch 125 | Dataset indices [992, 993, 994, 995, 996, 997, 998, 999] | Loss: 0.329550
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/epoch_0003.pt | next dataset index: 0
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/latest.pt | next dataset index: 0
+Saved checkpoint: /home/markphan24/LayerSkip/checkpoints/ee_cnn/final.pt | next dataset index: 0
