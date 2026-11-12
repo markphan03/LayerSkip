@@ -108,8 +108,11 @@ class HuggingfaceLlamaGenerator:
         prepare = getattr(self.generation_strategy, "prepare_for_generation", None)
         if prepare is not None:
             prepare(self.model, example["input_ids"].tolist()[0], generation_config)
+        cuda_devices = {parameter.device for parameter in self.model.parameters() if parameter.device.type == "cuda"}
         with torch.inference_mode():
-            start = time.time()
+            for device in cuda_devices:
+                torch.cuda.synchronize(device)
+            start = time.perf_counter()
             generation_strategy_result = self.generation_strategy.generate_token_ids(
                 model=self.model,
                 input_ids=example["input_ids"].tolist()[0],
@@ -119,7 +122,9 @@ class HuggingfaceLlamaGenerator:
                 stopping_criteria=stopping_criteria,
                 streamer=streamer,
             )
-            total_time = time.time() - start
+            for device in cuda_devices:
+                torch.cuda.synchronize(device)
+            total_time = time.perf_counter() - start
         decoded_prediction = self.tokenizer.decode(
             generation_strategy_result.predicted_tokens
         )

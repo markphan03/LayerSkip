@@ -37,6 +37,10 @@ class StreamerType(str, Enum):
 @dataclass
 class GenerateArguments:
     streamer: StreamerType = StreamerType.STANDARD
+    ss_cuda_graphs: str = field(default="auto", metadata={
+        "choices": ["auto", "off"],
+        "help": "Fixed-depth self_speculative: auto uses shared-pool CUDA graphs on CUDA; off disables graphs.",
+    })
     ee_checkpoint: str = field(default=None, metadata={
         "help": "GRU checkpoint for early_exit_speculative (default: checkpoints/ee_cnn/best_model/final.pt).",
     })
@@ -98,7 +102,9 @@ def main(args: Arguments, generate_arguments: GenerateArguments, generation_conf
     if generation_config.generation_strategy == "autoregressive":
         generation_strategy: GenerationStrategy = AutoRegressiveGenerationStrategy()
     elif generation_config.generation_strategy == "self_speculative":
-        generation_strategy: GenerationStrategy = SelfSpeculativeGenerationStrategy()
+        generation_strategy: GenerationStrategy = SelfSpeculativeGenerationStrategy(
+            cuda_graphs=generate_arguments.ss_cuda_graphs,
+        )
     elif generation_config.generation_strategy == "early_exit_speculative":
         generation_strategy = EarlyExitSelfSpeculativeGenerationStrategy(
             checkpoint_path=generate_arguments.ee_checkpoint,

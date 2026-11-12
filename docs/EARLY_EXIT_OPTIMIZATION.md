@@ -120,6 +120,11 @@ backend.
 
 ### Cached 7B model benchmark
 
+This table records the November 11 measurements, before CUDA graphs were
+added to fixed-depth `self_speculative`. Fixed-depth decoding now shares the
+optimized backend; use [the comparison tool](SPECULATIVE_COMPARISON.md) to
+measure the current implementations under matching conditions.
+
 The real-model check used `facebook/layerskip-llama2-7B`, the local trained GRU
 checkpoint, FP16 weights, SDPA attention, six speculative tokens, and 64 greedy
 output tokens. The prompt was:

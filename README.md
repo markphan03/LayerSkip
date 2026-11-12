@@ -67,6 +67,10 @@ $ python generate.py --model facebook/layerskip-llama2-7B \
 ```
 
 Tips:
+- `self_speculative` now uses shared-pool CUDA graphs by default on CUDA. Add
+  `--ss_cuda_graphs off` to disable graphs. Fixed-depth drafting does not load
+  a GRU checkpoint or perform classifier exit checks. Both modes require the
+  model on one device with eager or SDPA attention.
 - You may change `--model` to any HuggingFace model but in order to observe speedup with self-speculative decoding, use a model trained using the LayerSkip recipe, such as those we have [open sourced on HuggingFace](https://huggingface.co/collections/facebook/layerskip-666b25c50c8ae90e1965727a).
 - By default we enable sampling. You may change the sampling behaviour using the `--sample`, `--temperature`, `--top_p`, and `--top_k` arguments.
 - You may run `python generate.py --help` for details on different command-line arguments.
@@ -144,7 +148,77 @@ for implementation details, validation, and a single-prompt 7B benchmark. This m
 requires a Llama model on one device with eager or SDPA attention. The original
 `self_speculative` strategy continues to use a fixed exit layer.
 
+### Generate the same prompt N times
+
+`generate_n_times.py` loads the model once and generates independent completions
+of the same prompt. For adaptive early-exit speculation:
+
+```bash
+python generate_n_times.py \
+    --model facebook/layerskip-llama2-7B \
+    --generation_strategy early_exit_speculative \
+    --ee_checkpoint checkpoints/ee_cnn/best_model/final.pt \
+    --ee_gpu_branching auto \
+    --ee_threshold 0.8 \
+    --ee_initial_fraction 0.25 \
+    --num_speculations 6 \
+    --max_steps 512 \
+    --sample True --N 100 \
+    --prompt "What is the capital of France?"
+```
+
+For fixed-depth self-speculative decoding, specify the draft exit layer:
+
+```bash
+python generate_n_times.py \
+    --model facebook/layerskip-llama2-7B \
+    --generation_strategy self_speculative \
+    --exit_layer 8 \
+    --num_speculations 6 \
+    --max_steps 512 \
+    --sample True --N 100 \
+    --prompt "What is the capital of France?"
+```
+
+Fixed-depth mode does not require an early-exit checkpoint. Both commands print
+completion text only for runs 1–4 (`n < 5`, using 1-based run numbers), including
+when streaming is enabled. Every run prints generation time, token count, time
+per token (seconds/token), throughput, and acceptance rate, followed by aggregate
+metrics for the N runs. Aggregate time per token is total generation time divided
+by total generated tokens; zero-token results display `N/A`.
+Add `--output logs/generations.json` to save all completions, settings,
+text, token IDs, per-run seeds, and metrics. Runs use `--seed + run_index`
+(zero-based; default seed 42), so sampled runs have separate reproducible random
+streams. Greedy decoding (`--sample False`) normally repeats the same output.
+`--max_steps` is the per-run token limit; EOS can stop a completion earlier.
+
+Optional `--warmup 1` performs an extra unreported generation before the N runs
+without changing their seeds. Reported generation timing excludes model loading,
+tokenization, decoding, graph setup, and warmup runs. Aggregate throughput is
+total generated tokens divided by total generation time; acceptance is the mean
+of the per-run rates. Text streaming is off by default; use `--streamer standard`
+or `--streamer speculative` to enable it (streaming adds overhead to timing).
+The script also supports `--generation_strategy autoregressive`.
+
 ## Benchmark
+
+To compare fixed-depth and adaptive self-speculation with the same graph/cache
+backend, run:
+
+```bash
+python compare_speculative.py \
+    --model facebook/layerskip-llama2-7B \
+    --ee-checkpoint checkpoints/ee_cnn/best_model/final.pt \
+    --exit-layer 8 --num-speculations 6 \
+    --max-new-tokens 64 --warmup 1 --repeats 5 \
+    --output /tmp/speculative-comparison.json
+```
+
+This measures both strategies with graphs enabled and disabled, reports setup
+separately, and checks greedy outputs against full-model generation. Adaptive
+drafts may use all layers by default; add `--adaptive-exit-layer 8` to match the
+fixed draft-depth cap. See [Speculative decoding comparison](SPECULATIVE_COMPARISON.md)
+for timing methodology and command options.
 
 To benchmark on a dataset:
 

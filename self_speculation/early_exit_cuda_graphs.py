@@ -216,6 +216,8 @@ class GroupedDraftGraphs:
 
     @torch.inference_mode()
     def __init__(self, model, classifier, checks, threshold, capacity, max_drafts):
+        if classifier is None and len(checks) != 1:
+            raise ValueError("Fixed-depth graphs require exactly one exit depth.")
         self.model, self.classifier = model, classifier
         self.checks, self.threshold = checks, threshold
         self.capacity, self.max_drafts = capacity, max_drafts
@@ -235,7 +237,10 @@ class GroupedDraftGraphs:
         self.hidden_output = parameter.new_zeros((1, width, hidden))
         self.position_start = torch.zeros((), device=self.device, dtype=torch.long)
         self.key_positions = torch.arange(capacity, device=self.device)
-        self.gru_state = parameter.new_zeros((classifier.config["num_layers"], 1, classifier.config["hidden_size"]))
+        self.gru_state = (
+            parameter.new_zeros((classifier.config["num_layers"], 1, classifier.config["hidden_size"]))
+            if classifier is not None else None
+        )
         self.score = parameter.new_zeros(())
         self.draft_output = parameter.new_zeros((1, model.config.vocab_size))
         self.verify_output = parameter.new_zeros((1, width, model.config.vocab_size))
@@ -336,7 +341,8 @@ class GroupedDraftGraphs:
         self.length += 1
 
     def draft_logits(self, classifier, threshold, max_depth, initial_fraction=0.25):
-        self.gru_state.zero_()
+        if self.gru_state is not None:
+            self.gru_state.zero_()
         for start, end in self.groups:
             self._run_group(start, end, draft=True)
             if end == self.checks[-1]:

@@ -142,39 +142,20 @@ def _verify_sample(token, target, draft):
     return torch.multinomial(probabilities, num_samples=1).item(), False
 
 
-class EarlyExitSelfSpeculativeGenerationStrategy(GenerationStrategy):
-    """Draft at the first scheduled GRU score >= threshold, then fully verify.
+class VerifiedSpeculativeGenerationStrategy(GenerationStrategy):
+    """Shared cache, graph setup, and exact verification for both draft policies.
 
-    ``GenerationConfig.exit_layer`` optionally caps draft depth (1-based).
-    Its default -1 allows all layers. The final allowed layer is the fallback.
-    ``num_speculations`` is the maximum draft block length, including zero.
-    The checkpoint's training model must be used on one device with eager or
-    SDPA attention. The classifier is loaded once and reused across prompts.
-    The initial exit increment is initial_fraction of the full model depth;
-    subsequent increments halve, rounding up to at least one layer. Every draft
-    token gets an independent decision. CUDA auto mode uses ordinary graphs
-    with grouped host checks. Explicit on mode opts into conditional graphs.
+    With no classifier and initial_fraction=1, drafting stops at the configured
+    fixed depth. Adaptive subclasses supply a classifier and an exit schedule.
     """
 
-    def __init__(
-        self, checkpoint_path=None, threshold=0.5, initial_fraction=0.25,
-        gpu_branching="auto",
-    ):
-        from train_ee_cnn import EarlyExitGRU
-
+    def __init__(self, classifier=None, threshold=0.5, initial_fraction=1.0, gpu_branching="auto"):
         if not 0 <= threshold <= 1:
             raise ValueError("ee_threshold must be between 0 and 1.")
         exit_check_layers(1, initial_fraction=initial_fraction)
         if gpu_branching not in ("auto", "on", "off"):
             raise ValueError("ee_gpu_branching must be auto, on, or off.")
-        if checkpoint_path is None:
-            checkpoint_path = (
-                Path(__file__).resolve().parents[1] / "checkpoints/ee_cnn/best_model/final.pt"
-            )
-        checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=True)
-        self.classifier = EarlyExitGRU(**checkpoint["model_config"])
-        self.classifier.load_state_dict(checkpoint["model_state_dict"])
-        self.classifier.eval()
+        self.classifier = classifier
         self.threshold = threshold
         self.initial_fraction = initial_fraction
         self.gpu_branching = gpu_branching
@@ -185,10 +166,11 @@ class EarlyExitSelfSpeculativeGenerationStrategy(GenerationStrategy):
     def prepare_model(self, model):
         """Match the base model before warmup or timed generation."""
         parameter = model.model.embed_tokens.weight
-        classifier_parameter = next(self.classifier.parameters())
-        if classifier_parameter.device != parameter.device or classifier_parameter.dtype != parameter.dtype:
-            self.classifier.to(device=parameter.device, dtype=parameter.dtype)
-        self.classifier.eval()
+        if self.classifier is not None:
+            classifier_parameter = next(self.classifier.parameters())
+            if classifier_parameter.device != parameter.device or classifier_parameter.dtype != parameter.dtype:
+                self.classifier.to(device=parameter.device, dtype=parameter.dtype)
+            self.classifier.eval()
         model.eval()
 
     @torch.inference_mode()
@@ -200,11 +182,11 @@ class EarlyExitSelfSpeculativeGenerationStrategy(GenerationStrategy):
 
         config = generation_config
         if not isinstance(model, transformers.LlamaForCausalLM):
-            raise ValueError("Early-exit speculation requires LlamaForCausalLM.")
+            raise ValueError("Speculative decoding requires LlamaForCausalLM.")
         parameter = model.model.embed_tokens.weight
         if parameter.device.type == "meta" or any(p.device != parameter.device for p in model.parameters()):
-            raise ValueError("Early-exit speculation requires the model on one device.")
-        if model.config.hidden_size != self.classifier.config["input_size"]:
+            raise ValueError("Speculative decoding requires the model on one device.")
+        if self.classifier is not None and model.config.hidden_size != self.classifier.config["input_size"]:
             raise ValueError("The checkpoint input_size does not match the Llama hidden size.")
         self.prepare_model(model)
         available = conditional_graphs_available(model)
@@ -257,13 +239,13 @@ class EarlyExitSelfSpeculativeGenerationStrategy(GenerationStrategy):
         if config.top_k < 0 or not 0 <= config.top_p <= 1:
             raise ValueError("top_k must be non-negative and top_p between 0 and 1.")
         if not isinstance(model, transformers.LlamaForCausalLM):
-            raise ValueError("Early-exit speculation requires LlamaForCausalLM.")
+            raise ValueError("Speculative decoding requires LlamaForCausalLM.")
         device = model.model.embed_tokens.weight.device
         if device.type == "meta" or any(p.device != device for p in model.parameters()):
-            raise ValueError("Early-exit speculation requires the model on one device.")
+            raise ValueError("Speculative decoding requires the model on one device.")
         if model.config._attn_implementation not in ("eager", "sdpa"):
-            raise ValueError("Early-exit speculation requires eager or sdpa attention.")
-        if model.config.hidden_size != self.classifier.config["input_size"]:
+            raise ValueError("Speculative decoding requires eager or sdpa attention.")
+        if self.classifier is not None and model.config.hidden_size != self.classifier.config["input_size"]:
             raise ValueError("The checkpoint input_size does not match the Llama hidden size.")
         depth = len(model.model.layers) if config.exit_layer == -1 else config.exit_layer
         if not 1 <= depth <= len(model.model.layers):
@@ -376,3 +358,39 @@ class EarlyExitSelfSpeculativeGenerationStrategy(GenerationStrategy):
             predicted_tokens=output_ids,
             acceptance_rate=total_accepted / total_drafts if total_drafts else 0.0,
         )
+
+
+class EarlyExitSelfSpeculativeGenerationStrategy(VerifiedSpeculativeGenerationStrategy):
+    """Draft at the first scheduled GRU score >= threshold, then fully verify.
+
+    ``GenerationConfig.exit_layer`` optionally caps draft depth (1-based).
+    Its default -1 allows all layers. The final allowed layer is the fallback.
+    ``num_speculations`` is the maximum draft block length, including zero.
+    The checkpoint's training model must be used on one device with eager or
+    SDPA attention. The classifier is loaded once and reused across prompts.
+    The initial exit increment is initial_fraction of the full model depth;
+    subsequent increments halve, rounding up to at least one layer. Every draft
+    token gets an independent decision. CUDA auto mode uses ordinary graphs
+    with grouped host checks. Explicit on mode opts into conditional graphs.
+    """
+
+    def __init__(
+        self, checkpoint_path=None, threshold=0.5, initial_fraction=0.25,
+        gpu_branching="auto",
+    ):
+        from train_ee_cnn import EarlyExitGRU
+
+        if not 0 <= threshold <= 1:
+            raise ValueError("ee_threshold must be between 0 and 1.")
+        exit_check_layers(1, initial_fraction=initial_fraction)
+        if gpu_branching not in ("auto", "on", "off"):
+            raise ValueError("ee_gpu_branching must be auto, on, or off.")
+        if checkpoint_path is None:
+            checkpoint_path = (
+                Path(__file__).resolve().parents[1] / "checkpoints/ee_cnn/best_model/final.pt"
+            )
+        checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=True)
+        self.classifier = EarlyExitGRU(**checkpoint["model_config"])
+        self.classifier.load_state_dict(checkpoint["model_state_dict"])
+        self.classifier.eval()
+        super().__init__(self.classifier, threshold, initial_fraction, gpu_branching)

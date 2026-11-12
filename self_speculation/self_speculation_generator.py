@@ -11,11 +11,7 @@ import colorama
 import torch
 
 import transformers
-from self_speculation.generator_base import (
-    GenerationConfig,
-    GenerationStrategy,
-    GenerationStrategyResult,
-)
+from self_speculation.early_exit_speculation_generator import VerifiedSpeculativeGenerationStrategy
 from self_speculation.speculative_streamer import SpeculativeTextStreamer
 from self_speculation.llama_model_utils import (
     crop_past_key_values,
@@ -28,75 +24,19 @@ def max_fn(x, eps=1e-6):
     x_max = torch.where(x > 0, x, 0)
     return x_max / (torch.sum(x_max) + eps)
 
-class SelfSpeculativeGenerationStrategy(GenerationStrategy):
-    def generate_token_ids(
-        self,
-        model: transformers.LlamaForCausalLM,
-        input_ids: List[int],
-        eos_token_ids: List[int],
-        generation_config: GenerationConfig,
-        logits_processors: Optional[transformers.generation.logits_process.LogitsProcessorList] = None,
-        stopping_criteria: Optional[transformers.StoppingCriteriaList] = None,
-        streamer: Optional[transformers.TextStreamer] = None,
-    ) -> GenerationStrategyResult:
-        past_key_values = None
+class SelfSpeculativeGenerationStrategy(VerifiedSpeculativeGenerationStrategy):
+    """Fixed-depth drafting with the same graph/cache/verification backend as
+    adaptive speculation, without a GRU or host exit decisions.
 
-        input_ids_list = input_ids
-        input_ids: torch.Tensor = torch.tensor([input_ids_list]).to(model.device)
-        output_ids: List[int] = []
+    cuda_graphs="auto" captures shared-pool graphs on CUDA; "off" uses the
+    portable cache implementation. Neither mode loads a classifier checkpoint.
+    single_step_speculation remains available as the legacy split-forward API.
+    """
 
-        calls: int = 0
-        total_draft_matches = 0
-        total_generations = 0
-        while len(output_ids) < generation_config.max_steps:
-            (
-                input_ids,
-                output_ids,
-                past_key_values,
-                number_of_matches,
-                num_speculations,
-            ) = self.single_step_speculation(
-                model=model,
-                input_ids_list=input_ids_list,
-                input_ids=input_ids,
-                output_ids=output_ids,
-                num_speculations=min(
-                    generation_config.num_speculations,
-                    generation_config.max_steps - len(output_ids) - 1,
-                ),
-                past_key_values=past_key_values,
-                exit_layer=generation_config.exit_layer,
-                eos_token_ids=eos_token_ids,
-                calls=calls,
-                sample=generation_config.sample,
-                temperature=generation_config.temperature,
-                top_k=generation_config.top_k,
-                top_p=generation_config.top_p,
-                logits_processors=logits_processors,
-                stopping_criteria=stopping_criteria,
-                streamer=streamer,
-            )
-            calls += 1
-            total_draft_matches += number_of_matches
-            total_generations += num_speculations
-            eos_found = False
-            for eos_token_id in eos_token_ids:
-                if eos_token_id in output_ids:
-                    # break out of loop when we get an EOS token
-                    # remove the EOS token id
-                    output_ids = output_ids[: output_ids.index(eos_token_id)]
-                    eos_found = True
-                    break
-            if eos_found:
-                break
-            if stopping_criteria:
-                # TODO: when implementing batch size > 1, stop each sample separately?
-                if torch.all(stopping_criteria(input_ids, scores=None)):
-                    break
-        return GenerationStrategyResult(
-            predicted_tokens=output_ids,
-            acceptance_rate=total_draft_matches / total_generations,
-        )
+    def __init__(self, cuda_graphs="auto"):
+        if cuda_graphs not in ("auto", "off"):
+            raise ValueError("ss_cuda_graphs must be auto or off.")
+        super().__init__(initial_fraction=1.0, gpu_branching=cuda_graphs)
 
     # TODO: remove calls, input_ids_list, rely on generation config
     def single_step_speculation(
