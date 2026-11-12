@@ -30,12 +30,15 @@ def exit_check_layers(num_layers, max_depth=None, initial_fraction=0.25):
     if not 1 <= max_depth <= num_layers:
         raise ValueError("max_depth must be between 1 and num_layers.")
     step = math.ceil(num_layers * initial_fraction)
+    interval = math.ceil(num_layers * initial_fraction)
     depth = 0
     checks = []
     while depth < max_depth:
         depth = min(depth + step, max_depth)
         checks.append(depth)
-        step = (step + 1) // 2
+        # step = (step + 1) // 2
+        # step = (step + 1) 
+        step += interval
     return checks
 
 
@@ -54,6 +57,8 @@ class _AdaptiveDraftCache:
         self.base_length = cache.get_seq_length()
         self.states = [model.model.embed_tokens(input_ids)] + [None] * len(model.model.layers)
         self.position_data = {}
+        self.layers_run = 0
+        self.classifier_calls = 0
 
     def append(self, token):
         ids = torch.tensor([[token]], device=self.states[0].device)
@@ -61,6 +66,7 @@ class _AdaptiveDraftCache:
         self.position_data.clear()
 
     def _run_layer(self, index):
+        self.layers_run += 1
         backbone = self.model.model
         start = self.cache.get_seq_length(index)
         end = self.base_length + self.states[0].shape[1]
@@ -91,6 +97,8 @@ class _AdaptiveDraftCache:
         return self.states[index + 1]
 
     def draft_logits(self, classifier, threshold, max_depth, initial_fraction=0.25):
+        self.layers_run = 0
+        self.classifier_calls = 0
         state = None  # GRU sequences run across layers, independently per token.
         start = 0
         for depth in exit_check_layers(len(self.model.model.layers), max_depth, initial_fraction):
@@ -102,13 +110,15 @@ class _AdaptiveDraftCache:
             # issuing one GRU call and one host decision per scheduled group.
             states, state = classifier.gru(torch.cat(raw_states, dim=1), state)
             score = classifier.head(states[:, -1]).sigmoid().item()
+            # print(f"Current Layer is {depth} with score {score}")
+            self.classifier_calls += 1
             if not 0 <= score <= 1:
                 raise ValueError("The early-exit classifier produced a non-finite score.")
             if score >= threshold:
                 break
             start = depth
         logits = self.model.lm_head(self.model.model.norm(raw))[:, 0]
-        return logits, depth
+        return logits, depth, self.layers_run, self.classifier_calls
 
     def verification_logits(self, count):
         for index in range(len(self.model.model.layers)):
@@ -162,6 +172,10 @@ class VerifiedSpeculativeGenerationStrategy(GenerationStrategy):
         self._cuda_graphs = None
         self._cuda_key = None
         self.graph_setup_seconds = 0.0
+        self.layers_run = 0
+        self.classifier_calls = 0
+        self.exit_layer_array = [0]
+        
 
     def prepare_model(self, model):
         """Match the base model before warmup or timed generation."""
@@ -189,6 +203,7 @@ class VerifiedSpeculativeGenerationStrategy(GenerationStrategy):
         if self.classifier is not None and model.config.hidden_size != self.classifier.config["input_size"]:
             raise ValueError("The checkpoint input_size does not match the Llama hidden size.")
         self.prepare_model(model)
+        self.exit_layer_array = [0] * (len(model.model.layers) + 1)
         available = conditional_graphs_available(model)
         if self.gpu_branching == "on" and not available:
             raise RuntimeError(
@@ -291,9 +306,13 @@ class VerifiedSpeculativeGenerationStrategy(GenerationStrategy):
             draft_tokens, draft_probabilities = [], []
             budget = min(config.num_speculations, config.max_steps - len(output_ids) - 1)
             for _ in range(budget):
-                logits, _ = round_cache.draft_logits(
+                logits, exit_depth, layers_run, classifier_calls = round_cache.draft_logits(
                     self.classifier, self.threshold, depth, self.initial_fraction,
                 )
+                #print(f"After Batch layers_run: {self.layers_run} + {layers_run}  classifer_calls: {self.classifier_calls} + {classifier_calls} exit_depth: {exit_depth}")
+                self.layers_run += layers_run
+                self.classifier_calls += classifier_calls
+                self.exit_layer_array[exit_depth] += 1
                 scores = _processed_scores(logits, draft_context, config, logits_processors)
                 if config.sample:
                     probabilities = scores.softmax(dim=-1)
@@ -353,7 +372,12 @@ class VerifiedSpeculativeGenerationStrategy(GenerationStrategy):
             # Keep the verified prefix; the last emitted token is next round's input.
             if self._cuda_graphs is None:
                 cache.crop(context.shape[1] - 1)
-
+        print()
+        print(f"Layer Runs: {self.layers_run}")
+        print(f"Classifier Calls: {self.classifier_calls}")
+        print(f"Exit layer array: {self.exit_layer_array}")
+        print(f"Total accepted: {total_accepted}")
+        print(f"Total drafts: {total_drafts}")
         return GenerationStrategyResult(
             predicted_tokens=output_ids,
             acceptance_rate=total_accepted / total_drafts if total_drafts else 0.0,
