@@ -51,14 +51,14 @@ Once you run those steps, the commands below to run the LayerSkip checkpoints sh
 
 To run one of our models in interactive mode using regular autoregressive decoding:
 ```console
-$ torchrun generate.py --model facebook/layerskip-llama2-7B \
+$ python generate.py --model facebook/layerskip-llama2-7B \
     --sample True \
     --max_steps 512
 ```
 
 In order to observe speedup, you need to use self-speculative decoding to generate tokens, and specify `--exit_layer`, the layer the draft stage to exit at, and `--num_speculations`, the number of draft tokens:
 ```console
-$ torchrun generate.py --model facebook/layerskip-llama2-7B \
+$ python generate.py --model facebook/layerskip-llama2-7B \
     --sample True \
     --max_steps 512 \
     --generation_strategy self_speculative \
@@ -70,6 +70,79 @@ Tips:
 - You may change `--model` to any HuggingFace model but in order to observe speedup with self-speculative decoding, use a model trained using the LayerSkip recipe, such as those we have [open sourced on HuggingFace](https://huggingface.co/collections/facebook/layerskip-666b25c50c8ae90e1965727a).
 - By default we enable sampling. You may change the sampling behaviour using the `--sample`, `--temperature`, `--top_p`, and `--top_k` arguments.
 - You may run `python generate.py --help` for details on different command-line arguments.
+
+To choose each draft token's exit layer using the trained early-exit GRU:
+
+```console
+$ python generate.py \
+    --model facebook/layerskip-llama2-7B \
+    --sample True \
+    --max_steps 512 \
+    --generation_strategy early_exit_speculative \
+    --ee_checkpoint checkpoints/ee_cnn/best_model/final.pt \
+    --ee_threshold 0.5 \
+    --ee_initial_fraction 0.25 \
+    --ee_gpu_branching auto \
+    --num_speculations 6
+```
+
+No distributed environment variables are required for `python generate.py`.
+Launching with `torchrun` is also supported; only global rank 0 generates text.
+
+Enter a question or completion prompt using the same interactive input as the
+fixed-layer command. For this base language model, a prompt such as
+`Question: Why is the sky blue?` followed by a newline and `Answer:` is useful.
+The checkpoint above was trained with `facebook/layerskip-llama2-7B` on
+CNN/DailyMail summaries; use the matching base model.
+
+Exit checks begin after `ceil(total_layers * ee_initial_fraction)` layers.
+Each subsequent increment halves, rounded up to at least one layer; once the
+increment reaches one, checks continue at every layer. With 35 layers and
+`--ee_initial_fraction 0.25`, the checks are at layers 9, 14, 17, 19, 20, ..., 35.
+Fractions refer to the full model depth. The argument accepts values in `(0, 1]`.
+The GRU consumes every intermediate layer's raw state in grouped calls and exits
+at the first scheduled score reaching `--ee_threshold`. Every draft token has
+its own exit decision; depth is never fixed for a whole speculative block.
+
+If no check passes, drafting reaches the final layer. Optionally add
+`--exit_layer 8` to cap draft depth at layer 8; verification still uses all
+layers. `--num_speculations` sets the maximum number of drafts per round.
+The arguments shown above are the defaults except for the speculation count.
+
+The classifier uses the same device and floating-point dtype as Llama.
+`--ee_gpu_branching auto` uses ordinary CUDA graphs with one host exit check per
+scheduled decoder group. The graphs share one memory pool and capture stream;
+each group computes only its missing suffix. This preserves per-token adaptive
+exits and cache reuse while avoiding the conditional backend's many branch
+streams and BLAS workspaces. Rejected suffixes are logically rolled back.
+CUDA conditional-node support is not required. On CPUs, `auto` uses the portable
+implementation. Use `off` to disable CUDA graphs.
+
+`--ee_gpu_branching on` explicitly selects the experimental conditional backend
+for exit decisions on the GPU. It requires the CUDA conditional-node API and
+can consume substantially more memory. On the tested PyTorch 2.14.1/CUDA 13
+build, conditional graph pools remain reserved after deletion; changing prompt
+capacity or settings can accumulate memory. Prefer `auto` for normal use and
+restart the process after experimenting with conditional graphs to reclaim it.
+
+CUDA graph capture/warmup is a setup cost,
+performed before the generation timer by `HuggingfaceLlamaGenerator`; captured
+graphs are reused when the model, capacity bucket, and decoding settings match.
+It reserves KV storage for the prompt plus requested output budget, rounded up
+to a 128-token bucket. Large speculation counts increase graph capture time
+and memory. The portable path prefills the prompt separately, so adaptive
+activation storage covers only the short speculative suffix. For latency
+comparisons, match the model, prompt, draft-depth cap, speculation count, and
+sampling settings; allowing adaptive drafts to reach all layers can cost more
+than a fixed shallow draft.
+
+The full model verifies each block, with acceptance/rejection correction when
+sampling. KV caches and raw states are reused as draft depth changes, and
+rejected positions are removed before the next round. The command reports
+acceptance rate and throughput. See [Early-exit optimization](EARLY_EXIT_OPTIMIZATION.md)
+for implementation details, validation, and a single-prompt 7B benchmark. This mode
+requires a Llama model on one device with eager or SDPA attention. The original
+`self_speculative` strategy continues to use a fixed exit layer.
 
 ## Benchmark
 

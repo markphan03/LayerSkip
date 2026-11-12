@@ -1,0 +1,8 @@
+# Local editor settings and generated Python files
+.vscode/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local model and training artifacts
+/checkpoints/

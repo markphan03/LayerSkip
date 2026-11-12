@@ -188,17 +188,20 @@ def forward(
         past_key_values_length,
     )
 
+    position_embeddings = model.model.rotary_emb(inputs_embeds, position_ids)
     hidden_states = inputs_embeds
     for decoder_layer in model.model.layers:
-        hidden_states, past_key_values = decoder_layer(
+        layer_outputs = decoder_layer(
             hidden_states,
             attention_mask=attention_mask,
             position_ids=position_ids,
             past_key_value=past_key_values,
             output_attentions=False,
             use_cache=True,
-            padding_mask=None,
+            position_embeddings=position_embeddings,
+            cache_position=position_ids[0],
         )
+        hidden_states = layer_outputs[0]
 
     past_key_values = past_key_values.to_legacy_cache()
     hidden_states = model.model.norm(hidden_states)
@@ -248,17 +251,20 @@ def forward_early(
         past_key_values_length,
     )
 
+    position_embeddings = model.model.rotary_emb(inputs_embeds, position_ids)
     hidden_states = inputs_embeds
     for decoder_layer in model.model.layers[:exit_layer]:
-        hidden_states, past_key_values = decoder_layer(
+        layer_outputs = decoder_layer(
             hidden_states,
             attention_mask=attention_mask,
             position_ids=position_ids,
             past_key_value=past_key_values,
             output_attentions=False,
             use_cache=True,
-            padding_mask=None,
+            position_embeddings=position_embeddings,
+            cache_position=position_ids[0],
         )
+        hidden_states = layer_outputs[0]
 
     past_key_values = past_key_values.to_legacy_cache()
 
@@ -337,6 +343,7 @@ def forward_remainder(
     )
 
     next_decoder_cache = []
+    position_embeddings = model.model.rotary_emb(inputs_embeds, position_ids)
     hidden_states = inputs_embeds
     # TODO simplify
     full_hidden_states: Optional[torch.FloatTensor] = None
@@ -351,15 +358,19 @@ def forward_remainder(
             # early hidden states: B x num_gen x C
             early_hidden_states = hidden_states[:, -num_tokens_to_generate:]
             early_position_ids = position_ids[:, -num_tokens_to_generate:]
-            hidden_states, past_key_values = decoder_layer(
+            layer_outputs = decoder_layer(
                 early_hidden_states,
                 attention_mask=early_attention_mask,
                 position_ids=early_position_ids,
                 past_key_value=past_key_values,
                 output_attentions=False,
                 use_cache=True,
-                padding_mask=None,
+                position_embeddings=tuple(
+                    embedding[:, -num_tokens_to_generate:] for embedding in position_embeddings
+                ),
+                cache_position=early_position_ids[0],
             )
+            hidden_states = layer_outputs[0]
         else:
             if full_hidden_states is None and exit_query_cache is not None:
                 # first time seeing the full hidden states, we need to rely on the
@@ -372,15 +383,17 @@ def forward_remainder(
             else:
                 # we already have seen the fully hidden states we can re-use them now
                 full_hidden_states = hidden_states
-            hidden_states, past_key_values = decoder_layer(
+            layer_outputs = decoder_layer(
                 full_hidden_states,
                 attention_mask=full_attention_mask,
                 position_ids=position_ids,
                 past_key_value=past_key_values,
                 output_attentions=False,
                 use_cache=True,
-                padding_mask=None,
+                position_embeddings=position_embeddings,
+                cache_position=position_ids[0],
             )
+            hidden_states = layer_outputs[0]
 
     past_key_values = past_key_values.to_legacy_cache()
     hidden_states = model.model.norm(hidden_states)

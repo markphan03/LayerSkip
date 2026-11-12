@@ -227,3 +227,170 @@ class SelfSpeculativeGenerationStrategy(GenerationStrategy):
             number_of_matches,
             draft_output_ids.numel(),
         )
+
+
+@torch.inference_mode()
+def generate_with_early_exit(
+    question: str,
+    checkpoint_path=None,
+    *,
+    model=None,
+    tokenizer=None,
+    model_path=None,
+    max_new_tokens: int = 128,
+    threshold: float = 0.5,
+    sample: bool = False,
+    temperature: float = 0.7,
+    top_k: int = 50,
+    top_p: float = 0.95,
+    device=None,
+) -> str:
+    """Answer one question using the trained GRU's first accepted decoder layer.
+
+    Example::
+
+        answer = generate_with_early_exit("Why is the sky blue?", max_new_tokens=64)
+
+    The default checkpoint is checkpoints/ee_cnn/best_model/final.pt relative
+    to the repository. The base model/tokenizer are loaded from its training
+    metadata unless supplied; pass both to reuse an already loaded Llama.
+    They must match the checkpoint's training model and reside on one device.
+    ``device`` selects placement when loading a model. Supplied models retain
+    their placement. Models are put in evaluation mode.
+
+    Chat tokenizers use their chat template; otherwise the prompt is
+    "Question: <question>\\nAnswer:". Only the generated answer is returned.
+    This classifier was trained on CNN/DailyMail summaries, so question
+    answering quality is not established by its training metrics.
+
+    Raw last-token decoder states feed the GRU across layers, resetting its
+    state for each new token. A sigmoid score >= threshold selects that layer;
+    otherwise the final layer is used. Selected states pass through Llama's
+    final norm and vocabulary head. Tokens are not speculatively verified.
+
+    Each step recomputes the entire prefix without a KV cache, then skips layers
+    after the chosen exit. This preserves attention context when exit depth
+    changes between tokens; it is not an optimized decoding implementation.
+    """
+    import inspect
+    from pathlib import Path
+
+    from train_ee_cnn import EarlyExitGRU
+
+    if not isinstance(question, str) or not question.strip():
+        raise ValueError("question must be a nonempty string.")
+    if not isinstance(max_new_tokens, int) or max_new_tokens < 0:
+        raise ValueError("max_new_tokens must be a non-negative integer.")
+    if not 0 <= threshold <= 1:
+        raise ValueError("threshold must be between 0 and 1.")
+    if sample and not 0 < temperature < float("inf"):
+        raise ValueError("temperature must be finite and positive when sampling.")
+    if not isinstance(top_k, int) or top_k < 0 or not 0 <= top_p <= 1:
+        raise ValueError("top_k must be a non-negative integer and top_p between 0 and 1.")
+    if (model is None) != (tokenizer is None):
+        raise ValueError("Supply both model and tokenizer, or neither.")
+    if max_new_tokens == 0:
+        return ""
+
+    if checkpoint_path is None:
+        checkpoint_path = (
+            Path(__file__).resolve().parents[1]
+            / "checkpoints/ee_cnn/best_model/final.pt"
+        )
+    checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=True)
+    classifier = EarlyExitGRU(**checkpoint["model_config"])
+    classifier.load_state_dict(checkpoint["model_state_dict"])
+    if model is None:
+        model_path = model_path or checkpoint.get("training_args", {}).get("model_path")
+        if not model_path:
+            raise ValueError("The checkpoint has no training model_path; supply model_path.")
+        device = torch.device(device or ("cuda" if torch.cuda.is_available() else "cpu"))
+        tokenizer = transformers.AutoTokenizer.from_pretrained(model_path)
+        model = transformers.AutoModelForCausalLM.from_pretrained(
+            model_path,
+            torch_dtype=torch.float16 if device.type == "cuda" else torch.float32,
+            attn_implementation="sdpa",
+        ).to(device)
+    del checkpoint
+
+    if not isinstance(model, transformers.LlamaForCausalLM):
+        raise ValueError("generate_with_early_exit requires a LlamaForCausalLM.")
+    backbone = model.model
+    device = backbone.embed_tokens.weight.device
+    if device.type == "meta" or any(p.device != device for p in model.parameters()):
+        raise ValueError("The Llama model must reside entirely on one device.")
+    if backbone.embed_tokens.embedding_dim != classifier.config["input_size"]:
+        raise ValueError("The checkpoint input_size does not match the Llama hidden size.")
+    if not backbone.layers:
+        raise ValueError("The Llama model must have at least one decoder layer.")
+    model.eval()
+    classifier = classifier.to(device).eval()
+    classifier_dtype = next(classifier.parameters()).dtype
+
+    if getattr(tokenizer, "chat_template", None):
+        input_ids = tokenizer.apply_chat_template(
+            [{"role": "user", "content": question}],
+            tokenize=True, add_generation_prompt=True, return_tensors="pt",
+        )
+    else:
+        input_ids = tokenizer(
+            f"Question: {question}\nAnswer:", return_tensors="pt", add_special_tokens=True,
+        )["input_ids"]
+    input_ids = input_ids.to(device)
+    if input_ids.ndim != 2 or input_ids.shape[0] != 1 or input_ids.shape[1] == 0:
+        raise ValueError("The tokenizer must return one nonempty token sequence.")
+    if input_ids.shape[1] + max_new_tokens - 1 > model.config.max_position_embeddings:
+        raise ValueError("The question and requested answer exceed the model context length.")
+
+    eos_token_ids = set()
+    for value in (tokenizer.eos_token_id, model.generation_config.eos_token_id):
+        if value is not None:
+            eos_token_ids.update(value if isinstance(value, (list, tuple)) else [value])
+    layer_parameters = [inspect.signature(layer.forward).parameters for layer in backbone.layers]
+    output_ids = []
+    for _ in range(max_new_tokens):
+        hidden_states = backbone.embed_tokens(input_ids)
+        seq_len = input_ids.shape[1]
+        cache_position = torch.arange(seq_len, device=device)
+        position_ids = cache_position.unsqueeze(0)
+        causal_mask = torch.full(
+            (seq_len, seq_len), torch.finfo(hidden_states.dtype).min,
+            dtype=hidden_states.dtype, device=device,
+        ).triu(diagonal=1)[None, None]
+        position_embeddings = (
+            backbone.rotary_emb(hidden_states, position_ids)
+            if hasattr(backbone, "rotary_emb") else None
+        )
+        gru_state = None
+        for layer_index, (layer, parameters) in enumerate(zip(backbone.layers, layer_parameters)):
+            kwargs = {"attention_mask": causal_mask, "position_ids": position_ids}
+            optional_kwargs = {
+                "cache_position": cache_position,
+                "position_embeddings": position_embeddings,
+                "use_cache": False,
+                "output_attentions": False,
+            }
+            kwargs.update({key: value for key, value in optional_kwargs.items() if key in parameters})
+            layer_output = layer(hidden_states, **kwargs)
+            hidden_states = layer_output[0] if isinstance(layer_output, tuple) else layer_output
+            raw = hidden_states[:, -1:, :]
+            if layer_index == len(backbone.layers) - 1:
+                break
+            states, gru_state = classifier.gru(raw.to(dtype=classifier_dtype), gru_state)
+            score = classifier.head(states[:, 0]).sigmoid().item()
+            if not 0 <= score <= 1:
+                raise ValueError("The early-exit classifier produced a non-finite score.")
+            if score >= threshold:
+                break
+
+        logits = model.lm_head(backbone.norm(raw))
+        next_token, _ = decode_next_token(
+            logits, token_idx=-1, sample=sample, temperature=temperature,
+            top_k=top_k, top_p=top_p,
+        )
+        token_id = next_token.item()
+        if token_id in eos_token_ids:
+            break
+        output_ids.append(token_id)
+        input_ids = torch.cat([input_ids, input_ids.new_tensor([[token_id]])], dim=-1)
+    return tokenizer.decode(output_ids, skip_special_tokens=True)

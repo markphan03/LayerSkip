@@ -8,6 +8,8 @@
 
 import pytest
 import torch
+from transformers import LlamaConfig, LlamaForCausalLM
+from self_speculation.llama_model_utils import forward, forward_early, forward_remainder, crop_past_key_values
 from self_speculation.llama_model_utils import _prepare_decoder_attention_mask, _make_causal_mask, _expand_mask, top_k_top_p_filtering, decode_next_token, ForwardResult
 
 # Test for _make_causal_mask
@@ -74,3 +76,41 @@ def test_decode_next_token_sampling():
     next_token, probabilities = decode_next_token(logits, sample=True)
     assert next_token.shape == torch.Size([1, 1])
     assert probabilities.shape == torch.Size([1, 3])
+
+
+@pytest.mark.parametrize("attention_implementation", ["eager", "sdpa"])
+@torch.no_grad()
+def test_split_forward_matches_llama_with_cached_tokens(attention_implementation):
+    """Exercise drafting, verification, and rollback without downloading weights."""
+    torch.manual_seed(0)
+    config = LlamaConfig(
+        vocab_size=32, hidden_size=32, intermediate_size=64,
+        num_hidden_layers=4, num_attention_heads=4, num_key_value_heads=2,
+        max_position_embeddings=64,
+    )
+    config._attn_implementation = attention_implementation
+    model = LlamaForCausalLM(config).eval()
+    tokens = torch.tensor([[1, 5, 9, 3, 7, 2, 4, 6]])
+    cache = None
+    # The second round starts after rolling back the last two verified tokens.
+    for start, end in [(0, 6), (4, 8)]:
+        expected = model(tokens[:, :end], use_cache=True)
+        full = forward(model, tokens[:, start:end], cache)
+        torch.testing.assert_close(full.logits, expected.logits[:, start:])
+
+        draft = forward_early(model, tokens[:, start:end - 2], cache, 2, None)
+        draft = forward_early(
+            model, tokens[:, end - 2:end - 1], draft.past_key_values,
+            2, draft.exit_query_cache,
+        )
+        verified = forward_remainder(
+            model, tokens[:, start:end], draft.past_key_values,
+            2, draft.exit_query_cache,
+        )
+        torch.testing.assert_close(verified.logits, expected.logits[:, start:])
+        expected_cache = expected.past_key_values.to_legacy_cache()
+        for actual_layer, expected_layer in zip(verified.past_key_values, expected_cache):
+            for actual, reference in zip(actual_layer, expected_layer):
+                torch.testing.assert_close(actual, reference)
+        assert len(verified.past_key_values) == config.num_hidden_layers
+        cache = crop_past_key_values(verified.past_key_values, end - 2)

@@ -104,6 +104,10 @@ class HuggingfaceLlamaGenerator:
         logits_processors = self.create_logits_processors(generation_config=generation_config)
         stopping_criteria = self.create_stopping_criteria(generation_config)
         eos_token_ids = generation_config.stop_token_ids + [self.tokenizer.eos_token_id]
+        # Optional strategy setup (e.g. CUDA graph capture) is not token latency.
+        prepare = getattr(self.generation_strategy, "prepare_for_generation", None)
+        if prepare is not None:
+            prepare(self.model, example["input_ids"].tolist()[0], generation_config)
         with torch.inference_mode():
             start = time.time()
             generation_strategy_result = self.generation_strategy.generate_token_ids(
