@@ -4,27 +4,37 @@ An --evaluation_file is created once and reused verbatim on subsequent runs.
 The original benchmark.py is intentionally kept unchanged.
 """
 
-# # Original fixed-depth LayerSkip
-# python benchmark.py \
+# python benchmark2.py \
 #   --model facebook/layerskip-llama2-7B \
-#   --dataset custom_jsonl --data_path benchmark_inputs_200.jsonl \
-#   --num_samples 3 --random_shuffle false --seed 42 \
+#   --dataset cnn_dm_summarization \
+#   --num_samples 200 \
+#   --evaluation_file benchmark_inputs_200.jsonl \
 #   --generation_strategy self_speculative \
-#   --exit_layer 8 --num_speculations 6 \
-#   --max_steps 256 --sample false \
-#   --output_dir logs/fixed
+#   --exit_layer 8 \
+#   --num_speculations 6 \
+#   --max_steps 256 \
+#   --sample false \
+#   --seed 42 \
+#   --warmup 1 \
+#   --output logs/benchmark2_fixed.json
 
 # # Classifier-controlled LayerSkip, after extending benchmark.py
-# python benchmark.py \
+# python benchmark2.py \
 #   --model facebook/layerskip-llama2-7B \
-#   --dataset custom_jsonl --data_path benchmark_inputs_200.jsonl \
-#   --num_samples 3 --random_shuffle false --seed 42 \
+#   --dataset cnn_dm_summarization \
+#   --num_samples 200 \
+#   --evaluation_file benchmark_inputs_200.jsonl \
 #   --generation_strategy early_exit_speculative \
 #   --ee_checkpoint checkpoints/ee_cnn/best_model/final.pt \
-#   --ee_threshold 0.5 --ee_classifier_start_layer 1 \
-#   --exit_layer 8 --num_speculations 6 \
-#   --max_steps 256 --sample false \
-#   --output_dir logs/classifier
+#   --ee_threshold 0.5 \
+#   --ee_classifier_start_layer 1 \
+#   --exit_layer 8 \
+#   --num_speculations 6 \
+#   --max_steps 256 \
+#   --sample false \
+#   --seed 42 \
+#   --warmup 1 \
+#   --output logs/benchmark2_classifier.json
 
 from dataclasses import asdict, dataclass, field
 from datetime import datetime
