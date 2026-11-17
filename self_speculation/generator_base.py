@@ -6,18 +6,66 @@
 #
 
 import time
-from dataclasses import dataclass
-from typing import List, Optional
+from dataclasses import dataclass, field
+from typing import Dict, List, Optional
 
 import torch
 
 import transformers
+
+from self_speculation.exit_statistics import summarize_draft_exits
+
+
+def empty_layer_execution_counts():
+    return dict(prefill=0, draft=0, verification=0, decode=0)
+
+
+def format_layer_execution_counts(counts):
+    phases = [f"{phase.capitalize()}: {counts[phase]}" for phase in ("prefill", "draft", "verification")]
+    if counts["decode"]:
+        phases.append(f"Decode: {counts['decode']}")
+    return "Layer executions by phase | " + " | ".join(phases)
+
+
+@dataclass
+class GenerationCounters:
+    """Actual decoder work, including prefill and discarded speculation.
+
+    A layer execution is one decoder-layer call. A classifier call
+    is one GRU/head exit decision (not a vocabulary projection).
+    """
+
+    total_layer_executions: int = 0
+    total_classifier_calls: int = 0
+    layer_executions_by_phase: Dict[str, int] = field(default_factory=empty_layer_execution_counts)
+
+    def add(self, other):
+        self.total_layer_executions += other.total_layer_executions
+        self.total_classifier_calls += other.total_classifier_calls
+        for phase, count in other.layer_executions_by_phase.items():
+            self.layer_executions_by_phase[phase] += count
+
+    def record_layers(self, layers, phase="decode"):
+        self.layer_executions_by_phase[phase] += layers
+        self.total_layer_executions += layers
 
 
 @dataclass
 class GenerationStrategyResult:
     predicted_tokens: List[int]
     acceptance_rate: Optional[float] = None
+    total_layer_executions: int = 0
+    total_classifier_calls: int = 0
+    draft_exit_counts: List[int] = field(default_factory=list)
+    layer_executions_by_phase: Dict[str, int] = field(default_factory=empty_layer_execution_counts)
+
+    @property
+    def num_tokens_generated(self):
+        return len(self.predicted_tokens)
+
+    @property
+    def layers_per_token(self):
+        return self.total_layer_executions / self.num_tokens_generated if self.num_tokens_generated else None
 
 
 @dataclass
@@ -28,6 +76,19 @@ class GenerationResult:
     total_time: float
     time_per_token: float
     tokens_per_second: float
+    total_layer_executions: int = field(init=False)
+    total_classifier_calls: int = field(init=False)
+    layers_per_token: Optional[float] = field(init=False)
+    draft_exit_statistics: Optional[dict] = field(init=False)
+    layer_executions_by_phase: Dict[str, int] = field(init=False)
+
+    def __post_init__(self):
+        result = self.generation_strategy_result
+        self.total_layer_executions = result.total_layer_executions
+        self.total_classifier_calls = result.total_classifier_calls
+        self.layers_per_token = result.layers_per_token
+        self.draft_exit_statistics = summarize_draft_exits(result.draft_exit_counts)
+        self.layer_executions_by_phase = result.layer_executions_by_phase.copy()
 
 
 @dataclass

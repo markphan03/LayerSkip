@@ -85,7 +85,7 @@ $ python generate.py \
     --generation_strategy early_exit_speculative \
     --ee_checkpoint checkpoints/ee_cnn/best_model/final.pt \
     --ee_threshold 0.5 \
-    --ee_initial_fraction 0.25 \
+    --ee-classifier-start-layer 1 \
     --ee_gpu_branching auto \
     --num_speculations 6
 ```
@@ -99,14 +99,16 @@ fixed-layer command. For this base language model, a prompt such as
 The checkpoint above was trained with `facebook/layerskip-llama2-7B` on
 CNN/DailyMail summaries; use the matching base model.
 
-Exit checks begin after `ceil(total_layers * ee_initial_fraction)` layers.
-Each subsequent increment halves, rounded up to at least one layer; once the
-increment reaches one, checks continue at every layer. With 35 layers and
-`--ee_initial_fraction 0.25`, the checks are at layers 9, 14, 17, 19, 20, ..., 35.
-Fractions refer to the full model depth. The argument accepts values in `(0, 1]`.
-The GRU consumes every intermediate layer's raw state in grouped calls and exits
-at the first scheduled score reaching `--ee_threshold`. Every draft token has
-its own exit decision; depth is never fixed for a whole speculative block.
+Exit checks begin at `--ee-classifier-start-layer` (1-based, default `1`)
+and continue at every subsequent layer. For example, a start layer of `8`
+checks layers 8, 9, 10, and so on. The value must be a positive integer no
+larger than the model's layer count. The GRU consumes all preceding layers'
+raw states at the first check to preserve its trained layer history, then
+advances one layer per check. Drafting exits at the first score reaching
+`--ee_threshold`. Every draft token has its own exit decision.
+The final allowed draft layer is an unconditional fallback and needs no
+classifier call. If the start layer is at or beyond the draft-depth cap,
+drafting exits at the cap without classifier calls.
 
 If no check passes, drafting reaches the final layer. Optionally add
 `--exit_layer 8` to cap draft depth at layer 8; verification still uses all
@@ -115,7 +117,7 @@ The arguments shown above are the defaults except for the speculation count.
 
 The classifier uses the same device and floating-point dtype as Llama.
 `--ee_gpu_branching auto` uses ordinary CUDA graphs with one host exit check per
-scheduled decoder group. The graphs share one memory pool and capture stream;
+eligible layer. The graphs share one memory pool and capture stream;
 each group computes only its missing suffix. This preserves per-token adaptive
 exits and cache reuse while avoiding the conditional backend's many branch
 streams and BLAS workspaces. Rejected suffixes are logically rolled back.
@@ -160,7 +162,7 @@ python generate_n_times.py \
     --ee_checkpoint checkpoints/ee_cnn/best_model/final.pt \
     --ee_gpu_branching auto \
     --ee_threshold 0.8 \
-    --ee_initial_fraction 0.25 \
+    --ee-classifier-start-layer 1 \
     --num_speculations 6 \
     --max_steps 512 \
     --sample True --N 100 \
@@ -199,6 +201,60 @@ total generated tokens divided by total generation time; acceptance is the mean
 of the per-run rates. Text streaming is off by default; use `--streamer standard`
 or `--streamer speculative` to enable it (streaming adds overhead to timing).
 The script also supports `--generation_strategy autoregressive`.
+
+Both generation CLIs report work counters, also available on `GenerationResult`
+and in the per-run and summary JSON from `generate_n_times.py`:
+
+- `num_tokens_generated`: returned new tokens, excluding the prompt, EOS, and
+  rejected drafts (`total_tokens` in the summary).
+- `total_layer_executions`: decoder-layer forward calls. A call processing a
+  block of tokens counts once; embeddings, normalization, and heads are excluded.
+- `layer_executions_by_phase`: layer calls split into `prefill`, `draft`, and
+  `verification`, printed for each run and the combined summary. Speculative
+  prefill processes the prompt except its final token; drafting and verification
+  process the remaining suffix, including any catch-up work. Verification also
+  includes bonus-token passes and rounds with no drafts. Autoregressive generation
+  counts its first forward pass as `prefill` and subsequent passes as `decode`,
+  with zero draft/verification calls. The phase counts sum to the total.
+- `layers_per_token`: total layer calls divided by returned new tokens.
+- `total_classifier_calls`: GRU/head exit decisions, once per checked group of
+  layers. This excludes the vocabulary head and is zero without adaptive exits.
+
+Work totals include prompt prefill, verification, rejected drafts, and work that
+produces EOS. They exclude model warmup and CUDA graph capture and reset for each
+generation. Thus `layers_per_token` averages all layer calls needed for the
+returned completion; it is `null` (`N/A` in the CLI) when no tokens are returned.
+Aggregate ratios divide summed work by summed new tokens. The speculative
+comparison script also records these work metrics for each sample.
+
+Speculative generation also prints a draft exit-depth table with every decoder
+layer (1-based), exit count, percentage of all drafts, and cumulative percentage.
+The model-depth summary groups layers into 0–25%, 25–50%, 50–75%, and 75–100%
+bands and shows the cumulative share exiting by each boundary. For 32 layers,
+the boundaries are layers 8, 16, 24, and 32; other depths round boundaries up.
+These are fractions of model depth, not statistical percentiles of exit depths.
+
+To limit drafting to layers 1–10 with individual checks on Llama2-7B, use
+`--generation_strategy early_exit_speculative --exit_layer 10 --ee-classifier-start-layer 1`.
+The schedule is 1, 2, ..., 10. The classifier checks each layer from 1 through 9
+and exits at the first score meeting `--ee_threshold`; layer 10 is the mandatory
+fallback if no earlier check passes. There is no need for a classifier decision
+at layer 10 because drafting must stop there. Drafting never runs layers 11–32;
+full-model speculative verification still uses them to verify the drafts.
+
+The denominator includes all attempted drafts, including rejected drafts, EOS
+drafts, and exits at the configured depth limit. The final model layer represents
+full-depth fallback, not an early exit. Prefill, verification, and bonus tokens
+do not contribute. Zero-draft requests list every layer with zero counts and
+`N/A` percentages. Warmup and graph capture are excluded. JSON stores raw counts
+as `generation_strategy_result.draft_exit_counts` (index 0 is layer 1), plus
+`draft_exit_statistics` in each run and the summary. Aggregate percentages use
+summed counts across runs, rather than averaging per-run percentages.
+
+For the standalone unverified helper, use
+`answer, stats = generate_with_early_exit(question, return_stats=True)`;
+`stats` exposes the same work counts, token count, and per-token properties.
+Its default return value remains the answer string.
 
 ## Benchmark
 

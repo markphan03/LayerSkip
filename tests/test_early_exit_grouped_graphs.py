@@ -20,12 +20,13 @@ pytestmark = pytest.mark.skipif(not torch.cuda.is_available(), reason="Requires 
 
 @pytest.mark.parametrize("attention", ["eager", "sdpa"])
 @pytest.mark.parametrize("max_depth", [4, 8])
+@pytest.mark.parametrize("start_layer", [1, 3, 8])
 @torch.inference_mode()
-def test_grouped_graphs_match_adaptive_cache_across_exits_and_rollback(attention, max_depth):
+def test_grouped_graphs_match_adaptive_cache_across_exits_and_rollback(attention, max_depth, start_layer):
     model = tiny_model(attention, "cuda", torch.float16)
     classifier = EarlyExitGRU(16, 4, num_layers=2).cuda().half().eval()
     classifier.head.weight.zero_()
-    engine = GroupedDraftGraphs(model, classifier, exit_check_layers(8, max_depth), .5, 32, 3)
+    engine = GroupedDraftGraphs(model, classifier, exit_check_layers(8, max_depth, start_layer), .5, 32, 3)
     ids = torch.tensor([[1, 5, 9]], device="cuda")
     engine.prefill(ids)
     cache = DynamicCache()
@@ -37,10 +38,10 @@ def test_grouped_graphs_match_adaptive_cache_across_exits_and_rollback(attention
         full = ids.clone()
         for index, (bias, token) in enumerate([(10, 3), (-10, 7), (10, 2)]):
             classifier.head.bias.fill_(bias)
-            expected, depth = eager.draft_logits(classifier, .5, max_depth)
-            actual, actual_depth = engine.draft_logits(classifier, .5, max_depth)
+            expected, depth = eager.draft_logits(classifier, .5, max_depth, start_layer)
+            actual, actual_depth = engine.draft_logits(classifier, .5, max_depth, start_layer)
             torch.testing.assert_close(actual, expected, atol=2e-3, rtol=2e-3)
-            assert actual_depth == depth == (2 if bias > 0 else max_depth)
+            assert actual_depth == depth == (min(start_layer, max_depth) if bias > 0 else max_depth)
             if index == 0:
                 assert engine.completed == {start: int(start == 0) for start, _ in engine.groups}
             eager.append(token)

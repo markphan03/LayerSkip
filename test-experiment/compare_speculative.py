@@ -18,6 +18,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 
 from self_speculation.early_exit_speculation_generator import EarlyExitSelfSpeculativeGenerationStrategy
 from self_speculation.generator_base import GenerationConfig
+from self_speculation.exit_statistics import summarize_draft_exits
 from self_speculation.self_speculation_generator import SelfSpeculativeGenerationStrategy
 
 
@@ -52,6 +53,10 @@ def measure_strategy(model, strategy, prompt_ids, eos_ids, config, warmup, repea
         samples.append({
             "seconds": elapsed, "tokens": count, "tokens_per_second": count / elapsed,
             "acceptance_rate": result.acceptance_rate, "token_ids": result.predicted_tokens,
+            "total_layer_executions": result.total_layer_executions,
+            "layers_per_token": result.layers_per_token,
+            "total_classifier_calls": result.total_classifier_calls,
+            "draft_exit_statistics": summarize_draft_exits(result.draft_exit_counts),
         })
     return {
         "config": asdict(config), "setup_seconds": setup_seconds,
@@ -72,7 +77,7 @@ def parse_args(argv=None):
     parser.add_argument("--exit-layer", type=int, default=8, help="Fixed draft depth.")
     parser.add_argument("--adaptive-exit-layer", type=int, default=-1, help="Adaptive depth cap; -1 allows all layers.")
     parser.add_argument("--ee-threshold", type=float, default=.5)
-    parser.add_argument("--ee-initial-fraction", type=float, default=.25)
+    parser.add_argument("--ee-classifier-start-layer", type=int, default=1)
     parser.add_argument("--num-speculations", type=int, default=6)
     parser.add_argument("--max-new-tokens", type=int, default=64)
     parser.add_argument("--warmup", type=int, default=1)
@@ -90,6 +95,8 @@ def parse_args(argv=None):
         parser.error("repeats and max-new-tokens must be positive; warmup and num-speculations must be non-negative.")
     if args.exit_layer < 1 or (args.adaptive_exit_layer != -1 and args.adaptive_exit_layer < 1):
         parser.error("exit-layer must be positive; adaptive-exit-layer must be -1 or positive.")
+    if args.ee_classifier_start_layer < 1:
+        parser.error("--ee-classifier-start-layer must be a positive integer (1-based).")
     return args
 
 
@@ -111,7 +118,7 @@ def main(args):
         "gpu": torch.cuda.get_device_name(model.device) if args.device == "cuda" else None,
         "warmup": args.warmup, "repeats": args.repeats, "seed": args.seed,
         "ee_checkpoint": args.ee_checkpoint or "checkpoints/ee_cnn/best_model/final.pt",
-        "ee_threshold": args.ee_threshold, "ee_initial_fraction": args.ee_initial_fraction,
+        "ee_threshold": args.ee_threshold, "ee_classifier_start_layer": args.ee_classifier_start_layer,
         "results": [],
     }
     for prompt in args.prompt or ["Question: Why is the sky blue?\nAnswer:"]:
@@ -138,7 +145,7 @@ def main(args):
                     torch.cuda.empty_cache()
                 strategy = (
                     EarlyExitSelfSpeculativeGenerationStrategy(
-                        args.ee_checkpoint, args.ee_threshold, args.ee_initial_fraction, gpu_branching=mode,
+                        args.ee_checkpoint, args.ee_threshold, args.ee_classifier_start_layer, gpu_branching=mode,
                     ) if adaptive else SelfSpeculativeGenerationStrategy(cuda_graphs=mode)
                 )
                 depth = args.adaptive_exit_layer if adaptive else args.exit_layer

@@ -5,13 +5,15 @@
 # LICENSE file in the root directory of this source tree.
 #
 
-from typing import List, Optional, Tuple
+from dataclasses import asdict
+from typing import List, Optional, Tuple, Union
 
 import colorama
 import torch
 
 import transformers
 from self_speculation.early_exit_speculation_generator import VerifiedSpeculativeGenerationStrategy
+from self_speculation.generator_base import GenerationCounters, GenerationStrategyResult
 from self_speculation.speculative_streamer import SpeculativeTextStreamer
 from self_speculation.llama_model_utils import (
     crop_past_key_values,
@@ -36,7 +38,7 @@ class SelfSpeculativeGenerationStrategy(VerifiedSpeculativeGenerationStrategy):
     def __init__(self, cuda_graphs="auto"):
         if cuda_graphs not in ("auto", "off"):
             raise ValueError("ss_cuda_graphs must be auto or off.")
-        super().__init__(initial_fraction=1.0, gpu_branching=cuda_graphs)
+        super().__init__(gpu_branching=cuda_graphs)
 
     # TODO: remove calls, input_ids_list, rely on generation config
     def single_step_speculation(
@@ -184,7 +186,8 @@ def generate_with_early_exit(
     top_k: int = 50,
     top_p: float = 0.95,
     device=None,
-) -> str:
+    return_stats: bool = False,
+) -> Union[str, Tuple[str, GenerationStrategyResult]]:
     """Answer one question using the trained GRU's first accepted decoder layer.
 
     Example::
@@ -199,7 +202,9 @@ def generate_with_early_exit(
     their placement. Models are put in evaluation mode.
 
     Chat tokenizers use their chat template; otherwise the prompt is
-    "Question: <question>\\nAnswer:". Only the generated answer is returned.
+    "Question: <question>\\nAnswer:". By default only the answer is returned;
+    ``return_stats=True`` returns ``(answer, GenerationStrategyResult)`` with
+    token, layer, and classifier counts, including recomputed prefix work.
     This classifier was trained on CNN/DailyMail summaries, so question
     answering quality is not established by its training metrics.
 
@@ -230,7 +235,7 @@ def generate_with_early_exit(
     if (model is None) != (tokenizer is None):
         raise ValueError("Supply both model and tokenizer, or neither.")
     if max_new_tokens == 0:
-        return ""
+        return ("", GenerationStrategyResult([])) if return_stats else ""
 
     if checkpoint_path is None:
         checkpoint_path = (
@@ -288,7 +293,8 @@ def generate_with_early_exit(
             eos_token_ids.update(value if isinstance(value, (list, tuple)) else [value])
     layer_parameters = [inspect.signature(layer.forward).parameters for layer in backbone.layers]
     output_ids = []
-    for _ in range(max_new_tokens):
+    counters = GenerationCounters()
+    for step in range(max_new_tokens):
         hidden_states = backbone.embed_tokens(input_ids)
         seq_len = input_ids.shape[1]
         cache_position = torch.arange(seq_len, device=device)
@@ -312,12 +318,14 @@ def generate_with_early_exit(
             }
             kwargs.update({key: value for key, value in optional_kwargs.items() if key in parameters})
             layer_output = layer(hidden_states, **kwargs)
+            counters.record_layers(1, "prefill" if step == 0 else "decode")
             hidden_states = layer_output[0] if isinstance(layer_output, tuple) else layer_output
             raw = hidden_states[:, -1:, :]
             if layer_index == len(backbone.layers) - 1:
                 break
             states, gru_state = classifier.gru(raw.to(dtype=classifier_dtype), gru_state)
             score = classifier.head(states[:, 0]).sigmoid().item()
+            counters.total_classifier_calls += 1
             if not 0 <= score <= 1:
                 raise ValueError("The early-exit classifier produced a non-finite score.")
             if score >= threshold:
@@ -333,4 +341,7 @@ def generate_with_early_exit(
             break
         output_ids.append(token_id)
         input_ids = torch.cat([input_ids, input_ids.new_tensor([[token_id]])], dim=-1)
-    return tokenizer.decode(output_ids, skip_special_tokens=True)
+    answer = tokenizer.decode(output_ids, skip_special_tokens=True)
+    if return_stats:
+        return answer, GenerationStrategyResult(output_ids, **asdict(counters))
+    return answer

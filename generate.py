@@ -24,10 +24,12 @@ from self_speculation.generator_base import (
     GenerationResult,
     GenerationStrategy,
     HuggingfaceLlamaGenerator,
+    format_layer_execution_counts,
 )
 from self_speculation.self_speculation_generator import SelfSpeculativeGenerationStrategy
 from self_speculation.early_exit_speculation_generator import EarlyExitSelfSpeculativeGenerationStrategy
 from self_speculation.speculative_streamer import SpeculativeTextStreamer
+from self_speculation.exit_statistics import format_draft_exit_statistics
 
 class StreamerType(str, Enum):
     NONE="none"
@@ -47,8 +49,8 @@ class GenerateArguments:
     ee_threshold: float = field(default=0.5, metadata={
         "help": "Exit at the first scheduled GRU check >= this value. exit_layer optionally caps draft depth.",
     })
-    ee_initial_fraction: float = field(default=0.25, metadata={
-        "help": "First exit check as a fraction of total layers, in (0, 1]. Subsequent increments halve, rounding up to at least one layer.",
+    ee_classifier_start_layer: int = field(default=1, metadata={
+        "help": "First layer to check the classifier (1-based, default: 1); check every subsequent layer until the draft-depth cap.",
     })
     ee_gpu_branching: str = field(default="auto", metadata={
         "choices": ["auto", "on", "off"],
@@ -109,7 +111,7 @@ def main(args: Arguments, generate_arguments: GenerateArguments, generation_conf
         generation_strategy = EarlyExitSelfSpeculativeGenerationStrategy(
             checkpoint_path=generate_arguments.ee_checkpoint,
             threshold=generate_arguments.ee_threshold,
-            initial_fraction=generate_arguments.ee_initial_fraction,
+            classifier_start_layer=generate_arguments.ee_classifier_start_layer,
             gpu_branching=generate_arguments.ee_gpu_branching,
         )
         generation_strategy.prepare_model(model)
@@ -165,10 +167,17 @@ def main(args: Arguments, generate_arguments: GenerateArguments, generation_conf
         print()
         print(f"\tTime taken: {total_time :.3f}s")
         print(f"\tNumber of tokens: {num_tokens}")
+        print(f"\tTotal layer executions: {response.total_layer_executions}")
+        print(f"\t{format_layer_execution_counts(response.layer_executions_by_phase)}")
+        layers_per_token = f"{response.layers_per_token:.3f}" if response.layers_per_token is not None else "N/A"
+        print(f"\tLayer executions per generated token: {layers_per_token}")
+        print(f"\tTotal classifier calls: {response.total_classifier_calls}")
         print(f"\tTime per token: {total_time / num_tokens if num_tokens else 0 : .3f}s")
         print(f"\tTokens per second: {num_tokens / total_time :.3f}")
         if generation_config.generation_strategy in ("self_speculative", "early_exit_speculative"):
             print(f"\tAcceptance Rate: {response.generation_strategy_result.acceptance_rate:.2%}")
+        if response.draft_exit_statistics is not None:
+            print(format_draft_exit_statistics(response.draft_exit_statistics))
         print()
 
 def process_cli_arguments(argv=None) -> Tuple[Arguments, GenerateArguments, GenerationConfig]:
@@ -184,8 +193,8 @@ def process_cli_arguments(argv=None) -> Tuple[Arguments, GenerateArguments, Gene
     if generation_config.generation_strategy == "early_exit_speculative":
         if not 0 <= generate_arguments.ee_threshold <= 1:
             parser.error("--ee_threshold must be between 0 and 1.")
-        if not 0 < generate_arguments.ee_initial_fraction <= 1:
-            parser.error("--ee_initial_fraction must be greater than 0 and at most 1.")
+        if generate_arguments.ee_classifier_start_layer < 1:
+            parser.error("--ee-classifier-start-layer must be a positive integer (1-based).")
         if generation_config.num_speculations < 0:
             parser.error("--num_speculations must be non-negative for early_exit_speculative.")
         if generation_config.exit_layer != -1 and generation_config.exit_layer < 1:

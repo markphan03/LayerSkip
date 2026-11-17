@@ -13,7 +13,7 @@ The full model verifies both strategies' drafts.
 ## Run a repeated comparison
 
 ```bash
-python compare_speculative.py \
+python test-experiment/compare_speculative.py \
   --model facebook/layerskip-llama2-7B \
   --ee-checkpoint checkpoints/ee_cnn/best_model/final.pt \
   --exit-layer 8 \
@@ -45,11 +45,11 @@ The older `single_step_speculation` method remains available as a compatibility
 API; normal generation uses the shared implementation.
 
 Adaptive drafting allows all model layers by default. Set
-`--adaptive-exit-layer 8` to match a fixed depth cap of 8. On a 32-layer model
-with the default initial fraction of 0.25, the first adaptive check is already
-at layer 8, so this particular cap removes adaptive depth selection. Use a
-larger common cap or a smaller `--ee-initial-fraction` to compare policies that
-can choose among several depths under the same cap.
+`--adaptive-exit-layer 8` to match a fixed depth cap of 8. Classifier checks
+start at `--ee-classifier-start-layer` (1-based, default `1`) and continue
+at each layer before the cap. With the defaults and a cap of 8, the classifier
+checks layers 1 through 7; layer 8 is the unconditional fallback. Setting the
+start layer at or beyond the cap disables classifier decisions for that cap.
 
 ## Timing and correctness
 
@@ -104,6 +104,7 @@ python generate.py \
   --generation_strategy early_exit_speculative \
   --ee_checkpoint checkpoints/ee_cnn/best_model/final.pt \
   --ee_gpu_branching auto \
+  --ee-classifier-start-layer 1 \
   --num_speculations 6 \
   --max_steps 512 \
   --sample False
@@ -119,6 +120,8 @@ On November 12, 2026, the command above was run on an RTX 4090 with PyTorch
 2.14.1+cu130, Transformers 4.50.0, the cached LayerSkip Llama-2 7B model, and
 the trained GRU checkpoint. It used the default sky-blue prompt, 64 greedy
 output tokens, six speculative tokens, one warmup, and five timed repetitions.
+These historical measurements used the former halving schedule with an initial
+fraction of 0.25, rather than the current default of checking from layer 1.
 
 | Strategy | Graphs | Draft cap | Setup (s) | Median generation (s) | Median tokens/s | Acceptance | Reserved MiB |
 |---|---|---|---:|---:|---:|---:|---:|
@@ -157,6 +160,6 @@ the policies, and include setup time when first-request latency matters.
   and timing boundaries.
 
 ```bash
-python -m pytest -q tests/test_fixed_speculative_graphs.py \
+PYTHONPATH=.:test-experiment python -m pytest -q tests/test_fixed_speculative_graphs.py \
   tests/test_early_exit_grouped_graphs.py
 ```

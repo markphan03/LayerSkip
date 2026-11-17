@@ -1,0 +1,3131 @@
+Loading checkpoint shards:   0%|                                         | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███████████                      | 1/3 [00:00<00:01,  1.22it/s]Loading checkpoint shards:  67%|██████████████████████           | 2/3 [00:01<00:00,  1.54it/s]Loading checkpoint shards: 100%|█████████████████████████████████| 3/3 [00:01<00:00,  1.89it/s]Loading checkpoint shards: 100%|█████████████████████████████████| 3/3 [00:01<00:00,  1.73it/s]
+Strategy: early_exit_speculative; completions: 50
+Warmup 1/1
+
+=== Run 1/50 (seed 42) ===
+
+How many people live in France?
+What is the official language of France?
+What is the currency of France?
+What is the population density of France?
+What is the life expectancy of France?
+What is the literacy rate of France?
+What is the GDP of France?
+What is the GDP per capita of France?
+What is the unemployment rate of France?
+What is the rate of inflation of France?
+What is the rate of unemployment of France?
+What is the rate of poverty of France?
+What is the rate of home ownership in France?
+What is the rate of home ownership in France?
+What is the rate of homicide in France?
+What is the rate of infant mortality in France?
+What is the rate of obesity in France?
+What is the rate of suicide in France?
+What is the rate of violent crime in France?
+What is the total area of France?
+What is the total population of France?
+What is the total population of France?
+What is the total population of France?
+What is the total population of France?
+What is the total population of France?
+What is the total population of France?
+What is the total population of France?
+What is the total population of France?
+What is the total population of France?
+What is the total population of France?
+What is the total population of France?
+What is the total population of France?
+What is the total population of France?
+What is the total population of France?
+What is the total population of France?
+What is the total population of France?
+What is the total population of France?
+What is the total population of France?
+What is the total population of France?
+What is the total population of France?
+What is the total population of France?
+What is the total population of France?
+What is the total population of France?
+What is the total population of France?
+What is the total population of France?
+What is the total population of France?
+What is the total population of France?
+What is the total population of France?
+What is the total population of France?
+What is the total population of France?
+What is the total population of France?
+What is the total population of France?
+What is the total population of France?
+What is the total population
+Time: 5.287s | Tokens: 512 | Time per token: 0.010327s/token | Tokens/s: 96.834
+Layer executions: 6812 | Layers/token: 13.305 | Classifier calls: 4164
+Layer executions by phase | Prefill: 0 | Draft: 4188 | Verification: 2592 | Decode: 32
+Acceptance rate: 88.87%
+Draft exit depths — 485 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       4 │   0.82% │        0.82% │
+│       4 │        12.50% │     128 │  26.39% │       27.22% │
+│       5 │        15.62% │      50 │  10.31% │       37.53% │
+│       6 │        18.75% │      37 │   7.63% │       45.15% │
+│       7 │        21.88% │      98 │  20.21% │       65.36% │
+│       8 │        25.00% │      44 │   9.07% │       74.43% │
+│       9 │        28.12% │      26 │   5.36% │       79.79% │
+│      10 │        31.25% │       8 │   1.65% │       81.44% │
+│      11 │        34.38% │       2 │   0.41% │       81.86% │
+│      12 │        37.50% │       2 │   0.41% │       82.27% │
+│      13 │        40.62% │      25 │   5.15% │       87.42% │
+│      14 │        43.75% │       1 │   0.21% │       87.63% │
+│      15 │        46.88% │      13 │   2.68% │       90.31% │
+│      16 │        50.00% │       4 │   0.82% │       91.13% │
+│      17 │        53.12% │       7 │   1.44% │       92.58% │
+│      18 │        56.25% │       2 │   0.41% │       92.99% │
+│      19 │        59.38% │       1 │   0.21% │       93.20% │
+│      20 │        62.50% │       0 │   0.00% │       93.20% │
+│      21 │        65.62% │       1 │   0.21% │       93.40% │
+│      22 │        68.75% │       0 │   0.00% │       93.40% │
+│      23 │        71.88% │       0 │   0.00% │       93.40% │
+│      24 │        75.00% │       0 │   0.00% │       93.40% │
+│      25 │        78.12% │       0 │   0.00% │       93.40% │
+│      26 │        81.25% │       0 │   0.00% │       93.40% │
+│      27 │        84.38% │       0 │   0.00% │       93.40% │
+│      28 │        87.50% │       2 │   0.41% │       93.81% │
+│      29 │        90.62% │       4 │   0.82% │       94.64% │
+│      30 │        93.75% │       1 │   0.21% │       94.85% │
+│      31 │        96.88% │       1 │   0.21% │       95.05% │
+│      32 │       100.00% │      24 │   4.95% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     361 │  74.43% │       74.43% │
+│ 25–50%       │     9–16 │      81 │  16.70% │       91.13% │
+│ 50–75%       │    17–24 │      11 │   2.27% │       93.40% │
+│ 75–100%      │    25–32 │      32 │   6.60% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 2/50 (seed 43) ===
+
+What is the capital of Spain?
+What is the capital of Russia?
+What is the capital of Italy?
+What is the capital of Mexico?
+What is the capital of the United Kingdom?
+What is the capital of Canada?
+What is the capital of Germany?
+What is the capital of China?
+What is the capital of Japan?
+What is the capital of India?
+What is the capital of Australia?
+What is the capital of Brazil?
+What is the capital of Argentina?
+What is the capital of Iran?
+What is the capital of Israel?
+What is the capital of Turkey?
+What is the capital of Nigeria?
+What is the capital of South Africa?
+What is the capital of Saudi Arabia?
+What is the capital of Egypt?
+What is the capital of Iran?
+What is the capital of Iraq?
+What is the capital of the United Arab Emirates?
+What is the capital of Algeria?
+What is the capital of Bahrain?
+What is the capital of Kuwait?
+What is the capital of Qatar?
+What is the capital of Morocco?
+What is the capital of Tunisia?
+What is the capital of Libya?
+What is the capital of Syria?
+What is the capital of Lebanon?
+What is the capital of Jordan?
+What is the capital of Oman?
+What is the capital of Yemen?
+What is the capital of Palestine?
+What is the capital of Afghanistan?
+What is the capital of Pakistan?
+What is the capital of Bangladesh?
+What is the capital of Nepal?
+What is the capital of Bhutan?
+What is the capital of Maldives?
+What is the capital of Sri Lanka?
+What is the capital of Indonesia?
+What is the capital of Malaysia?
+What is the capital of Brunei?
+What is the capital of Thailand?
+What is the capital of Singapore?
+What is the capital of Vietnam?
+What is the capital of Cambodia?
+What is the capital of Laos?
+What is the capital of Myanmar?
+What is the capital of the Philippines?
+What is the capital of the Solomon Islands?
+What is the capital of Samoa?
+What is the capital of Tonga?
+What is the capital of Kiribati
+Time: 5.401s | Tokens: 512 | Time per token: 0.010549s/token | Tokens/s: 94.796
+Layer executions: 6969 | Layers/token: 13.611 | Classifier calls: 4399
+Layer executions by phase | Prefill: 0 | Draft: 4441 | Verification: 2496 | Decode: 32
+Acceptance rate: 94.55%
+Draft exit depths — 459 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │      12 │   2.61% │        2.61% │
+│       4 │        12.50% │     149 │  32.46% │       35.08% │
+│       5 │        15.62% │      29 │   6.32% │       41.39% │
+│       6 │        18.75% │       4 │   0.87% │       42.27% │
+│       7 │        21.88% │      35 │   7.63% │       49.89% │
+│       8 │        25.00% │      69 │  15.03% │       64.92% │
+│       9 │        28.12% │      71 │  15.47% │       80.39% │
+│      10 │        31.25% │      11 │   2.40% │       82.79% │
+│      11 │        34.38% │       5 │   1.09% │       83.88% │
+│      12 │        37.50% │       6 │   1.31% │       85.19% │
+│      13 │        40.62% │       2 │   0.44% │       85.62% │
+│      14 │        43.75% │       1 │   0.22% │       85.84% │
+│      15 │        46.88% │       0 │   0.00% │       85.84% │
+│      16 │        50.00% │       0 │   0.00% │       85.84% │
+│      17 │        53.12% │       5 │   1.09% │       86.93% │
+│      18 │        56.25% │       0 │   0.00% │       86.93% │
+│      19 │        59.38% │       1 │   0.22% │       87.15% │
+│      20 │        62.50% │       1 │   0.22% │       87.36% │
+│      21 │        65.62% │       1 │   0.22% │       87.58% │
+│      22 │        68.75% │       0 │   0.00% │       87.58% │
+│      23 │        71.88% │       0 │   0.00% │       87.58% │
+│      24 │        75.00% │       1 │   0.22% │       87.80% │
+│      25 │        78.12% │       1 │   0.22% │       88.02% │
+│      26 │        81.25% │       0 │   0.00% │       88.02% │
+│      27 │        84.38% │       0 │   0.00% │       88.02% │
+│      28 │        87.50% │       2 │   0.44% │       88.45% │
+│      29 │        90.62% │       2 │   0.44% │       88.89% │
+│      30 │        93.75% │       4 │   0.87% │       89.76% │
+│      31 │        96.88% │       5 │   1.09% │       90.85% │
+│      32 │       100.00% │      42 │   9.15% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     298 │  64.92% │       64.92% │
+│ 25–50%       │     9–16 │      96 │  20.92% │       85.84% │
+│ 50–75%       │    17–24 │       9 │   1.96% │       87.80% │
+│ 75–100%      │    25–32 │      56 │  12.20% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 3/50 (seed 44) ===
+
+What is the capital of France? It is Paris. The capital of France is also called the City of Lights. The capital of France is one of the most beautiful cities in the world. It is a very popular tourist destination. It is a city that is full of life.
+The capital of France is also called the City of Lights.
+The capital of France is Paris.
+The capital of France is also called the City of Lights. The capital of France is one of the most beautiful cities in the world. It is a very popular tourist destination. It is a city that is full of life.
+The capital of France is Paris. The capital of France is also called the City of Lights. The capital of France is one of the most beautiful cities in the world. It is a very popular tourist destination. It is a city that is full of life.
+The capital of France is Paris. The capital of France is also called the City of Lights. The capital of France is one of the most beautiful cities in the world. It is a very popular tourist destination. It is a city that is full of life. The capital of France is Paris. The capital of France is also called the City of Lights. The capital of France is one of the most beautiful cities in the world. It is a very popular tourist destination. It is a city that is full of life.
+The capital of France is Paris. The capital of France is also called the City of Lights. The capital of France is one of the most beautiful cities in the world. It is a very popular tourist destination. It is a city that is full of life. The capital of France is Paris. The capital of France is also called the City of Lights. The capital of France is one of the most beautiful cities in the world. It is a very popular tourist destination. It is a city that is full of life. The capital of France is Paris. The capital of France is also called the City of Lights. The capital of France is one of the most beautiful cities in the world. It is a very popular tourist destination. It is a city that is full of life. The capital of France is Paris. The capital of France is also called the City of Lights. The capital of France is one of the most beautiful cities in the world. It is a very popular tourist destination. It is a city that is full of life. The capital
+Time: 6.270s | Tokens: 512 | Time per token: 0.012247s/token | Tokens/s: 81.656
+Layer executions: 8074 | Layers/token: 15.770 | Classifier calls: 4868
+Layer executions by phase | Prefill: 0 | Draft: 4874 | Verification: 3168 | Decode: 32
+Acceptance rate: 70.24%
+Draft exit depths — 588 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       0 │   0.00% │        0.00% │
+│       4 │        12.50% │      87 │  14.80% │       14.80% │
+│       5 │        15.62% │      63 │  10.71% │       25.51% │
+│       6 │        18.75% │      80 │  13.61% │       39.12% │
+│       7 │        21.88% │     234 │  39.80% │       78.91% │
+│       8 │        25.00% │      14 │   2.38% │       81.29% │
+│       9 │        28.12% │      13 │   2.21% │       83.50% │
+│      10 │        31.25% │       7 │   1.19% │       84.69% │
+│      11 │        34.38% │       5 │   0.85% │       85.54% │
+│      12 │        37.50% │      10 │   1.70% │       87.24% │
+│      13 │        40.62% │       6 │   1.02% │       88.27% │
+│      14 │        43.75% │       0 │   0.00% │       88.27% │
+│      15 │        46.88% │       1 │   0.17% │       88.44% │
+│      16 │        50.00% │       2 │   0.34% │       88.78% │
+│      17 │        53.12% │      15 │   2.55% │       91.33% │
+│      18 │        56.25% │       7 │   1.19% │       92.52% │
+│      19 │        59.38% │       4 │   0.68% │       93.20% │
+│      20 │        62.50% │       4 │   0.68% │       93.88% │
+│      21 │        65.62% │       4 │   0.68% │       94.56% │
+│      22 │        68.75% │       2 │   0.34% │       94.90% │
+│      23 │        71.88% │       1 │   0.17% │       95.07% │
+│      24 │        75.00% │       3 │   0.51% │       95.58% │
+│      25 │        78.12% │       4 │   0.68% │       96.26% │
+│      26 │        81.25% │       5 │   0.85% │       97.11% │
+│      27 │        84.38% │       6 │   1.02% │       98.13% │
+│      28 │        87.50% │       1 │   0.17% │       98.30% │
+│      29 │        90.62% │       1 │   0.17% │       98.47% │
+│      30 │        93.75% │       0 │   0.00% │       98.47% │
+│      31 │        96.88% │       3 │   0.51% │       98.98% │
+│      32 │       100.00% │       6 │   1.02% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     478 │  81.29% │       81.29% │
+│ 25–50%       │     9–16 │      44 │   7.48% │       88.78% │
+│ 50–75%       │    17–24 │      40 │   6.80% │       95.58% │
+│ 75–100%      │    25–32 │      26 │   4.42% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 4/50 (seed 45) ===
+
+What is the capital of Germany?
+What is the capital of Spain?
+What is the capital of Italy?
+What is the capital of China?
+What is the capital of Russia?
+What is the capital of Canada?
+What is the capital of Japan?
+What is the capital of the United States?
+What is the capital of Australia?
+What is the capital of Brazil?
+What is the capital of Mexico?
+What is the capital of India?
+What is the capital of South Africa?
+What is the capital of the United Kingdom?
+What is the capital of France? Paris
+What is the capital of Germany? Berlin
+What is the capital of Spain? Madrid
+What is the capital of Italy? Rome
+What is the capital of China? Beijing
+What is the capital of Russia? Moscow
+What is the capital of Canada? Ottawa
+What is the capital of Japan? Tokyo
+What is the capital of the United States? Washington, D.C.
+What is the capital of Australia? Canberra
+What is the capital of Brazil? Brasilia
+What is the capital of Mexico? Mexico City
+What is the capital of India? New Delhi
+What is the capital of South Africa? Pretoria
+What is the capital of the United Kingdom? London
+What is the capital of the United States? Washington, D.C.
+What is the capital of France? Paris.
+What is the capital of Germany? Berlin.
+What is the capital of Spain? Madrid.
+What is the capital of Italy? Rome.
+What is the capital of China? Beijing.
+What is the capital of Russia? Moscow.
+What is the capital of Canada? Ottawa.
+What is the capital of Japan? Tokyo.
+What is the capital of the United States? Washington, D.C.
+What is the capital of Australia? Canberra.
+What is the capital of Brazil? Brasilia.
+What is the capital of Mexico? Mexico City.
+What is the capital of India? New Delhi.
+What is the capital of South Africa? Pretoria.
+What is the capital of the United Kingdom? London.
+Time: 6.193s | Tokens: 459 | Time per token: 0.013493s/token | Tokens/s: 74.112
+Layer executions: 8025 | Layers/token: 17.484 | Classifier calls: 4972
+Layer executions by phase | Prefill: 0 | Draft: 4985 | Verification: 3008 | Decode: 32
+Acceptance rate: 64.89%
+Draft exit depths — 564 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       9 │   1.60% │        1.60% │
+│       4 │        12.50% │     145 │  25.71% │       27.30% │
+│       5 │        15.62% │      63 │  11.17% │       38.48% │
+│       6 │        18.75% │      11 │   1.95% │       40.43% │
+│       7 │        21.88% │     103 │  18.26% │       58.69% │
+│       8 │        25.00% │      35 │   6.21% │       64.89% │
+│       9 │        28.12% │      48 │   8.51% │       73.40% │
+│      10 │        31.25% │       6 │   1.06% │       74.47% │
+│      11 │        34.38% │      10 │   1.77% │       76.24% │
+│      12 │        37.50% │      49 │   8.69% │       84.93% │
+│      13 │        40.62% │      16 │   2.84% │       87.77% │
+│      14 │        43.75% │       2 │   0.35% │       88.12% │
+│      15 │        46.88% │       6 │   1.06% │       89.18% │
+│      16 │        50.00% │      11 │   1.95% │       91.13% │
+│      17 │        53.12% │       3 │   0.53% │       91.67% │
+│      18 │        56.25% │       2 │   0.35% │       92.02% │
+│      19 │        59.38% │       4 │   0.71% │       92.73% │
+│      20 │        62.50% │       1 │   0.18% │       92.91% │
+│      21 │        65.62% │       6 │   1.06% │       93.97% │
+│      22 │        68.75% │       0 │   0.00% │       93.97% │
+│      23 │        71.88% │       1 │   0.18% │       94.15% │
+│      24 │        75.00% │       3 │   0.53% │       94.68% │
+│      25 │        78.12% │       1 │   0.18% │       94.86% │
+│      26 │        81.25% │       2 │   0.35% │       95.21% │
+│      27 │        84.38% │       4 │   0.71% │       95.92% │
+│      28 │        87.50% │       0 │   0.00% │       95.92% │
+│      29 │        90.62% │       5 │   0.89% │       96.81% │
+│      30 │        93.75% │       1 │   0.18% │       96.99% │
+│      31 │        96.88% │       4 │   0.71% │       97.70% │
+│      32 │       100.00% │      13 │   2.30% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     366 │  64.89% │       64.89% │
+│ 25–50%       │     9–16 │     148 │  26.24% │       91.13% │
+│ 50–75%       │    17–24 │      20 │   3.55% │       94.68% │
+│ 75–100%      │    25–32 │      30 │   5.32% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 5/50 (seed 46) ===
+Time: 2.830s | Tokens: 237 | Time per token: 0.011940s/token | Tokens/s: 83.755
+Layer executions: 3625 | Layers/token: 15.295 | Classifier calls: 2276
+Layer executions by phase | Prefill: 0 | Draft: 2281 | Verification: 1312 | Decode: 32
+Acceptance rate: 80.08%
+Draft exit depths — 246 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       0 │   0.00% │        0.00% │
+│       4 │        12.50% │      55 │  22.36% │       22.36% │
+│       5 │        15.62% │      47 │  19.11% │       41.46% │
+│       6 │        18.75% │      14 │   5.69% │       47.15% │
+│       7 │        21.88% │      38 │  15.45% │       62.60% │
+│       8 │        25.00% │      11 │   4.47% │       67.07% │
+│       9 │        28.12% │      18 │   7.32% │       74.39% │
+│      10 │        31.25% │       2 │   0.81% │       75.20% │
+│      11 │        34.38% │       1 │   0.41% │       75.61% │
+│      12 │        37.50% │      12 │   4.88% │       80.49% │
+│      13 │        40.62% │       2 │   0.81% │       81.30% │
+│      14 │        43.75% │       0 │   0.00% │       81.30% │
+│      15 │        46.88% │       2 │   0.81% │       82.11% │
+│      16 │        50.00% │       2 │   0.81% │       82.93% │
+│      17 │        53.12% │       3 │   1.22% │       84.15% │
+│      18 │        56.25% │       4 │   1.63% │       85.77% │
+│      19 │        59.38% │       6 │   2.44% │       88.21% │
+│      20 │        62.50% │       5 │   2.03% │       90.24% │
+│      21 │        65.62% │       7 │   2.85% │       93.09% │
+│      22 │        68.75% │       2 │   0.81% │       93.90% │
+│      23 │        71.88% │       1 │   0.41% │       94.31% │
+│      24 │        75.00% │       1 │   0.41% │       94.72% │
+│      25 │        78.12% │       1 │   0.41% │       95.12% │
+│      26 │        81.25% │       1 │   0.41% │       95.53% │
+│      27 │        84.38% │       1 │   0.41% │       95.93% │
+│      28 │        87.50% │       1 │   0.41% │       96.34% │
+│      29 │        90.62% │       1 │   0.41% │       96.75% │
+│      30 │        93.75% │       0 │   0.00% │       96.75% │
+│      31 │        96.88% │       3 │   1.22% │       97.97% │
+│      32 │       100.00% │       5 │   2.03% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     165 │  67.07% │       67.07% │
+│ 25–50%       │     9–16 │      39 │  15.85% │       82.93% │
+│ 50–75%       │    17–24 │      29 │  11.79% │       94.72% │
+│ 75–100%      │    25–32 │      13 │   5.28% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 6/50 (seed 47) ===
+Time: 5.675s | Tokens: 512 | Time per token: 0.011083s/token | Tokens/s: 90.226
+Layer executions: 7312 | Layers/token: 14.281 | Classifier calls: 4600
+Layer executions by phase | Prefill: 0 | Draft: 4624 | Verification: 2656 | Decode: 32
+Acceptance rate: 87.02%
+Draft exit depths — 493 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │      13 │   2.64% │        2.64% │
+│       4 │        12.50% │     135 │  27.38% │       30.02% │
+│       5 │        15.62% │      25 │   5.07% │       35.09% │
+│       6 │        18.75% │      24 │   4.87% │       39.96% │
+│       7 │        21.88% │      93 │  18.86% │       58.82% │
+│       8 │        25.00% │      40 │   8.11% │       66.94% │
+│       9 │        28.12% │      50 │  10.14% │       77.08% │
+│      10 │        31.25% │      23 │   4.67% │       81.74% │
+│      11 │        34.38% │       3 │   0.61% │       82.35% │
+│      12 │        37.50% │      11 │   2.23% │       84.58% │
+│      13 │        40.62% │       6 │   1.22% │       85.80% │
+│      14 │        43.75% │       1 │   0.20% │       86.00% │
+│      15 │        46.88% │       1 │   0.20% │       86.21% │
+│      16 │        50.00% │       3 │   0.61% │       86.82% │
+│      17 │        53.12% │       2 │   0.41% │       87.22% │
+│      18 │        56.25% │       1 │   0.20% │       87.42% │
+│      19 │        59.38% │       1 │   0.20% │       87.63% │
+│      20 │        62.50% │       0 │   0.00% │       87.63% │
+│      21 │        65.62% │       5 │   1.01% │       88.64% │
+│      22 │        68.75% │       6 │   1.22% │       89.86% │
+│      23 │        71.88% │       0 │   0.00% │       89.86% │
+│      24 │        75.00% │       1 │   0.20% │       90.06% │
+│      25 │        78.12% │       1 │   0.20% │       90.26% │
+│      26 │        81.25% │       2 │   0.41% │       90.67% │
+│      27 │        84.38% │       7 │   1.42% │       92.09% │
+│      28 │        87.50% │       6 │   1.22% │       93.31% │
+│      29 │        90.62% │       3 │   0.61% │       93.91% │
+│      30 │        93.75% │       2 │   0.41% │       94.32% │
+│      31 │        96.88% │       4 │   0.81% │       95.13% │
+│      32 │       100.00% │      24 │   4.87% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     330 │  66.94% │       66.94% │
+│ 25–50%       │     9–16 │      98 │  19.88% │       86.82% │
+│ 50–75%       │    17–24 │      16 │   3.25% │       90.06% │
+│ 75–100%      │    25–32 │      49 │   9.94% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 7/50 (seed 48) ===
+Time: 5.206s | Tokens: 512 | Time per token: 0.010168s/token | Tokens/s: 98.352
+Layer executions: 6683 | Layers/token: 13.053 | Classifier calls: 4100
+Layer executions by phase | Prefill: 0 | Draft: 4123 | Verification: 2528 | Decode: 32
+Acceptance rate: 91.93%
+Draft exit depths — 471 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       6 │   1.27% │        1.27% │
+│       4 │        12.50% │     143 │  30.36% │       31.63% │
+│       5 │        15.62% │      62 │  13.16% │       44.80% │
+│       6 │        18.75% │       3 │   0.64% │       45.44% │
+│       7 │        21.88% │      76 │  16.14% │       61.57% │
+│       8 │        25.00% │       9 │   1.91% │       63.48% │
+│       9 │        28.12% │      55 │  11.68% │       75.16% │
+│      10 │        31.25% │       2 │   0.42% │       75.58% │
+│      11 │        34.38% │       3 │   0.64% │       76.22% │
+│      12 │        37.50% │      17 │   3.61% │       79.83% │
+│      13 │        40.62% │      53 │  11.25% │       91.08% │
+│      14 │        43.75% │       1 │   0.21% │       91.30% │
+│      15 │        46.88% │       1 │   0.21% │       91.51% │
+│      16 │        50.00% │       0 │   0.00% │       91.51% │
+│      17 │        53.12% │       3 │   0.64% │       92.14% │
+│      18 │        56.25% │       2 │   0.42% │       92.57% │
+│      19 │        59.38% │       1 │   0.21% │       92.78% │
+│      20 │        62.50% │       0 │   0.00% │       92.78% │
+│      21 │        65.62% │       3 │   0.64% │       93.42% │
+│      22 │        68.75% │       0 │   0.00% │       93.42% │
+│      23 │        71.88% │       0 │   0.00% │       93.42% │
+│      24 │        75.00% │       0 │   0.00% │       93.42% │
+│      25 │        78.12% │       2 │   0.42% │       93.84% │
+│      26 │        81.25% │       1 │   0.21% │       94.06% │
+│      27 │        84.38% │       0 │   0.00% │       94.06% │
+│      28 │        87.50% │       0 │   0.00% │       94.06% │
+│      29 │        90.62% │       1 │   0.21% │       94.27% │
+│      30 │        93.75% │       3 │   0.64% │       94.90% │
+│      31 │        96.88% │       1 │   0.21% │       95.12% │
+│      32 │       100.00% │      23 │   4.88% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     299 │  63.48% │       63.48% │
+│ 25–50%       │     9–16 │     132 │  28.03% │       91.51% │
+│ 50–75%       │    17–24 │       9 │   1.91% │       93.42% │
+│ 75–100%      │    25–32 │      31 │   6.58% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 8/50 (seed 49) ===
+Time: 5.715s | Tokens: 512 | Time per token: 0.011161s/token | Tokens/s: 89.595
+Layer executions: 7432 | Layers/token: 14.516 | Classifier calls: 4389
+Layer executions by phase | Prefill: 0 | Draft: 4392 | Verification: 3008 | Decode: 32
+Acceptance rate: 74.64%
+Draft exit depths — 560 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       1 │   0.18% │        0.18% │
+│       4 │        12.50% │      70 │  12.50% │       12.68% │
+│       5 │        15.62% │     118 │  21.07% │       33.75% │
+│       6 │        18.75% │      48 │   8.57% │       42.32% │
+│       7 │        21.88% │     210 │  37.50% │       79.82% │
+│       8 │        25.00% │      22 │   3.93% │       83.75% │
+│       9 │        28.12% │      18 │   3.21% │       86.96% │
+│      10 │        31.25% │       3 │   0.54% │       87.50% │
+│      11 │        34.38% │       2 │   0.36% │       87.86% │
+│      12 │        37.50% │       4 │   0.71% │       88.57% │
+│      13 │        40.62% │       8 │   1.43% │       90.00% │
+│      14 │        43.75% │       4 │   0.71% │       90.71% │
+│      15 │        46.88% │       3 │   0.54% │       91.25% │
+│      16 │        50.00% │       1 │   0.18% │       91.43% │
+│      17 │        53.12% │       6 │   1.07% │       92.50% │
+│      18 │        56.25% │       5 │   0.89% │       93.39% │
+│      19 │        59.38% │       5 │   0.89% │       94.29% │
+│      20 │        62.50% │       5 │   0.89% │       95.18% │
+│      21 │        65.62% │       3 │   0.54% │       95.71% │
+│      22 │        68.75% │       1 │   0.18% │       95.89% │
+│      23 │        71.88% │       2 │   0.36% │       96.25% │
+│      24 │        75.00% │       2 │   0.36% │       96.61% │
+│      25 │        78.12% │       3 │   0.54% │       97.14% │
+│      26 │        81.25% │       5 │   0.89% │       98.04% │
+│      27 │        84.38% │       1 │   0.18% │       98.21% │
+│      28 │        87.50% │       0 │   0.00% │       98.21% │
+│      29 │        90.62% │       4 │   0.71% │       98.93% │
+│      30 │        93.75% │       1 │   0.18% │       99.11% │
+│      31 │        96.88% │       2 │   0.36% │       99.46% │
+│      32 │       100.00% │       3 │   0.54% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     469 │  83.75% │       83.75% │
+│ 25–50%       │     9–16 │      43 │   7.68% │       91.43% │
+│ 50–75%       │    17–24 │      29 │   5.18% │       96.61% │
+│ 75–100%      │    25–32 │      19 │   3.39% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 9/50 (seed 50) ===
+Time: 5.369s | Tokens: 512 | Time per token: 0.010487s/token | Tokens/s: 95.360
+Layer executions: 7049 | Layers/token: 13.768 | Classifier calls: 3881
+Layer executions by phase | Prefill: 0 | Draft: 3881 | Verification: 3136 | Decode: 32
+Acceptance rate: 70.65%
+Draft exit depths — 586 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       0 │   0.00% │        0.00% │
+│       4 │        12.50% │     159 │  27.13% │       27.13% │
+│       5 │        15.62% │     217 │  37.03% │       64.16% │
+│       6 │        18.75% │       9 │   1.54% │       65.70% │
+│       7 │        21.88% │     120 │  20.48% │       86.18% │
+│       8 │        25.00% │      22 │   3.75% │       89.93% │
+│       9 │        28.12% │       7 │   1.19% │       91.13% │
+│      10 │        31.25% │       1 │   0.17% │       91.30% │
+│      11 │        34.38% │       2 │   0.34% │       91.64% │
+│      12 │        37.50% │       8 │   1.37% │       93.00% │
+│      13 │        40.62% │       1 │   0.17% │       93.17% │
+│      14 │        43.75% │       0 │   0.00% │       93.17% │
+│      15 │        46.88% │       0 │   0.00% │       93.17% │
+│      16 │        50.00% │       0 │   0.00% │       93.17% │
+│      17 │        53.12% │       0 │   0.00% │       93.17% │
+│      18 │        56.25% │       0 │   0.00% │       93.17% │
+│      19 │        59.38% │       1 │   0.17% │       93.34% │
+│      20 │        62.50% │      16 │   2.73% │       96.08% │
+│      21 │        65.62% │       6 │   1.02% │       97.10% │
+│      22 │        68.75% │       2 │   0.34% │       97.44% │
+│      23 │        71.88% │       6 │   1.02% │       98.46% │
+│      24 │        75.00% │       0 │   0.00% │       98.46% │
+│      25 │        78.12% │       6 │   1.02% │       99.49% │
+│      26 │        81.25% │       0 │   0.00% │       99.49% │
+│      27 │        84.38% │       1 │   0.17% │       99.66% │
+│      28 │        87.50% │       0 │   0.00% │       99.66% │
+│      29 │        90.62% │       0 │   0.00% │       99.66% │
+│      30 │        93.75% │       0 │   0.00% │       99.66% │
+│      31 │        96.88% │       2 │   0.34% │      100.00% │
+│      32 │       100.00% │       0 │   0.00% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     527 │  89.93% │       89.93% │
+│ 25–50%       │     9–16 │      19 │   3.24% │       93.17% │
+│ 50–75%       │    17–24 │      31 │   5.29% │       98.46% │
+│ 75–100%      │    25–32 │       9 │   1.54% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 10/50 (seed 51) ===
+Time: 6.518s | Tokens: 512 | Time per token: 0.012730s/token | Tokens/s: 78.554
+Layer executions: 8714 | Layers/token: 17.020 | Classifier calls: 5434
+Layer executions by phase | Prefill: 0 | Draft: 5450 | Verification: 3232 | Decode: 32
+Acceptance rate: 68.73%
+Draft exit depths — 598 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       2 │   0.33% │        0.33% │
+│       4 │        12.50% │     115 │  19.23% │       19.57% │
+│       5 │        15.62% │      94 │  15.72% │       35.28% │
+│       6 │        18.75% │      50 │   8.36% │       43.65% │
+│       7 │        21.88% │     130 │  21.74% │       65.38% │
+│       8 │        25.00% │      36 │   6.02% │       71.40% │
+│       9 │        28.12% │      40 │   6.69% │       78.09% │
+│      10 │        31.25% │       6 │   1.00% │       79.10% │
+│      11 │        34.38% │       6 │   1.00% │       80.10% │
+│      12 │        37.50% │      17 │   2.84% │       82.94% │
+│      13 │        40.62% │       9 │   1.51% │       84.45% │
+│      14 │        43.75% │       1 │   0.17% │       84.62% │
+│      15 │        46.88% │       7 │   1.17% │       85.79% │
+│      16 │        50.00% │       4 │   0.67% │       86.45% │
+│      17 │        53.12% │       7 │   1.17% │       87.63% │
+│      18 │        56.25% │       8 │   1.34% │       88.96% │
+│      19 │        59.38% │       2 │   0.33% │       89.30% │
+│      20 │        62.50% │       8 │   1.34% │       90.64% │
+│      21 │        65.62% │       5 │   0.84% │       91.47% │
+│      22 │        68.75% │       5 │   0.84% │       92.31% │
+│      23 │        71.88% │       1 │   0.17% │       92.47% │
+│      24 │        75.00% │       2 │   0.33% │       92.81% │
+│      25 │        78.12% │       1 │   0.17% │       92.98% │
+│      26 │        81.25% │       4 │   0.67% │       93.65% │
+│      27 │        84.38% │       1 │   0.17% │       93.81% │
+│      28 │        87.50% │       9 │   1.51% │       95.32% │
+│      29 │        90.62% │       4 │   0.67% │       95.99% │
+│      30 │        93.75% │       5 │   0.84% │       96.82% │
+│      31 │        96.88% │       3 │   0.50% │       97.32% │
+│      32 │       100.00% │      16 │   2.68% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     427 │  71.40% │       71.40% │
+│ 25–50%       │     9–16 │      90 │  15.05% │       86.45% │
+│ 50–75%       │    17–24 │      38 │   6.35% │       92.81% │
+│ 75–100%      │    25–32 │      43 │   7.19% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 11/50 (seed 52) ===
+Time: 5.613s | Tokens: 512 | Time per token: 0.010963s/token | Tokens/s: 91.213
+Layer executions: 7448 | Layers/token: 14.547 | Classifier calls: 4696
+Layer executions by phase | Prefill: 0 | Draft: 4728 | Verification: 2688 | Decode: 32
+Acceptance rate: 85.26%
+Draft exit depths — 502 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │      17 │   3.39% │        3.39% │
+│       4 │        12.50% │     179 │  35.66% │       39.04% │
+│       5 │        15.62% │      31 │   6.18% │       45.22% │
+│       6 │        18.75% │       6 │   1.20% │       46.41% │
+│       7 │        21.88% │      54 │  10.76% │       57.17% │
+│       8 │        25.00% │      47 │   9.36% │       66.53% │
+│       9 │        28.12% │      45 │   8.96% │       75.50% │
+│      10 │        31.25% │       9 │   1.79% │       77.29% │
+│      11 │        34.38% │      18 │   3.59% │       80.88% │
+│      12 │        37.50% │      12 │   2.39% │       83.27% │
+│      13 │        40.62% │      10 │   1.99% │       85.26% │
+│      14 │        43.75% │       1 │   0.20% │       85.46% │
+│      15 │        46.88% │       1 │   0.20% │       85.66% │
+│      16 │        50.00% │       0 │   0.00% │       85.66% │
+│      17 │        53.12% │       2 │   0.40% │       86.06% │
+│      18 │        56.25% │       2 │   0.40% │       86.45% │
+│      19 │        59.38% │       1 │   0.20% │       86.65% │
+│      20 │        62.50% │       0 │   0.00% │       86.65% │
+│      21 │        65.62% │       3 │   0.60% │       87.25% │
+│      22 │        68.75% │       5 │   1.00% │       88.25% │
+│      23 │        71.88% │       3 │   0.60% │       88.84% │
+│      24 │        75.00% │       1 │   0.20% │       89.04% │
+│      25 │        78.12% │       6 │   1.20% │       90.24% │
+│      26 │        81.25% │       3 │   0.60% │       90.84% │
+│      27 │        84.38% │       1 │   0.20% │       91.04% │
+│      28 │        87.50% │       1 │   0.20% │       91.24% │
+│      29 │        90.62% │       6 │   1.20% │       92.43% │
+│      30 │        93.75% │       2 │   0.40% │       92.83% │
+│      31 │        96.88% │       4 │   0.80% │       93.63% │
+│      32 │       100.00% │      32 │   6.37% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     334 │  66.53% │       66.53% │
+│ 25–50%       │     9–16 │      96 │  19.12% │       85.66% │
+│ 50–75%       │    17–24 │      17 │   3.39% │       89.04% │
+│ 75–100%      │    25–32 │      55 │  10.96% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 12/50 (seed 53) ===
+Time: 5.300s | Tokens: 512 | Time per token: 0.010352s/token | Tokens/s: 96.596
+Layer executions: 7031 | Layers/token: 13.732 | Classifier calls: 4529
+Layer executions by phase | Prefill: 0 | Draft: 4567 | Verification: 2432 | Decode: 32
+Acceptance rate: 96.46%
+Draft exit depths — 452 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       0 │   0.00% │        0.00% │
+│       4 │        12.50% │     143 │  31.64% │       31.64% │
+│       5 │        15.62% │      31 │   6.86% │       38.50% │
+│       6 │        18.75% │      11 │   2.43% │       40.93% │
+│       7 │        21.88% │      96 │  21.24% │       62.17% │
+│       8 │        25.00% │      15 │   3.32% │       65.49% │
+│       9 │        28.12% │      36 │   7.96% │       73.45% │
+│      10 │        31.25% │       2 │   0.44% │       73.89% │
+│      11 │        34.38% │       1 │   0.22% │       74.12% │
+│      12 │        37.50% │      19 │   4.20% │       78.32% │
+│      13 │        40.62% │      32 │   7.08% │       85.40% │
+│      14 │        43.75% │       2 │   0.44% │       85.84% │
+│      15 │        46.88% │       0 │   0.00% │       85.84% │
+│      16 │        50.00% │       0 │   0.00% │       85.84% │
+│      17 │        53.12% │       2 │   0.44% │       86.28% │
+│      18 │        56.25% │       1 │   0.22% │       86.50% │
+│      19 │        59.38% │       1 │   0.22% │       86.73% │
+│      20 │        62.50% │       0 │   0.00% │       86.73% │
+│      21 │        65.62% │       0 │   0.00% │       86.73% │
+│      22 │        68.75% │       0 │   0.00% │       86.73% │
+│      23 │        71.88% │       0 │   0.00% │       86.73% │
+│      24 │        75.00% │       1 │   0.22% │       86.95% │
+│      25 │        78.12% │       0 │   0.00% │       86.95% │
+│      26 │        81.25% │       1 │   0.22% │       87.17% │
+│      27 │        84.38% │       0 │   0.00% │       87.17% │
+│      28 │        87.50% │       0 │   0.00% │       87.17% │
+│      29 │        90.62% │       0 │   0.00% │       87.17% │
+│      30 │        93.75% │       2 │   0.44% │       87.61% │
+│      31 │        96.88% │      18 │   3.98% │       91.59% │
+│      32 │       100.00% │      38 │   8.41% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     296 │  65.49% │       65.49% │
+│ 25–50%       │     9–16 │      92 │  20.35% │       85.84% │
+│ 50–75%       │    17–24 │       5 │   1.11% │       86.95% │
+│ 75–100%      │    25–32 │      59 │  13.05% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 13/50 (seed 54) ===
+Time: 8.498s | Tokens: 512 | Time per token: 0.016598s/token | Tokens/s: 60.249
+Layer executions: 11533 | Layers/token: 22.525 | Classifier calls: 7820
+Layer executions by phase | Prefill: 0 | Draft: 7885 | Verification: 3616 | Decode: 32
+Acceptance rate: 59.46%
+Draft exit depths — 671 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       9 │   1.34% │        1.34% │
+│       4 │        12.50% │     110 │  16.39% │       17.73% │
+│       5 │        15.62% │      50 │   7.45% │       25.19% │
+│       6 │        18.75% │      46 │   6.86% │       32.04% │
+│       7 │        21.88% │      97 │  14.46% │       46.50% │
+│       8 │        25.00% │      60 │   8.94% │       55.44% │
+│       9 │        28.12% │      50 │   7.45% │       62.89% │
+│      10 │        31.25% │      20 │   2.98% │       65.87% │
+│      11 │        34.38% │      16 │   2.38% │       68.26% │
+│      12 │        37.50% │      24 │   3.58% │       71.83% │
+│      13 │        40.62% │      10 │   1.49% │       73.32% │
+│      14 │        43.75% │       9 │   1.34% │       74.66% │
+│      15 │        46.88% │       9 │   1.34% │       76.01% │
+│      16 │        50.00% │       7 │   1.04% │       77.05% │
+│      17 │        53.12% │      17 │   2.53% │       79.58% │
+│      18 │        56.25% │      15 │   2.24% │       81.82% │
+│      19 │        59.38% │       1 │   0.15% │       81.97% │
+│      20 │        62.50% │       3 │   0.45% │       82.41% │
+│      21 │        65.62% │       7 │   1.04% │       83.46% │
+│      22 │        68.75% │       3 │   0.45% │       83.90% │
+│      23 │        71.88% │       7 │   1.04% │       84.95% │
+│      24 │        75.00% │       2 │   0.30% │       85.25% │
+│      25 │        78.12% │       4 │   0.60% │       85.84% │
+│      26 │        81.25% │       2 │   0.30% │       86.14% │
+│      27 │        84.38% │       4 │   0.60% │       86.74% │
+│      28 │        87.50% │       6 │   0.89% │       87.63% │
+│      29 │        90.62% │       3 │   0.45% │       88.08% │
+│      30 │        93.75% │       4 │   0.60% │       88.67% │
+│      31 │        96.88% │      11 │   1.64% │       90.31% │
+│      32 │       100.00% │      65 │   9.69% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     372 │  55.44% │       55.44% │
+│ 25–50%       │     9–16 │     145 │  21.61% │       77.05% │
+│ 50–75%       │    17–24 │      55 │   8.20% │       85.25% │
+│ 75–100%      │    25–32 │      99 │  14.75% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 14/50 (seed 55) ===
+Time: 5.900s | Tokens: 512 | Time per token: 0.011524s/token | Tokens/s: 86.777
+Layer executions: 7811 | Layers/token: 15.256 | Classifier calls: 4636
+Layer executions by phase | Prefill: 0 | Draft: 4643 | Verification: 3136 | Decode: 32
+Acceptance rate: 70.53%
+Draft exit depths — 587 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       0 │   0.00% │        0.00% │
+│       4 │        12.50% │     180 │  30.66% │       30.66% │
+│       5 │        15.62% │      86 │  14.65% │       45.32% │
+│       6 │        18.75% │      48 │   8.18% │       53.49% │
+│       7 │        21.88% │     130 │  22.15% │       75.64% │
+│       8 │        25.00% │      14 │   2.39% │       78.02% │
+│       9 │        28.12% │      22 │   3.75% │       81.77% │
+│      10 │        31.25% │       5 │   0.85% │       82.62% │
+│      11 │        34.38% │       8 │   1.36% │       83.99% │
+│      12 │        37.50% │      13 │   2.21% │       86.20% │
+│      13 │        40.62% │      11 │   1.87% │       88.07% │
+│      14 │        43.75% │       3 │   0.51% │       88.59% │
+│      15 │        46.88% │       5 │   0.85% │       89.44% │
+│      16 │        50.00% │       4 │   0.68% │       90.12% │
+│      17 │        53.12% │      10 │   1.70% │       91.82% │
+│      18 │        56.25% │       8 │   1.36% │       93.19% │
+│      19 │        59.38% │       2 │   0.34% │       93.53% │
+│      20 │        62.50% │       5 │   0.85% │       94.38% │
+│      21 │        65.62% │       3 │   0.51% │       94.89% │
+│      22 │        68.75% │       1 │   0.17% │       95.06% │
+│      23 │        71.88% │       2 │   0.34% │       95.40% │
+│      24 │        75.00% │       2 │   0.34% │       95.74% │
+│      25 │        78.12% │       2 │   0.34% │       96.08% │
+│      26 │        81.25% │       3 │   0.51% │       96.59% │
+│      27 │        84.38% │       1 │   0.17% │       96.76% │
+│      28 │        87.50% │       1 │   0.17% │       96.93% │
+│      29 │        90.62% │       2 │   0.34% │       97.27% │
+│      30 │        93.75% │       8 │   1.36% │       98.64% │
+│      31 │        96.88% │       1 │   0.17% │       98.81% │
+│      32 │       100.00% │       7 │   1.19% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     458 │  78.02% │       78.02% │
+│ 25–50%       │     9–16 │      71 │  12.10% │       90.12% │
+│ 50–75%       │    17–24 │      33 │   5.62% │       95.74% │
+│ 75–100%      │    25–32 │      25 │   4.26% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 15/50 (seed 56) ===
+Time: 6.153s | Tokens: 512 | Time per token: 0.012018s/token | Tokens/s: 83.208
+Layer executions: 8143 | Layers/token: 15.904 | Classifier calls: 4835
+Layer executions by phase | Prefill: 0 | Draft: 4847 | Verification: 3264 | Decode: 32
+Acceptance rate: 67.32%
+Draft exit depths — 609 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │      30 │   4.93% │        4.93% │
+│       4 │        12.50% │      94 │  15.44% │       20.36% │
+│       5 │        15.62% │     105 │  17.24% │       37.60% │
+│       6 │        18.75% │      93 │  15.27% │       52.87% │
+│       7 │        21.88% │     133 │  21.84% │       74.71% │
+│       8 │        25.00% │      22 │   3.61% │       78.33% │
+│       9 │        28.12% │      22 │   3.61% │       81.94% │
+│      10 │        31.25% │       7 │   1.15% │       83.09% │
+│      11 │        34.38% │       6 │   0.99% │       84.07% │
+│      12 │        37.50% │      23 │   3.78% │       87.85% │
+│      13 │        40.62% │       4 │   0.66% │       88.51% │
+│      14 │        43.75% │       1 │   0.16% │       88.67% │
+│      15 │        46.88% │       2 │   0.33% │       89.00% │
+│      16 │        50.00% │       4 │   0.66% │       89.66% │
+│      17 │        53.12% │      19 │   3.12% │       92.78% │
+│      18 │        56.25% │       3 │   0.49% │       93.27% │
+│      19 │        59.38% │       8 │   1.31% │       94.58% │
+│      20 │        62.50% │       3 │   0.49% │       95.07% │
+│      21 │        65.62% │       6 │   0.99% │       96.06% │
+│      22 │        68.75% │       2 │   0.33% │       96.39% │
+│      23 │        71.88% │       0 │   0.00% │       96.39% │
+│      24 │        75.00% │       1 │   0.16% │       96.55% │
+│      25 │        78.12% │       0 │   0.00% │       96.55% │
+│      26 │        81.25% │       2 │   0.33% │       96.88% │
+│      27 │        84.38% │       3 │   0.49% │       97.37% │
+│      28 │        87.50% │       0 │   0.00% │       97.37% │
+│      29 │        90.62% │       1 │   0.16% │       97.54% │
+│      30 │        93.75% │       1 │   0.16% │       97.70% │
+│      31 │        96.88% │       2 │   0.33% │       98.03% │
+│      32 │       100.00% │      12 │   1.97% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     477 │  78.33% │       78.33% │
+│ 25–50%       │     9–16 │      69 │  11.33% │       89.66% │
+│ 50–75%       │    17–24 │      42 │   6.90% │       96.55% │
+│ 75–100%      │    25–32 │      21 │   3.45% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 16/50 (seed 57) ===
+Time: 4.286s | Tokens: 512 | Time per token: 0.008372s/token | Tokens/s: 119.452
+Layer executions: 5523 | Layers/token: 10.787 | Classifier calls: 2994
+Layer executions by phase | Prefill: 0 | Draft: 2995 | Verification: 2496 | Decode: 32
+Acceptance rate: 92.93%
+Draft exit depths — 467 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       0 │   0.00% │        0.00% │
+│       4 │        12.50% │      67 │  14.35% │       14.35% │
+│       5 │        15.62% │     122 │  26.12% │       40.47% │
+│       6 │        18.75% │      81 │  17.34% │       57.82% │
+│       7 │        21.88% │     160 │  34.26% │       92.08% │
+│       8 │        25.00% │       4 │   0.86% │       92.93% │
+│       9 │        28.12% │       7 │   1.50% │       94.43% │
+│      10 │        31.25% │       4 │   0.86% │       95.29% │
+│      11 │        34.38% │       0 │   0.00% │       95.29% │
+│      12 │        37.50% │       7 │   1.50% │       96.79% │
+│      13 │        40.62% │       3 │   0.64% │       97.43% │
+│      14 │        43.75% │       1 │   0.21% │       97.64% │
+│      15 │        46.88% │       1 │   0.21% │       97.86% │
+│      16 │        50.00% │       1 │   0.21% │       98.07% │
+│      17 │        53.12% │       1 │   0.21% │       98.29% │
+│      18 │        56.25% │       2 │   0.43% │       98.72% │
+│      19 │        59.38% │       0 │   0.00% │       98.72% │
+│      20 │        62.50% │       2 │   0.43% │       99.14% │
+│      21 │        65.62% │       0 │   0.00% │       99.14% │
+│      22 │        68.75% │       1 │   0.21% │       99.36% │
+│      23 │        71.88% │       0 │   0.00% │       99.36% │
+│      24 │        75.00% │       0 │   0.00% │       99.36% │
+│      25 │        78.12% │       0 │   0.00% │       99.36% │
+│      26 │        81.25% │       0 │   0.00% │       99.36% │
+│      27 │        84.38% │       0 │   0.00% │       99.36% │
+│      28 │        87.50% │       0 │   0.00% │       99.36% │
+│      29 │        90.62% │       0 │   0.00% │       99.36% │
+│      30 │        93.75% │       1 │   0.21% │       99.57% │
+│      31 │        96.88% │       1 │   0.21% │       99.79% │
+│      32 │       100.00% │       1 │   0.21% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     434 │  92.93% │       92.93% │
+│ 25–50%       │     9–16 │      24 │   5.14% │       98.07% │
+│ 50–75%       │    17–24 │       6 │   1.28% │       99.36% │
+│ 75–100%      │    25–32 │       3 │   0.64% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 17/50 (seed 58) ===
+Time: 4.089s | Tokens: 512 | Time per token: 0.007987s/token | Tokens/s: 125.209
+Layer executions: 5292 | Layers/token: 10.336 | Classifier calls: 2828
+Layer executions by phase | Prefill: 0 | Draft: 2828 | Verification: 2432 | Decode: 32
+Acceptance rate: 96.46%
+Draft exit depths — 452 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       0 │   0.00% │        0.00% │
+│       4 │        12.50% │      77 │  17.04% │       17.04% │
+│       5 │        15.62% │      75 │  16.59% │       33.63% │
+│       6 │        18.75% │     107 │  23.67% │       57.30% │
+│       7 │        21.88% │     171 │  37.83% │       95.13% │
+│       8 │        25.00% │       4 │   0.88% │       96.02% │
+│       9 │        28.12% │       7 │   1.55% │       97.57% │
+│      10 │        31.25% │       0 │   0.00% │       97.57% │
+│      11 │        34.38% │       0 │   0.00% │       97.57% │
+│      12 │        37.50% │       2 │   0.44% │       98.01% │
+│      13 │        40.62% │       0 │   0.00% │       98.01% │
+│      14 │        43.75% │       1 │   0.22% │       98.23% │
+│      15 │        46.88% │       0 │   0.00% │       98.23% │
+│      16 │        50.00% │       0 │   0.00% │       98.23% │
+│      17 │        53.12% │       3 │   0.66% │       98.89% │
+│      18 │        56.25% │       0 │   0.00% │       98.89% │
+│      19 │        59.38% │       1 │   0.22% │       99.12% │
+│      20 │        62.50% │       1 │   0.22% │       99.34% │
+│      21 │        65.62% │       0 │   0.00% │       99.34% │
+│      22 │        68.75% │       0 │   0.00% │       99.34% │
+│      23 │        71.88% │       1 │   0.22% │       99.56% │
+│      24 │        75.00% │       0 │   0.00% │       99.56% │
+│      25 │        78.12% │       0 │   0.00% │       99.56% │
+│      26 │        81.25% │       0 │   0.00% │       99.56% │
+│      27 │        84.38% │       0 │   0.00% │       99.56% │
+│      28 │        87.50% │       0 │   0.00% │       99.56% │
+│      29 │        90.62% │       1 │   0.22% │       99.78% │
+│      30 │        93.75% │       0 │   0.00% │       99.78% │
+│      31 │        96.88% │       1 │   0.22% │      100.00% │
+│      32 │       100.00% │       0 │   0.00% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     434 │  96.02% │       96.02% │
+│ 25–50%       │     9–16 │      10 │   2.21% │       98.23% │
+│ 50–75%       │    17–24 │       6 │   1.33% │       99.56% │
+│ 75–100%      │    25–32 │       2 │   0.44% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 18/50 (seed 59) ===
+Time: 4.693s | Tokens: 433 | Time per token: 0.010839s/token | Tokens/s: 92.260
+Layer executions: 6144 | Layers/token: 14.189 | Classifier calls: 3391
+Layer executions by phase | Prefill: 0 | Draft: 3392 | Verification: 2720 | Decode: 32
+Acceptance rate: 68.43%
+Draft exit depths — 510 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │      24 │   4.71% │        4.71% │
+│       4 │        12.50% │     159 │  31.18% │       35.88% │
+│       5 │        15.62% │     142 │  27.84% │       63.73% │
+│       6 │        18.75% │      17 │   3.33% │       67.06% │
+│       7 │        21.88% │      62 │  12.16% │       79.22% │
+│       8 │        25.00% │      28 │   5.49% │       84.71% │
+│       9 │        28.12% │      15 │   2.94% │       87.65% │
+│      10 │        31.25% │       4 │   0.78% │       88.43% │
+│      11 │        34.38% │       3 │   0.59% │       89.02% │
+│      12 │        37.50% │      10 │   1.96% │       90.98% │
+│      13 │        40.62% │       9 │   1.76% │       92.75% │
+│      14 │        43.75% │       2 │   0.39% │       93.14% │
+│      15 │        46.88% │       2 │   0.39% │       93.53% │
+│      16 │        50.00% │       3 │   0.59% │       94.12% │
+│      17 │        53.12% │      11 │   2.16% │       96.27% │
+│      18 │        56.25% │       2 │   0.39% │       96.67% │
+│      19 │        59.38% │       0 │   0.00% │       96.67% │
+│      20 │        62.50% │       2 │   0.39% │       97.06% │
+│      21 │        65.62% │       1 │   0.20% │       97.25% │
+│      22 │        68.75% │       2 │   0.39% │       97.65% │
+│      23 │        71.88% │       0 │   0.00% │       97.65% │
+│      24 │        75.00% │       2 │   0.39% │       98.04% │
+│      25 │        78.12% │       0 │   0.00% │       98.04% │
+│      26 │        81.25% │       1 │   0.20% │       98.24% │
+│      27 │        84.38% │       2 │   0.39% │       98.63% │
+│      28 │        87.50% │       3 │   0.59% │       99.22% │
+│      29 │        90.62% │       1 │   0.20% │       99.41% │
+│      30 │        93.75% │       0 │   0.00% │       99.41% │
+│      31 │        96.88% │       2 │   0.39% │       99.80% │
+│      32 │       100.00% │       1 │   0.20% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     432 │  84.71% │       84.71% │
+│ 25–50%       │     9–16 │      48 │   9.41% │       94.12% │
+│ 50–75%       │    17–24 │      20 │   3.92% │       98.04% │
+│ 75–100%      │    25–32 │      10 │   1.96% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 19/50 (seed 60) ===
+Time: 4.762s | Tokens: 441 | Time per token: 0.010797s/token | Tokens/s: 92.614
+Layer executions: 6266 | Layers/token: 14.209 | Classifier calls: 3638
+Layer executions by phase | Prefill: 0 | Draft: 3642 | Verification: 2592 | Decode: 32
+Acceptance rate: 74.28%
+Draft exit depths — 486 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       5 │   1.03% │        1.03% │
+│       4 │        12.50% │     183 │  37.65% │       38.68% │
+│       5 │        15.62% │      69 │  14.20% │       52.88% │
+│       6 │        18.75% │      30 │   6.17% │       59.05% │
+│       7 │        21.88% │      80 │  16.46% │       75.51% │
+│       8 │        25.00% │      16 │   3.29% │       78.81% │
+│       9 │        28.12% │      21 │   4.32% │       83.13% │
+│      10 │        31.25% │      11 │   2.26% │       85.39% │
+│      11 │        34.38% │       5 │   1.03% │       86.42% │
+│      12 │        37.50% │       7 │   1.44% │       87.86% │
+│      13 │        40.62% │       6 │   1.23% │       89.09% │
+│      14 │        43.75% │       3 │   0.62% │       89.71% │
+│      15 │        46.88% │       5 │   1.03% │       90.74% │
+│      16 │        50.00% │       1 │   0.21% │       90.95% │
+│      17 │        53.12% │       9 │   1.85% │       92.80% │
+│      18 │        56.25% │       2 │   0.41% │       93.21% │
+│      19 │        59.38% │       0 │   0.00% │       93.21% │
+│      20 │        62.50% │       3 │   0.62% │       93.83% │
+│      21 │        65.62% │       5 │   1.03% │       94.86% │
+│      22 │        68.75% │       4 │   0.82% │       95.68% │
+│      23 │        71.88% │       1 │   0.21% │       95.88% │
+│      24 │        75.00% │       2 │   0.41% │       96.30% │
+│      25 │        78.12% │       0 │   0.00% │       96.30% │
+│      26 │        81.25% │       3 │   0.62% │       96.91% │
+│      27 │        84.38% │       5 │   1.03% │       97.94% │
+│      28 │        87.50% │       2 │   0.41% │       98.35% │
+│      29 │        90.62% │       0 │   0.00% │       98.35% │
+│      30 │        93.75% │       1 │   0.21% │       98.56% │
+│      31 │        96.88% │       3 │   0.62% │       99.18% │
+│      32 │       100.00% │       4 │   0.82% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     383 │  78.81% │       78.81% │
+│ 25–50%       │     9–16 │      59 │  12.14% │       90.95% │
+│ 50–75%       │    17–24 │      26 │   5.35% │       96.30% │
+│ 75–100%      │    25–32 │      18 │   3.70% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 20/50 (seed 61) ===
+Time: 2.856s | Tokens: 233 | Time per token: 0.012259s/token | Tokens/s: 81.576
+Layer executions: 3728 | Layers/token: 16.000 | Classifier calls: 2253
+Layer executions by phase | Prefill: 0 | Draft: 2256 | Verification: 1440 | Decode: 32
+Acceptance rate: 70.00%
+Draft exit depths — 270 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       1 │   0.37% │        0.37% │
+│       4 │        12.50% │      51 │  18.89% │       19.26% │
+│       5 │        15.62% │      47 │  17.41% │       36.67% │
+│       6 │        18.75% │      31 │  11.48% │       48.15% │
+│       7 │        21.88% │      55 │  20.37% │       68.52% │
+│       8 │        25.00% │       5 │   1.85% │       70.37% │
+│       9 │        28.12% │      17 │   6.30% │       76.67% │
+│      10 │        31.25% │      10 │   3.70% │       80.37% │
+│      11 │        34.38% │       6 │   2.22% │       82.59% │
+│      12 │        37.50% │       6 │   2.22% │       84.81% │
+│      13 │        40.62% │       5 │   1.85% │       86.67% │
+│      14 │        43.75% │       2 │   0.74% │       87.41% │
+│      15 │        46.88% │       2 │   0.74% │       88.15% │
+│      16 │        50.00% │       0 │   0.00% │       88.15% │
+│      17 │        53.12% │       8 │   2.96% │       91.11% │
+│      18 │        56.25% │       5 │   1.85% │       92.96% │
+│      19 │        59.38% │       2 │   0.74% │       93.70% │
+│      20 │        62.50% │       5 │   1.85% │       95.56% │
+│      21 │        65.62% │       3 │   1.11% │       96.67% │
+│      22 │        68.75% │       1 │   0.37% │       97.04% │
+│      23 │        71.88% │       0 │   0.00% │       97.04% │
+│      24 │        75.00% │       0 │   0.00% │       97.04% │
+│      25 │        78.12% │       0 │   0.00% │       97.04% │
+│      26 │        81.25% │       1 │   0.37% │       97.41% │
+│      27 │        84.38% │       1 │   0.37% │       97.78% │
+│      28 │        87.50% │       0 │   0.00% │       97.78% │
+│      29 │        90.62% │       0 │   0.00% │       97.78% │
+│      30 │        93.75% │       2 │   0.74% │       98.52% │
+│      31 │        96.88% │       1 │   0.37% │       98.89% │
+│      32 │       100.00% │       3 │   1.11% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     190 │  70.37% │       70.37% │
+│ 25–50%       │     9–16 │      48 │  17.78% │       88.15% │
+│ 50–75%       │    17–24 │      24 │   8.89% │       97.04% │
+│ 75–100%      │    25–32 │       8 │   2.96% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 21/50 (seed 62) ===
+Time: 6.022s | Tokens: 512 | Time per token: 0.011763s/token | Tokens/s: 85.015
+Layer executions: 7950 | Layers/token: 15.527 | Classifier calls: 4965
+Layer executions by phase | Prefill: 0 | Draft: 4974 | Verification: 2944 | Decode: 32
+Acceptance rate: 76.64%
+Draft exit depths — 548 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       0 │   0.00% │        0.00% │
+│       4 │        12.50% │      90 │  16.42% │       16.42% │
+│       5 │        15.62% │      62 │  11.31% │       27.74% │
+│       6 │        18.75% │      47 │   8.58% │       36.31% │
+│       7 │        21.88% │     169 │  30.84% │       67.15% │
+│       8 │        25.00% │      24 │   4.38% │       71.53% │
+│       9 │        28.12% │      28 │   5.11% │       76.64% │
+│      10 │        31.25% │       4 │   0.73% │       77.37% │
+│      11 │        34.38% │       6 │   1.09% │       78.47% │
+│      12 │        37.50% │      16 │   2.92% │       81.39% │
+│      13 │        40.62% │      17 │   3.10% │       84.49% │
+│      14 │        43.75% │       3 │   0.55% │       85.04% │
+│      15 │        46.88% │       3 │   0.55% │       85.58% │
+│      16 │        50.00% │       3 │   0.55% │       86.13% │
+│      17 │        53.12% │      13 │   2.37% │       88.50% │
+│      18 │        56.25% │      10 │   1.82% │       90.33% │
+│      19 │        59.38% │       7 │   1.28% │       91.61% │
+│      20 │        62.50% │       1 │   0.18% │       91.79% │
+│      21 │        65.62% │       8 │   1.46% │       93.25% │
+│      22 │        68.75% │       4 │   0.73% │       93.98% │
+│      23 │        71.88% │       4 │   0.73% │       94.71% │
+│      24 │        75.00% │       2 │   0.36% │       95.07% │
+│      25 │        78.12% │       4 │   0.73% │       95.80% │
+│      26 │        81.25% │       1 │   0.18% │       95.99% │
+│      27 │        84.38% │       1 │   0.18% │       96.17% │
+│      28 │        87.50% │       6 │   1.09% │       97.26% │
+│      29 │        90.62% │       1 │   0.18% │       97.45% │
+│      30 │        93.75% │       2 │   0.36% │       97.81% │
+│      31 │        96.88% │       3 │   0.55% │       98.36% │
+│      32 │       100.00% │       9 │   1.64% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     392 │  71.53% │       71.53% │
+│ 25–50%       │     9–16 │      80 │  14.60% │       86.13% │
+│ 50–75%       │    17–24 │      49 │   8.94% │       95.07% │
+│ 75–100%      │    25–32 │      27 │   4.93% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 22/50 (seed 63) ===
+Time: 0.436s | Tokens: 23 | Time per token: 0.018961s/token | Tokens/s: 52.739
+Layer executions: 574 | Layers/token: 24.957 | Classifier calls: 380
+Layer executions by phase | Prefill: 0 | Draft: 382 | Verification: 160 | Decode: 32
+Acceptance rate: 63.33%
+Draft exit depths — 30 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       0 │   0.00% │        0.00% │
+│       4 │        12.50% │       0 │   0.00% │        0.00% │
+│       5 │        15.62% │       4 │  13.33% │       13.33% │
+│       6 │        18.75% │       1 │   3.33% │       16.67% │
+│       7 │        21.88% │       6 │  20.00% │       36.67% │
+│       8 │        25.00% │       4 │  13.33% │       50.00% │
+│       9 │        28.12% │       2 │   6.67% │       56.67% │
+│      10 │        31.25% │       1 │   3.33% │       60.00% │
+│      11 │        34.38% │       0 │   0.00% │       60.00% │
+│      12 │        37.50% │       3 │  10.00% │       70.00% │
+│      13 │        40.62% │       2 │   6.67% │       76.67% │
+│      14 │        43.75% │       0 │   0.00% │       76.67% │
+│      15 │        46.88% │       0 │   0.00% │       76.67% │
+│      16 │        50.00% │       0 │   0.00% │       76.67% │
+│      17 │        53.12% │       0 │   0.00% │       76.67% │
+│      18 │        56.25% │       0 │   0.00% │       76.67% │
+│      19 │        59.38% │       0 │   0.00% │       76.67% │
+│      20 │        62.50% │       2 │   6.67% │       83.33% │
+│      21 │        65.62% │       0 │   0.00% │       83.33% │
+│      22 │        68.75% │       0 │   0.00% │       83.33% │
+│      23 │        71.88% │       0 │   0.00% │       83.33% │
+│      24 │        75.00% │       0 │   0.00% │       83.33% │
+│      25 │        78.12% │       0 │   0.00% │       83.33% │
+│      26 │        81.25% │       0 │   0.00% │       83.33% │
+│      27 │        84.38% │       1 │   3.33% │       86.67% │
+│      28 │        87.50% │       0 │   0.00% │       86.67% │
+│      29 │        90.62% │       0 │   0.00% │       86.67% │
+│      30 │        93.75% │       1 │   3.33% │       90.00% │
+│      31 │        96.88% │       1 │   3.33% │       93.33% │
+│      32 │       100.00% │       2 │   6.67% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │      15 │  50.00% │       50.00% │
+│ 25–50%       │     9–16 │       8 │  26.67% │       76.67% │
+│ 50–75%       │    17–24 │       2 │   6.67% │       83.33% │
+│ 75–100%      │    25–32 │       5 │  16.67% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 23/50 (seed 64) ===
+Time: 4.800s | Tokens: 512 | Time per token: 0.009375s/token | Tokens/s: 106.664
+Layer executions: 6235 | Layers/token: 12.178 | Classifier calls: 3411
+Layer executions by phase | Prefill: 0 | Draft: 3419 | Verification: 2784 | Decode: 32
+Acceptance rate: 82.36%
+Draft exit depths — 516 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │      82 │  15.89% │       15.89% │
+│       4 │        12.50% │     169 │  32.75% │       48.64% │
+│       5 │        15.62% │      68 │  13.18% │       61.82% │
+│       6 │        18.75% │      18 │   3.49% │       65.31% │
+│       7 │        21.88% │      39 │   7.56% │       72.87% │
+│       8 │        25.00% │      42 │   8.14% │       81.01% │
+│       9 │        28.12% │      41 │   7.95% │       88.95% │
+│      10 │        31.25% │       3 │   0.58% │       89.53% │
+│      11 │        34.38% │       2 │   0.39% │       89.92% │
+│      12 │        37.50% │      10 │   1.94% │       91.86% │
+│      13 │        40.62% │       7 │   1.36% │       93.22% │
+│      14 │        43.75% │       3 │   0.58% │       93.80% │
+│      15 │        46.88% │       2 │   0.39% │       94.19% │
+│      16 │        50.00% │       0 │   0.00% │       94.19% │
+│      17 │        53.12% │       7 │   1.36% │       95.54% │
+│      18 │        56.25% │       3 │   0.58% │       96.12% │
+│      19 │        59.38% │       3 │   0.58% │       96.71% │
+│      20 │        62.50% │       0 │   0.00% │       96.71% │
+│      21 │        65.62% │       0 │   0.00% │       96.71% │
+│      22 │        68.75% │       0 │   0.00% │       96.71% │
+│      23 │        71.88% │       0 │   0.00% │       96.71% │
+│      24 │        75.00% │       1 │   0.19% │       96.90% │
+│      25 │        78.12% │       1 │   0.19% │       97.09% │
+│      26 │        81.25% │       1 │   0.19% │       97.29% │
+│      27 │        84.38% │       1 │   0.19% │       97.48% │
+│      28 │        87.50% │       2 │   0.39% │       97.87% │
+│      29 │        90.62% │       0 │   0.00% │       97.87% │
+│      30 │        93.75% │       1 │   0.19% │       98.06% │
+│      31 │        96.88% │       2 │   0.39% │       98.45% │
+│      32 │       100.00% │       8 │   1.55% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     418 │  81.01% │       81.01% │
+│ 25–50%       │     9–16 │      68 │  13.18% │       94.19% │
+│ 50–75%       │    17–24 │      14 │   2.71% │       96.90% │
+│ 75–100%      │    25–32 │      16 │   3.10% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 24/50 (seed 65) ===
+Time: 4.395s | Tokens: 512 | Time per token: 0.008585s/token | Tokens/s: 116.486
+Layer executions: 5671 | Layers/token: 11.076 | Classifier calls: 3045
+Layer executions by phase | Prefill: 0 | Draft: 3047 | Verification: 2592 | Decode: 32
+Acceptance rate: 89.05%
+Draft exit depths — 484 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │      31 │   6.40% │        6.40% │
+│       4 │        12.50% │     191 │  39.46% │       45.87% │
+│       5 │        15.62% │      85 │  17.56% │       63.43% │
+│       6 │        18.75% │      30 │   6.20% │       69.63% │
+│       7 │        21.88% │      62 │  12.81% │       82.44% │
+│       8 │        25.00% │      16 │   3.31% │       85.74% │
+│       9 │        28.12% │      11 │   2.27% │       88.02% │
+│      10 │        31.25% │       2 │   0.41% │       88.43% │
+│      11 │        34.38% │      14 │   2.89% │       91.32% │
+│      12 │        37.50% │      13 │   2.69% │       94.01% │
+│      13 │        40.62% │       5 │   1.03% │       95.04% │
+│      14 │        43.75% │       0 │   0.00% │       95.04% │
+│      15 │        46.88% │       2 │   0.41% │       95.45% │
+│      16 │        50.00% │       0 │   0.00% │       95.45% │
+│      17 │        53.12% │       2 │   0.41% │       95.87% │
+│      18 │        56.25% │       7 │   1.45% │       97.31% │
+│      19 │        59.38% │       0 │   0.00% │       97.31% │
+│      20 │        62.50% │       1 │   0.21% │       97.52% │
+│      21 │        65.62% │       0 │   0.00% │       97.52% │
+│      22 │        68.75% │       2 │   0.41% │       97.93% │
+│      23 │        71.88% │       1 │   0.21% │       98.14% │
+│      24 │        75.00% │       3 │   0.62% │       98.76% │
+│      25 │        78.12% │       0 │   0.00% │       98.76% │
+│      26 │        81.25% │       0 │   0.00% │       98.76% │
+│      27 │        84.38% │       1 │   0.21% │       98.97% │
+│      28 │        87.50% │       1 │   0.21% │       99.17% │
+│      29 │        90.62% │       0 │   0.00% │       99.17% │
+│      30 │        93.75% │       1 │   0.21% │       99.38% │
+│      31 │        96.88% │       1 │   0.21% │       99.59% │
+│      32 │       100.00% │       2 │   0.41% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     415 │  85.74% │       85.74% │
+│ 25–50%       │     9–16 │      47 │   9.71% │       95.45% │
+│ 50–75%       │    17–24 │      16 │   3.31% │       98.76% │
+│ 75–100%      │    25–32 │       6 │   1.24% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 25/50 (seed 66) ===
+Time: 5.230s | Tokens: 512 | Time per token: 0.010214s/token | Tokens/s: 97.906
+Layer executions: 6864 | Layers/token: 13.406 | Classifier calls: 4079
+Layer executions by phase | Prefill: 0 | Draft: 4080 | Verification: 2752 | Decode: 32
+Acceptance rate: 82.56%
+Draft exit depths — 516 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       0 │   0.00% │        0.00% │
+│       4 │        12.50% │     108 │  20.93% │       20.93% │
+│       5 │        15.62% │      84 │  16.28% │       37.21% │
+│       6 │        18.75% │      45 │   8.72% │       45.93% │
+│       7 │        21.88% │     142 │  27.52% │       73.45% │
+│       8 │        25.00% │      16 │   3.10% │       76.55% │
+│       9 │        28.12% │      33 │   6.40% │       82.95% │
+│      10 │        31.25% │       5 │   0.97% │       83.91% │
+│      11 │        34.38% │       2 │   0.39% │       84.30% │
+│      12 │        37.50% │      14 │   2.71% │       87.02% │
+│      13 │        40.62% │      13 │   2.52% │       89.53% │
+│      14 │        43.75% │       1 │   0.19% │       89.73% │
+│      15 │        46.88% │       4 │   0.78% │       90.50% │
+│      16 │        50.00% │       7 │   1.36% │       91.86% │
+│      17 │        53.12% │       8 │   1.55% │       93.41% │
+│      18 │        56.25% │       7 │   1.36% │       94.77% │
+│      19 │        59.38% │       1 │   0.19% │       94.96% │
+│      20 │        62.50% │       2 │   0.39% │       95.35% │
+│      21 │        65.62% │       2 │   0.39% │       95.74% │
+│      22 │        68.75% │       5 │   0.97% │       96.71% │
+│      23 │        71.88% │       2 │   0.39% │       97.09% │
+│      24 │        75.00% │       1 │   0.19% │       97.29% │
+│      25 │        78.12% │       1 │   0.19% │       97.48% │
+│      26 │        81.25% │       4 │   0.78% │       98.26% │
+│      27 │        84.38% │       1 │   0.19% │       98.45% │
+│      28 │        87.50% │       1 │   0.19% │       98.64% │
+│      29 │        90.62% │       0 │   0.00% │       98.64% │
+│      30 │        93.75% │       1 │   0.19% │       98.84% │
+│      31 │        96.88% │       5 │   0.97% │       99.81% │
+│      32 │       100.00% │       1 │   0.19% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     395 │  76.55% │       76.55% │
+│ 25–50%       │     9–16 │      79 │  15.31% │       91.86% │
+│ 50–75%       │    17–24 │      28 │   5.43% │       97.29% │
+│ 75–100%      │    25–32 │      14 │   2.71% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 26/50 (seed 67) ===
+Time: 4.799s | Tokens: 512 | Time per token: 0.009374s/token | Tokens/s: 106.678
+Layer executions: 6273 | Layers/token: 12.252 | Classifier calls: 3583
+Layer executions by phase | Prefill: 0 | Draft: 3585 | Verification: 2656 | Decode: 32
+Acceptance rate: 87.20%
+Draft exit depths — 492 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       0 │   0.00% │        0.00% │
+│       4 │        12.50% │      39 │   7.93% │        7.93% │
+│       5 │        15.62% │     226 │  45.93% │       53.86% │
+│       6 │        18.75% │      29 │   5.89% │       59.76% │
+│       7 │        21.88% │     108 │  21.95% │       81.71% │
+│       8 │        25.00% │      11 │   2.24% │       83.94% │
+│       9 │        28.12% │       5 │   1.02% │       84.96% │
+│      10 │        31.25% │       5 │   1.02% │       85.98% │
+│      11 │        34.38% │       2 │   0.41% │       86.38% │
+│      12 │        37.50% │      32 │   6.50% │       92.89% │
+│      13 │        40.62% │       1 │   0.20% │       93.09% │
+│      14 │        43.75% │       1 │   0.20% │       93.29% │
+│      15 │        46.88% │       0 │   0.00% │       93.29% │
+│      16 │        50.00% │       1 │   0.20% │       93.50% │
+│      17 │        53.12% │       1 │   0.20% │       93.70% │
+│      18 │        56.25% │       4 │   0.81% │       94.51% │
+│      19 │        59.38% │       1 │   0.20% │       94.72% │
+│      20 │        62.50% │       2 │   0.41% │       95.12% │
+│      21 │        65.62% │      11 │   2.24% │       97.36% │
+│      22 │        68.75% │       2 │   0.41% │       97.76% │
+│      23 │        71.88% │       1 │   0.20% │       97.97% │
+│      24 │        75.00% │       0 │   0.00% │       97.97% │
+│      25 │        78.12% │       2 │   0.41% │       98.37% │
+│      26 │        81.25% │       1 │   0.20% │       98.58% │
+│      27 │        84.38% │       0 │   0.00% │       98.58% │
+│      28 │        87.50% │       1 │   0.20% │       98.78% │
+│      29 │        90.62% │       0 │   0.00% │       98.78% │
+│      30 │        93.75% │       1 │   0.20% │       98.98% │
+│      31 │        96.88% │       3 │   0.61% │       99.59% │
+│      32 │       100.00% │       2 │   0.41% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     413 │  83.94% │       83.94% │
+│ 25–50%       │     9–16 │      47 │   9.55% │       93.50% │
+│ 50–75%       │    17–24 │      22 │   4.47% │       97.97% │
+│ 75–100%      │    25–32 │      10 │   2.03% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 27/50 (seed 68) ===
+Time: 5.368s | Tokens: 512 | Time per token: 0.010485s/token | Tokens/s: 95.371
+Layer executions: 7019 | Layers/token: 13.709 | Classifier calls: 4007
+Layer executions by phase | Prefill: 0 | Draft: 4011 | Verification: 2976 | Decode: 32
+Acceptance rate: 75.63%
+Draft exit depths — 554 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       0 │   0.00% │        0.00% │
+│       4 │        12.50% │     128 │  23.10% │       23.10% │
+│       5 │        15.62% │      66 │  11.91% │       35.02% │
+│       6 │        18.75% │      78 │  14.08% │       49.10% │
+│       7 │        21.88% │     197 │  35.56% │       84.66% │
+│       8 │        25.00% │      13 │   2.35% │       87.00% │
+│       9 │        28.12% │       5 │   0.90% │       87.91% │
+│      10 │        31.25% │       4 │   0.72% │       88.63% │
+│      11 │        34.38% │       2 │   0.36% │       88.99% │
+│      12 │        37.50% │      16 │   2.89% │       91.88% │
+│      13 │        40.62% │       3 │   0.54% │       92.42% │
+│      14 │        43.75% │       1 │   0.18% │       92.60% │
+│      15 │        46.88% │       1 │   0.18% │       92.78% │
+│      16 │        50.00% │       1 │   0.18% │       92.96% │
+│      17 │        53.12% │      10 │   1.81% │       94.77% │
+│      18 │        56.25% │       5 │   0.90% │       95.67% │
+│      19 │        59.38% │       2 │   0.36% │       96.03% │
+│      20 │        62.50% │       5 │   0.90% │       96.93% │
+│      21 │        65.62% │       6 │   1.08% │       98.01% │
+│      22 │        68.75% │       1 │   0.18% │       98.19% │
+│      23 │        71.88% │       1 │   0.18% │       98.38% │
+│      24 │        75.00% │       1 │   0.18% │       98.56% │
+│      25 │        78.12% │       0 │   0.00% │       98.56% │
+│      26 │        81.25% │       0 │   0.00% │       98.56% │
+│      27 │        84.38% │       1 │   0.18% │       98.74% │
+│      28 │        87.50% │       2 │   0.36% │       99.10% │
+│      29 │        90.62% │       0 │   0.00% │       99.10% │
+│      30 │        93.75% │       0 │   0.00% │       99.10% │
+│      31 │        96.88% │       1 │   0.18% │       99.28% │
+│      32 │       100.00% │       4 │   0.72% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     482 │  87.00% │       87.00% │
+│ 25–50%       │     9–16 │      33 │   5.96% │       92.96% │
+│ 50–75%       │    17–24 │      31 │   5.60% │       98.56% │
+│ 75–100%      │    25–32 │       8 │   1.44% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 28/50 (seed 69) ===
+Time: 6.885s | Tokens: 512 | Time per token: 0.013448s/token | Tokens/s: 74.361
+Layer executions: 8965 | Layers/token: 17.510 | Classifier calls: 5679
+Layer executions by phase | Prefill: 0 | Draft: 5701 | Verification: 3232 | Decode: 32
+Acceptance rate: 68.27%
+Draft exit depths — 602 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       2 │   0.33% │        0.33% │
+│       4 │        12.50% │     113 │  18.77% │       19.10% │
+│       5 │        15.62% │      87 │  14.45% │       33.55% │
+│       6 │        18.75% │      56 │   9.30% │       42.86% │
+│       7 │        21.88% │     133 │  22.09% │       64.95% │
+│       8 │        25.00% │      33 │   5.48% │       70.43% │
+│       9 │        28.12% │      10 │   1.66% │       72.09% │
+│      10 │        31.25% │      16 │   2.66% │       74.75% │
+│      11 │        34.38% │       5 │   0.83% │       75.58% │
+│      12 │        37.50% │      11 │   1.83% │       77.41% │
+│      13 │        40.62% │      22 │   3.65% │       81.06% │
+│      14 │        43.75% │       6 │   1.00% │       82.06% │
+│      15 │        46.88% │       5 │   0.83% │       82.89% │
+│      16 │        50.00% │       4 │   0.66% │       83.55% │
+│      17 │        53.12% │      26 │   4.32% │       87.87% │
+│      18 │        56.25% │       7 │   1.16% │       89.04% │
+│      19 │        59.38% │       3 │   0.50% │       89.53% │
+│      20 │        62.50% │       7 │   1.16% │       90.70% │
+│      21 │        65.62% │       8 │   1.33% │       92.03% │
+│      22 │        68.75% │       2 │   0.33% │       92.36% │
+│      23 │        71.88% │       3 │   0.50% │       92.86% │
+│      24 │        75.00% │       2 │   0.33% │       93.19% │
+│      25 │        78.12% │       4 │   0.66% │       93.85% │
+│      26 │        81.25% │       4 │   0.66% │       94.52% │
+│      27 │        84.38% │       2 │   0.33% │       94.85% │
+│      28 │        87.50% │       0 │   0.00% │       94.85% │
+│      29 │        90.62% │       1 │   0.17% │       95.02% │
+│      30 │        93.75% │       2 │   0.33% │       95.35% │
+│      31 │        96.88% │       6 │   1.00% │       96.35% │
+│      32 │       100.00% │      22 │   3.65% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     424 │  70.43% │       70.43% │
+│ 25–50%       │     9–16 │      79 │  13.12% │       83.55% │
+│ 50–75%       │    17–24 │      58 │   9.63% │       93.19% │
+│ 75–100%      │    25–32 │      41 │   6.81% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 29/50 (seed 70) ===
+Time: 5.103s | Tokens: 512 | Time per token: 0.009966s/token | Tokens/s: 100.338
+Layer executions: 6472 | Layers/token: 12.641 | Classifier calls: 3655
+Layer executions by phase | Prefill: 0 | Draft: 3656 | Verification: 2784 | Decode: 32
+Acceptance rate: 81.42%
+Draft exit depths — 522 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       0 │   0.00% │        0.00% │
+│       4 │        12.50% │      90 │  17.24% │       17.24% │
+│       5 │        15.62% │     185 │  35.44% │       52.68% │
+│       6 │        18.75% │      25 │   4.79% │       57.47% │
+│       7 │        21.88% │     121 │  23.18% │       80.65% │
+│       8 │        25.00% │      21 │   4.02% │       84.67% │
+│       9 │        28.12% │      20 │   3.83% │       88.51% │
+│      10 │        31.25% │       0 │   0.00% │       88.51% │
+│      11 │        34.38% │       0 │   0.00% │       88.51% │
+│      12 │        37.50% │      20 │   3.83% │       92.34% │
+│      13 │        40.62% │       0 │   0.00% │       92.34% │
+│      14 │        43.75% │       1 │   0.19% │       92.53% │
+│      15 │        46.88% │       2 │   0.38% │       92.91% │
+│      16 │        50.00% │       0 │   0.00% │       92.91% │
+│      17 │        53.12% │      17 │   3.26% │       96.17% │
+│      18 │        56.25% │       4 │   0.77% │       96.93% │
+│      19 │        59.38% │       1 │   0.19% │       97.13% │
+│      20 │        62.50% │       4 │   0.77% │       97.89% │
+│      21 │        65.62% │       3 │   0.57% │       98.47% │
+│      22 │        68.75% │       0 │   0.00% │       98.47% │
+│      23 │        71.88% │       0 │   0.00% │       98.47% │
+│      24 │        75.00% │       2 │   0.38% │       98.85% │
+│      25 │        78.12% │       1 │   0.19% │       99.04% │
+│      26 │        81.25% │       2 │   0.38% │       99.43% │
+│      27 │        84.38% │       0 │   0.00% │       99.43% │
+│      28 │        87.50% │       0 │   0.00% │       99.43% │
+│      29 │        90.62% │       0 │   0.00% │       99.43% │
+│      30 │        93.75% │       0 │   0.00% │       99.43% │
+│      31 │        96.88% │       2 │   0.38% │       99.81% │
+│      32 │       100.00% │       1 │   0.19% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     442 │  84.67% │       84.67% │
+│ 25–50%       │     9–16 │      43 │   8.24% │       92.91% │
+│ 50–75%       │    17–24 │      31 │   5.94% │       98.85% │
+│ 75–100%      │    25–32 │       6 │   1.15% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 30/50 (seed 71) ===
+Time: 11.540s | Tokens: 512 | Time per token: 0.022539s/token | Tokens/s: 44.367
+Layer executions: 15343 | Layers/token: 29.967 | Classifier calls: 11059
+Layer executions by phase | Prefill: 0 | Draft: 11119 | Verification: 4192 | Decode: 32
+Acceptance rate: 48.60%
+Draft exit depths — 784 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │      10 │   1.28% │        1.28% │
+│       4 │        12.50% │      81 │  10.33% │       11.61% │
+│       5 │        15.62% │      58 │   7.40% │       19.01% │
+│       6 │        18.75% │      26 │   3.32% │       22.32% │
+│       7 │        21.88% │      57 │   7.27% │       29.59% │
+│       8 │        25.00% │      67 │   8.55% │       38.14% │
+│       9 │        28.12% │      49 │   6.25% │       44.39% │
+│      10 │        31.25% │      35 │   4.46% │       48.85% │
+│      11 │        34.38% │      27 │   3.44% │       52.30% │
+│      12 │        37.50% │      41 │   5.23% │       57.53% │
+│      13 │        40.62% │      16 │   2.04% │       59.57% │
+│      14 │        43.75% │       4 │   0.51% │       60.08% │
+│      15 │        46.88% │      15 │   1.91% │       61.99% │
+│      16 │        50.00% │      15 │   1.91% │       63.90% │
+│      17 │        53.12% │      26 │   3.32% │       67.22% │
+│      18 │        56.25% │      36 │   4.59% │       71.81% │
+│      19 │        59.38% │      13 │   1.66% │       73.47% │
+│      20 │        62.50% │       9 │   1.15% │       74.62% │
+│      21 │        65.62% │      13 │   1.66% │       76.28% │
+│      22 │        68.75% │       9 │   1.15% │       77.42% │
+│      23 │        71.88% │      12 │   1.53% │       78.95% │
+│      24 │        75.00% │      11 │   1.40% │       80.36% │
+│      25 │        78.12% │      11 │   1.40% │       81.76% │
+│      26 │        81.25% │      12 │   1.53% │       83.29% │
+│      27 │        84.38% │       8 │   1.02% │       84.31% │
+│      28 │        87.50% │      31 │   3.95% │       88.27% │
+│      29 │        90.62% │      14 │   1.79% │       90.05% │
+│      30 │        93.75% │       8 │   1.02% │       91.07% │
+│      31 │        96.88% │      10 │   1.28% │       92.35% │
+│      32 │       100.00% │      60 │   7.65% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     299 │  38.14% │       38.14% │
+│ 25–50%       │     9–16 │     202 │  25.77% │       63.90% │
+│ 50–75%       │    17–24 │     129 │  16.45% │       80.36% │
+│ 75–100%      │    25–32 │     154 │  19.64% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 31/50 (seed 72) ===
+Time: 5.537s | Tokens: 512 | Time per token: 0.010814s/token | Tokens/s: 92.470
+Layer executions: 7074 | Layers/token: 13.816 | Classifier calls: 4527
+Layer executions by phase | Prefill: 0 | Draft: 4578 | Verification: 2464 | Decode: 32
+Acceptance rate: 94.57%
+Draft exit depths — 460 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       6 │   1.30% │        1.30% │
+│       4 │        12.50% │     151 │  32.83% │       34.13% │
+│       5 │        15.62% │      26 │   5.65% │       39.78% │
+│       6 │        18.75% │       5 │   1.09% │       40.87% │
+│       7 │        21.88% │      41 │   8.91% │       49.78% │
+│       8 │        25.00% │      67 │  14.57% │       64.35% │
+│       9 │        28.12% │      78 │  16.96% │       81.30% │
+│      10 │        31.25% │       6 │   1.30% │       82.61% │
+│      11 │        34.38% │       7 │   1.52% │       84.13% │
+│      12 │        37.50% │       4 │   0.87% │       85.00% │
+│      13 │        40.62% │       1 │   0.22% │       85.22% │
+│      14 │        43.75% │       0 │   0.00% │       85.22% │
+│      15 │        46.88% │       0 │   0.00% │       85.22% │
+│      16 │        50.00% │       0 │   0.00% │       85.22% │
+│      17 │        53.12% │       0 │   0.00% │       85.22% │
+│      18 │        56.25% │       1 │   0.22% │       85.43% │
+│      19 │        59.38% │       2 │   0.43% │       85.87% │
+│      20 │        62.50% │       2 │   0.43% │       86.30% │
+│      21 │        65.62% │       0 │   0.00% │       86.30% │
+│      22 │        68.75% │       0 │   0.00% │       86.30% │
+│      23 │        71.88% │       0 │   0.00% │       86.30% │
+│      24 │        75.00% │       0 │   0.00% │       86.30% │
+│      25 │        78.12% │       3 │   0.65% │       86.96% │
+│      26 │        81.25% │       1 │   0.22% │       87.17% │
+│      27 │        84.38% │       0 │   0.00% │       87.17% │
+│      28 │        87.50% │       1 │   0.22% │       87.39% │
+│      29 │        90.62% │       0 │   0.00% │       87.39% │
+│      30 │        93.75% │       1 │   0.22% │       87.61% │
+│      31 │        96.88% │       6 │   1.30% │       88.91% │
+│      32 │       100.00% │      51 │  11.09% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     296 │  64.35% │       64.35% │
+│ 25–50%       │     9–16 │      96 │  20.87% │       85.22% │
+│ 50–75%       │    17–24 │       5 │   1.09% │       86.30% │
+│ 75–100%      │    25–32 │      63 │  13.70% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 32/50 (seed 73) ===
+Time: 4.091s | Tokens: 512 | Time per token: 0.007991s/token | Tokens/s: 125.144
+Layer executions: 5230 | Layers/token: 10.215 | Classifier calls: 2830
+Layer executions by phase | Prefill: 0 | Draft: 2830 | Verification: 2368 | Decode: 32
+Acceptance rate: 98.87%
+Draft exit depths — 443 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       0 │   0.00% │        0.00% │
+│       4 │        12.50% │      59 │  13.32% │       13.32% │
+│       5 │        15.62% │      81 │  18.28% │       31.60% │
+│       6 │        18.75% │      60 │  13.54% │       45.15% │
+│       7 │        21.88% │     217 │  48.98% │       94.13% │
+│       8 │        25.00% │       3 │   0.68% │       94.81% │
+│       9 │        28.12% │      14 │   3.16% │       97.97% │
+│      10 │        31.25% │       1 │   0.23% │       98.19% │
+│      11 │        34.38% │       0 │   0.00% │       98.19% │
+│      12 │        37.50% │       3 │   0.68% │       98.87% │
+│      13 │        40.62% │       1 │   0.23% │       99.10% │
+│      14 │        43.75% │       0 │   0.00% │       99.10% │
+│      15 │        46.88% │       0 │   0.00% │       99.10% │
+│      16 │        50.00% │       0 │   0.00% │       99.10% │
+│      17 │        53.12% │       0 │   0.00% │       99.10% │
+│      18 │        56.25% │       0 │   0.00% │       99.10% │
+│      19 │        59.38% │       1 │   0.23% │       99.32% │
+│      20 │        62.50% │       0 │   0.00% │       99.32% │
+│      21 │        65.62% │       0 │   0.00% │       99.32% │
+│      22 │        68.75% │       1 │   0.23% │       99.55% │
+│      23 │        71.88% │       0 │   0.00% │       99.55% │
+│      24 │        75.00% │       0 │   0.00% │       99.55% │
+│      25 │        78.12% │       0 │   0.00% │       99.55% │
+│      26 │        81.25% │       0 │   0.00% │       99.55% │
+│      27 │        84.38% │       0 │   0.00% │       99.55% │
+│      28 │        87.50% │       0 │   0.00% │       99.55% │
+│      29 │        90.62% │       1 │   0.23% │       99.77% │
+│      30 │        93.75% │       0 │   0.00% │       99.77% │
+│      31 │        96.88% │       1 │   0.23% │      100.00% │
+│      32 │       100.00% │       0 │   0.00% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     420 │  94.81% │       94.81% │
+│ 25–50%       │     9–16 │      19 │   4.29% │       99.10% │
+│ 50–75%       │    17–24 │       2 │   0.45% │       99.55% │
+│ 75–100%      │    25–32 │       2 │   0.45% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 33/50 (seed 74) ===
+Time: 1.159s | Tokens: 60 | Time per token: 0.019313s/token | Tokens/s: 51.779
+Layer executions: 1489 | Layers/token: 24.817 | Classifier calls: 975
+Layer executions by phase | Prefill: 0 | Draft: 977 | Verification: 480 | Decode: 32
+Acceptance rate: 51.11%
+Draft exit depths — 90 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       0 │   0.00% │        0.00% │
+│       4 │        12.50% │       4 │   4.44% │        4.44% │
+│       5 │        15.62% │      16 │  17.78% │       22.22% │
+│       6 │        18.75% │      13 │  14.44% │       36.67% │
+│       7 │        21.88% │      15 │  16.67% │       53.33% │
+│       8 │        25.00% │       4 │   4.44% │       57.78% │
+│       9 │        28.12% │       6 │   6.67% │       64.44% │
+│      10 │        31.25% │       1 │   1.11% │       65.56% │
+│      11 │        34.38% │       3 │   3.33% │       68.89% │
+│      12 │        37.50% │       4 │   4.44% │       73.33% │
+│      13 │        40.62% │       0 │   0.00% │       73.33% │
+│      14 │        43.75% │       3 │   3.33% │       76.67% │
+│      15 │        46.88% │       1 │   1.11% │       77.78% │
+│      16 │        50.00% │       0 │   0.00% │       77.78% │
+│      17 │        53.12% │       3 │   3.33% │       81.11% │
+│      18 │        56.25% │       2 │   2.22% │       83.33% │
+│      19 │        59.38% │       1 │   1.11% │       84.44% │
+│      20 │        62.50% │       3 │   3.33% │       87.78% │
+│      21 │        65.62% │       1 │   1.11% │       88.89% │
+│      22 │        68.75% │       0 │   0.00% │       88.89% │
+│      23 │        71.88% │       1 │   1.11% │       90.00% │
+│      24 │        75.00% │       3 │   3.33% │       93.33% │
+│      25 │        78.12% │       0 │   0.00% │       93.33% │
+│      26 │        81.25% │       0 │   0.00% │       93.33% │
+│      27 │        84.38% │       0 │   0.00% │       93.33% │
+│      28 │        87.50% │       1 │   1.11% │       94.44% │
+│      29 │        90.62% │       1 │   1.11% │       95.56% │
+│      30 │        93.75% │       1 │   1.11% │       96.67% │
+│      31 │        96.88% │       1 │   1.11% │       97.78% │
+│      32 │       100.00% │       2 │   2.22% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │      52 │  57.78% │       57.78% │
+│ 25–50%       │     9–16 │      18 │  20.00% │       77.78% │
+│ 50–75%       │    17–24 │      14 │  15.56% │       93.33% │
+│ 75–100%      │    25–32 │       6 │   6.67% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 34/50 (seed 75) ===
+Time: 5.345s | Tokens: 512 | Time per token: 0.010439s/token | Tokens/s: 95.798
+Layer executions: 6992 | Layers/token: 13.656 | Classifier calls: 4199
+Layer executions by phase | Prefill: 0 | Draft: 4208 | Verification: 2752 | Decode: 32
+Acceptance rate: 82.56%
+Draft exit depths — 516 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       9 │   1.74% │        1.74% │
+│       4 │        12.50% │     174 │  33.72% │       35.47% │
+│       5 │        15.62% │      46 │   8.91% │       44.38% │
+│       6 │        18.75% │      16 │   3.10% │       47.48% │
+│       7 │        21.88% │      70 │  13.57% │       61.05% │
+│       8 │        25.00% │      26 │   5.04% │       66.09% │
+│       9 │        28.12% │      69 │  13.37% │       79.46% │
+│      10 │        31.25% │      13 │   2.52% │       81.98% │
+│      11 │        34.38% │      20 │   3.88% │       85.85% │
+│      12 │        37.50% │      12 │   2.33% │       88.18% │
+│      13 │        40.62% │       5 │   0.97% │       89.15% │
+│      14 │        43.75% │       2 │   0.39% │       89.53% │
+│      15 │        46.88% │       0 │   0.00% │       89.53% │
+│      16 │        50.00% │       0 │   0.00% │       89.53% │
+│      17 │        53.12% │      14 │   2.71% │       92.25% │
+│      18 │        56.25% │       3 │   0.58% │       92.83% │
+│      19 │        59.38% │       6 │   1.16% │       93.99% │
+│      20 │        62.50% │       4 │   0.78% │       94.77% │
+│      21 │        65.62% │       1 │   0.19% │       94.96% │
+│      22 │        68.75% │       2 │   0.39% │       95.35% │
+│      23 │        71.88% │       2 │   0.39% │       95.74% │
+│      24 │        75.00% │       0 │   0.00% │       95.74% │
+│      25 │        78.12% │       2 │   0.39% │       96.12% │
+│      26 │        81.25% │       3 │   0.58% │       96.71% │
+│      27 │        84.38% │       0 │   0.00% │       96.71% │
+│      28 │        87.50% │       1 │   0.19% │       96.90% │
+│      29 │        90.62% │       1 │   0.19% │       97.09% │
+│      30 │        93.75% │       3 │   0.58% │       97.67% │
+│      31 │        96.88% │       3 │   0.58% │       98.26% │
+│      32 │       100.00% │       9 │   1.74% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     341 │  66.09% │       66.09% │
+│ 25–50%       │     9–16 │     121 │  23.45% │       89.53% │
+│ 50–75%       │    17–24 │      32 │   6.20% │       95.74% │
+│ 75–100%      │    25–32 │      22 │   4.26% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 35/50 (seed 76) ===
+Time: 5.193s | Tokens: 512 | Time per token: 0.010143s/token | Tokens/s: 98.591
+Layer executions: 6816 | Layers/token: 13.312 | Classifier calls: 4050
+Layer executions by phase | Prefill: 0 | Draft: 4064 | Verification: 2720 | Decode: 32
+Acceptance rate: 84.72%
+Draft exit depths — 504 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       0 │   0.00% │        0.00% │
+│       4 │        12.50% │      81 │  16.07% │       16.07% │
+│       5 │        15.62% │      73 │  14.48% │       30.56% │
+│       6 │        18.75% │      80 │  15.87% │       46.43% │
+│       7 │        21.88% │     166 │  32.94% │       79.37% │
+│       8 │        25.00% │      11 │   2.18% │       81.55% │
+│       9 │        28.12% │      21 │   4.17% │       85.71% │
+│      10 │        31.25% │       3 │   0.60% │       86.31% │
+│      11 │        34.38% │       0 │   0.00% │       86.31% │
+│      12 │        37.50% │      14 │   2.78% │       89.09% │
+│      13 │        40.62% │       5 │   0.99% │       90.08% │
+│      14 │        43.75% │       1 │   0.20% │       90.28% │
+│      15 │        46.88% │       5 │   0.99% │       91.27% │
+│      16 │        50.00% │       0 │   0.00% │       91.27% │
+│      17 │        53.12% │       9 │   1.79% │       93.06% │
+│      18 │        56.25% │       3 │   0.60% │       93.65% │
+│      19 │        59.38% │       2 │   0.40% │       94.05% │
+│      20 │        62.50% │       1 │   0.20% │       94.25% │
+│      21 │        65.62% │       1 │   0.20% │       94.44% │
+│      22 │        68.75% │       1 │   0.20% │       94.64% │
+│      23 │        71.88% │       2 │   0.40% │       95.04% │
+│      24 │        75.00% │       2 │   0.40% │       95.44% │
+│      25 │        78.12% │       1 │   0.20% │       95.63% │
+│      26 │        81.25% │       0 │   0.00% │       95.63% │
+│      27 │        84.38% │       1 │   0.20% │       95.83% │
+│      28 │        87.50% │       3 │   0.60% │       96.43% │
+│      29 │        90.62% │       3 │   0.60% │       97.02% │
+│      30 │        93.75% │       0 │   0.00% │       97.02% │
+│      31 │        96.88% │       1 │   0.20% │       97.22% │
+│      32 │       100.00% │      14 │   2.78% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     411 │  81.55% │       81.55% │
+│ 25–50%       │     9–16 │      49 │   9.72% │       91.27% │
+│ 50–75%       │    17–24 │      21 │   4.17% │       95.44% │
+│ 75–100%      │    25–32 │      23 │   4.56% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 36/50 (seed 77) ===
+Time: 3.745s | Tokens: 231 | Time per token: 0.016210s/token | Tokens/s: 61.690
+Layer executions: 4953 | Layers/token: 21.442 | Classifier calls: 3309
+Layer executions by phase | Prefill: 0 | Draft: 3321 | Verification: 1600 | Decode: 32
+Acceptance rate: 60.67%
+Draft exit depths — 300 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │      15 │   5.00% │        5.00% │
+│       4 │        12.50% │      38 │  12.67% │       17.67% │
+│       5 │        15.62% │      64 │  21.33% │       39.00% │
+│       6 │        18.75% │       8 │   2.67% │       41.67% │
+│       7 │        21.88% │      24 │   8.00% │       49.67% │
+│       8 │        25.00% │      19 │   6.33% │       56.00% │
+│       9 │        28.12% │      19 │   6.33% │       62.33% │
+│      10 │        31.25% │       9 │   3.00% │       65.33% │
+│      11 │        34.38% │       3 │   1.00% │       66.33% │
+│      12 │        37.50% │      18 │   6.00% │       72.33% │
+│      13 │        40.62% │       4 │   1.33% │       73.67% │
+│      14 │        43.75% │       5 │   1.67% │       75.33% │
+│      15 │        46.88% │       0 │   0.00% │       75.33% │
+│      16 │        50.00% │       4 │   1.33% │       76.67% │
+│      17 │        53.12% │      10 │   3.33% │       80.00% │
+│      18 │        56.25% │       6 │   2.00% │       82.00% │
+│      19 │        59.38% │       2 │   0.67% │       82.67% │
+│      20 │        62.50% │       3 │   1.00% │       83.67% │
+│      21 │        65.62% │       3 │   1.00% │       84.67% │
+│      22 │        68.75% │       1 │   0.33% │       85.00% │
+│      23 │        71.88% │       3 │   1.00% │       86.00% │
+│      24 │        75.00% │       1 │   0.33% │       86.33% │
+│      25 │        78.12% │       5 │   1.67% │       88.00% │
+│      26 │        81.25% │       4 │   1.33% │       89.33% │
+│      27 │        84.38% │       8 │   2.67% │       92.00% │
+│      28 │        87.50% │       2 │   0.67% │       92.67% │
+│      29 │        90.62% │       4 │   1.33% │       94.00% │
+│      30 │        93.75% │       1 │   0.33% │       94.33% │
+│      31 │        96.88% │       5 │   1.67% │       96.00% │
+│      32 │       100.00% │      12 │   4.00% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     168 │  56.00% │       56.00% │
+│ 25–50%       │     9–16 │      62 │  20.67% │       76.67% │
+│ 50–75%       │    17–24 │      29 │   9.67% │       86.33% │
+│ 75–100%      │    25–32 │      41 │  13.67% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 37/50 (seed 78) ===
+Time: 9.292s | Tokens: 512 | Time per token: 0.018148s/token | Tokens/s: 55.101
+Layer executions: 12580 | Layers/token: 24.570 | Classifier calls: 8788
+Layer executions by phase | Prefill: 0 | Draft: 8836 | Verification: 3712 | Decode: 32
+Acceptance rate: 57.31%
+Draft exit depths — 691 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       6 │   0.87% │        0.87% │
+│       4 │        12.50% │      94 │  13.60% │       14.47% │
+│       5 │        15.62% │     108 │  15.63% │       30.10% │
+│       6 │        18.75% │      36 │   5.21% │       35.31% │
+│       7 │        21.88% │      61 │   8.83% │       44.14% │
+│       8 │        25.00% │      45 │   6.51% │       50.65% │
+│       9 │        28.12% │      39 │   5.64% │       56.30% │
+│      10 │        31.25% │      17 │   2.46% │       58.76% │
+│      11 │        34.38% │      23 │   3.33% │       62.08% │
+│      12 │        37.50% │      25 │   3.62% │       65.70% │
+│      13 │        40.62% │      11 │   1.59% │       67.29% │
+│      14 │        43.75% │       4 │   0.58% │       67.87% │
+│      15 │        46.88% │      13 │   1.88% │       69.75% │
+│      16 │        50.00% │       9 │   1.30% │       71.06% │
+│      17 │        53.12% │      15 │   2.17% │       73.23% │
+│      18 │        56.25% │       6 │   0.87% │       74.10% │
+│      19 │        59.38% │       5 │   0.72% │       74.82% │
+│      20 │        62.50% │       7 │   1.01% │       75.83% │
+│      21 │        65.62% │       7 │   1.01% │       76.85% │
+│      22 │        68.75% │      14 │   2.03% │       78.87% │
+│      23 │        71.88% │      16 │   2.32% │       81.19% │
+│      24 │        75.00% │       4 │   0.58% │       81.77% │
+│      25 │        78.12% │       9 │   1.30% │       83.07% │
+│      26 │        81.25% │       4 │   0.58% │       83.65% │
+│      27 │        84.38% │       9 │   1.30% │       84.95% │
+│      28 │        87.50% │      12 │   1.74% │       86.69% │
+│      29 │        90.62% │      13 │   1.88% │       88.57% │
+│      30 │        93.75% │      12 │   1.74% │       90.30% │
+│      31 │        96.88% │      19 │   2.75% │       93.05% │
+│      32 │       100.00% │      48 │   6.95% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     350 │  50.65% │       50.65% │
+│ 25–50%       │     9–16 │     141 │  20.41% │       71.06% │
+│ 50–75%       │    17–24 │      74 │  10.71% │       81.77% │
+│ 75–100%      │    25–32 │     126 │  18.23% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 38/50 (seed 79) ===
+Time: 5.215s | Tokens: 512 | Time per token: 0.010185s/token | Tokens/s: 98.183
+Layer executions: 6851 | Layers/token: 13.381 | Classifier calls: 4324
+Layer executions by phase | Prefill: 0 | Draft: 4355 | Verification: 2464 | Decode: 32
+Acceptance rate: 94.16%
+Draft exit depths — 462 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       3 │   0.65% │        0.65% │
+│       4 │        12.50% │     142 │  30.74% │       31.39% │
+│       5 │        15.62% │      24 │   5.19% │       36.58% │
+│       6 │        18.75% │       6 │   1.30% │       37.88% │
+│       7 │        21.88% │      75 │  16.23% │       54.11% │
+│       8 │        25.00% │      28 │   6.06% │       60.17% │
+│       9 │        28.12% │      58 │  12.55% │       72.73% │
+│      10 │        31.25% │       8 │   1.73% │       74.46% │
+│      11 │        34.38% │      12 │   2.60% │       77.06% │
+│      12 │        37.50% │      40 │   8.66% │       85.71% │
+│      13 │        40.62% │      16 │   3.46% │       89.18% │
+│      14 │        43.75% │       0 │   0.00% │       89.18% │
+│      15 │        46.88% │       1 │   0.22% │       89.39% │
+│      16 │        50.00% │       0 │   0.00% │       89.39% │
+│      17 │        53.12% │       3 │   0.65% │       90.04% │
+│      18 │        56.25% │       1 │   0.22% │       90.26% │
+│      19 │        59.38% │       1 │   0.22% │       90.48% │
+│      20 │        62.50% │       0 │   0.00% │       90.48% │
+│      21 │        65.62% │       0 │   0.00% │       90.48% │
+│      22 │        68.75% │       0 │   0.00% │       90.48% │
+│      23 │        71.88% │       1 │   0.22% │       90.69% │
+│      24 │        75.00% │       1 │   0.22% │       90.91% │
+│      25 │        78.12% │       2 │   0.43% │       91.34% │
+│      26 │        81.25% │       2 │   0.43% │       91.77% │
+│      27 │        84.38% │       0 │   0.00% │       91.77% │
+│      28 │        87.50% │       2 │   0.43% │       92.21% │
+│      29 │        90.62% │       1 │   0.22% │       92.42% │
+│      30 │        93.75% │       2 │   0.43% │       92.86% │
+│      31 │        96.88% │       2 │   0.43% │       93.29% │
+│      32 │       100.00% │      31 │   6.71% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     278 │  60.17% │       60.17% │
+│ 25–50%       │     9–16 │     135 │  29.22% │       89.39% │
+│ 50–75%       │    17–24 │       7 │   1.52% │       90.91% │
+│ 75–100%      │    25–32 │      42 │   9.09% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 39/50 (seed 80) ===
+Time: 6.668s | Tokens: 512 | Time per token: 0.013023s/token | Tokens/s: 76.790
+Layer executions: 8851 | Layers/token: 17.287 | Classifier calls: 5507
+Layer executions by phase | Prefill: 0 | Draft: 5523 | Verification: 3296 | Decode: 32
+Acceptance rate: 66.18%
+Draft exit depths — 618 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       0 │   0.00% │        0.00% │
+│       4 │        12.50% │     129 │  20.87% │       20.87% │
+│       5 │        15.62% │      96 │  15.53% │       36.41% │
+│       6 │        18.75% │      39 │   6.31% │       42.72% │
+│       7 │        21.88% │     136 │  22.01% │       64.72% │
+│       8 │        25.00% │      35 │   5.66% │       70.39% │
+│       9 │        28.12% │      33 │   5.34% │       75.73% │
+│      10 │        31.25% │       9 │   1.46% │       77.18% │
+│      11 │        34.38% │      12 │   1.94% │       79.13% │
+│      12 │        37.50% │      22 │   3.56% │       82.69% │
+│      13 │        40.62% │      14 │   2.27% │       84.95% │
+│      14 │        43.75% │       4 │   0.65% │       85.60% │
+│      15 │        46.88% │       4 │   0.65% │       86.25% │
+│      16 │        50.00% │       1 │   0.16% │       86.41% │
+│      17 │        53.12% │      14 │   2.27% │       88.67% │
+│      18 │        56.25% │      17 │   2.75% │       91.42% │
+│      19 │        59.38% │       5 │   0.81% │       92.23% │
+│      20 │        62.50% │       3 │   0.49% │       92.72% │
+│      21 │        65.62% │       1 │   0.16% │       92.88% │
+│      22 │        68.75% │       2 │   0.32% │       93.20% │
+│      23 │        71.88% │       4 │   0.65% │       93.85% │
+│      24 │        75.00% │       1 │   0.16% │       94.01% │
+│      25 │        78.12% │       7 │   1.13% │       95.15% │
+│      26 │        81.25% │       4 │   0.65% │       95.79% │
+│      27 │        84.38% │       1 │   0.16% │       95.95% │
+│      28 │        87.50% │       1 │   0.16% │       96.12% │
+│      29 │        90.62% │       4 │   0.65% │       96.76% │
+│      30 │        93.75% │       2 │   0.32% │       97.09% │
+│      31 │        96.88% │       2 │   0.32% │       97.41% │
+│      32 │       100.00% │      16 │   2.59% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     435 │  70.39% │       70.39% │
+│ 25–50%       │     9–16 │      99 │  16.02% │       86.41% │
+│ 50–75%       │    17–24 │      47 │   7.61% │       94.01% │
+│ 75–100%      │    25–32 │      37 │   5.99% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 40/50 (seed 81) ===
+Time: 6.205s | Tokens: 512 | Time per token: 0.012119s/token | Tokens/s: 82.518
+Layer executions: 8227 | Layers/token: 16.068 | Classifier calls: 5189
+Layer executions by phase | Prefill: 0 | Draft: 5219 | Verification: 2976 | Decode: 32
+Acceptance rate: 75.09%
+Draft exit depths — 558 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       4 │   0.72% │        0.72% │
+│       4 │        12.50% │     124 │  22.22% │       22.94% │
+│       5 │        15.62% │      85 │  15.23% │       38.17% │
+│       6 │        18.75% │      41 │   7.35% │       45.52% │
+│       7 │        21.88% │      96 │  17.20% │       62.72% │
+│       8 │        25.00% │      40 │   7.17% │       69.89% │
+│       9 │        28.12% │      29 │   5.20% │       75.09% │
+│      10 │        31.25% │      15 │   2.69% │       77.78% │
+│      11 │        34.38% │      10 │   1.79% │       79.57% │
+│      12 │        37.50% │      30 │   5.38% │       84.95% │
+│      13 │        40.62% │       7 │   1.25% │       86.20% │
+│      14 │        43.75% │       2 │   0.36% │       86.56% │
+│      15 │        46.88% │       2 │   0.36% │       86.92% │
+│      16 │        50.00% │       2 │   0.36% │       87.28% │
+│      17 │        53.12% │       2 │   0.36% │       87.63% │
+│      18 │        56.25% │       1 │   0.18% │       87.81% │
+│      19 │        59.38% │       2 │   0.36% │       88.17% │
+│      20 │        62.50% │       4 │   0.72% │       88.89% │
+│      21 │        65.62% │       2 │   0.36% │       89.25% │
+│      22 │        68.75% │       6 │   1.08% │       90.32% │
+│      23 │        71.88% │       1 │   0.18% │       90.50% │
+│      24 │        75.00% │       0 │   0.00% │       90.50% │
+│      25 │        78.12% │       1 │   0.18% │       90.68% │
+│      26 │        81.25% │       5 │   0.90% │       91.58% │
+│      27 │        84.38% │       2 │   0.36% │       91.94% │
+│      28 │        87.50% │       2 │   0.36% │       92.29% │
+│      29 │        90.62% │       3 │   0.54% │       92.83% │
+│      30 │        93.75% │       3 │   0.54% │       93.37% │
+│      31 │        96.88% │       7 │   1.25% │       94.62% │
+│      32 │       100.00% │      30 │   5.38% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     390 │  69.89% │       69.89% │
+│ 25–50%       │     9–16 │      97 │  17.38% │       87.28% │
+│ 50–75%       │    17–24 │      18 │   3.23% │       90.50% │
+│ 75–100%      │    25–32 │      53 │   9.50% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 41/50 (seed 82) ===
+Time: 5.432s | Tokens: 512 | Time per token: 0.010609s/token | Tokens/s: 94.261
+Layer executions: 7142 | Layers/token: 13.949 | Classifier calls: 4533
+Layer executions by phase | Prefill: 0 | Draft: 4582 | Verification: 2528 | Decode: 32
+Acceptance rate: 92.52%
+Draft exit depths — 468 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       8 │   1.71% │        1.71% │
+│       4 │        12.50% │     149 │  31.84% │       33.55% │
+│       5 │        15.62% │      35 │   7.48% │       41.03% │
+│       6 │        18.75% │       5 │   1.07% │       42.09% │
+│       7 │        21.88% │      59 │  12.61% │       54.70% │
+│       8 │        25.00% │      54 │  11.54% │       66.24% │
+│       9 │        28.12% │      60 │  12.82% │       79.06% │
+│      10 │        31.25% │       8 │   1.71% │       80.77% │
+│      11 │        34.38% │       7 │   1.50% │       82.26% │
+│      12 │        37.50% │      10 │   2.14% │       84.40% │
+│      13 │        40.62% │       8 │   1.71% │       86.11% │
+│      14 │        43.75% │       1 │   0.21% │       86.32% │
+│      15 │        46.88% │       0 │   0.00% │       86.32% │
+│      16 │        50.00% │       0 │   0.00% │       86.32% │
+│      17 │        53.12% │       0 │   0.00% │       86.32% │
+│      18 │        56.25% │       0 │   0.00% │       86.32% │
+│      19 │        59.38% │       2 │   0.43% │       86.75% │
+│      20 │        62.50% │       0 │   0.00% │       86.75% │
+│      21 │        65.62% │       1 │   0.21% │       86.97% │
+│      22 │        68.75% │       0 │   0.00% │       86.97% │
+│      23 │        71.88% │       0 │   0.00% │       86.97% │
+│      24 │        75.00% │       0 │   0.00% │       86.97% │
+│      25 │        78.12% │       1 │   0.21% │       87.18% │
+│      26 │        81.25% │       2 │   0.43% │       87.61% │
+│      27 │        84.38% │       0 │   0.00% │       87.61% │
+│      28 │        87.50% │       1 │   0.21% │       87.82% │
+│      29 │        90.62% │       1 │   0.21% │       88.03% │
+│      30 │        93.75% │       1 │   0.21% │       88.25% │
+│      31 │        96.88% │       6 │   1.28% │       89.53% │
+│      32 │       100.00% │      49 │  10.47% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     310 │  66.24% │       66.24% │
+│ 25–50%       │     9–16 │      94 │  20.09% │       86.32% │
+│ 50–75%       │    17–24 │       3 │   0.64% │       86.97% │
+│ 75–100%      │    25–32 │      61 │  13.03% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 42/50 (seed 83) ===
+Time: 8.437s | Tokens: 512 | Time per token: 0.016479s/token | Tokens/s: 60.685
+Layer executions: 11387 | Layers/token: 22.240 | Classifier calls: 7769
+Layer executions by phase | Prefill: 0 | Draft: 7803 | Verification: 3552 | Decode: 32
+Acceptance rate: 60.39%
+Draft exit depths — 664 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │      13 │   1.96% │        1.96% │
+│       4 │        12.50% │      88 │  13.25% │       15.21% │
+│       5 │        15.62% │      60 │   9.04% │       24.25% │
+│       6 │        18.75% │      39 │   5.87% │       30.12% │
+│       7 │        21.88% │     140 │  21.08% │       51.20% │
+│       8 │        25.00% │      64 │   9.64% │       60.84% │
+│       9 │        28.12% │      29 │   4.37% │       65.21% │
+│      10 │        31.25% │      24 │   3.61% │       68.83% │
+│      11 │        34.38% │       5 │   0.75% │       69.58% │
+│      12 │        37.50% │      21 │   3.16% │       72.74% │
+│      13 │        40.62% │       5 │   0.75% │       73.49% │
+│      14 │        43.75% │       6 │   0.90% │       74.40% │
+│      15 │        46.88% │       3 │   0.45% │       74.85% │
+│      16 │        50.00% │       3 │   0.45% │       75.30% │
+│      17 │        53.12% │       8 │   1.20% │       76.51% │
+│      18 │        56.25% │       6 │   0.90% │       77.41% │
+│      19 │        59.38% │       8 │   1.20% │       78.61% │
+│      20 │        62.50% │       9 │   1.36% │       79.97% │
+│      21 │        65.62% │       4 │   0.60% │       80.57% │
+│      22 │        68.75% │       9 │   1.36% │       81.93% │
+│      23 │        71.88% │       2 │   0.30% │       82.23% │
+│      24 │        75.00% │       4 │   0.60% │       82.83% │
+│      25 │        78.12% │       5 │   0.75% │       83.58% │
+│      26 │        81.25% │      15 │   2.26% │       85.84% │
+│      27 │        84.38% │      13 │   1.96% │       87.80% │
+│      28 │        87.50% │      14 │   2.11% │       89.91% │
+│      29 │        90.62% │      12 │   1.81% │       91.72% │
+│      30 │        93.75% │       9 │   1.36% │       93.07% │
+│      31 │        96.88% │      12 │   1.81% │       94.88% │
+│      32 │       100.00% │      34 │   5.12% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     404 │  60.84% │       60.84% │
+│ 25–50%       │     9–16 │      96 │  14.46% │       75.30% │
+│ 50–75%       │    17–24 │      50 │   7.53% │       82.83% │
+│ 75–100%      │    25–32 │     114 │  17.17% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 43/50 (seed 84) ===
+Time: 2.948s | Tokens: 284 | Time per token: 0.010381s/token | Tokens/s: 96.334
+Layer executions: 3798 | Layers/token: 13.373 | Classifier calls: 2227
+Layer executions by phase | Prefill: 0 | Draft: 2230 | Verification: 1536 | Decode: 32
+Acceptance rate: 82.29%
+Draft exit depths — 288 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │      14 │   4.86% │        4.86% │
+│       4 │        12.50% │      69 │  23.96% │       28.82% │
+│       5 │        15.62% │      59 │  20.49% │       49.31% │
+│       6 │        18.75% │      14 │   4.86% │       54.17% │
+│       7 │        21.88% │      50 │  17.36% │       71.53% │
+│       8 │        25.00% │       4 │   1.39% │       72.92% │
+│       9 │        28.12% │      28 │   9.72% │       82.64% │
+│      10 │        31.25% │       6 │   2.08% │       84.72% │
+│      11 │        34.38% │       3 │   1.04% │       85.76% │
+│      12 │        37.50% │      13 │   4.51% │       90.28% │
+│      13 │        40.62% │       1 │   0.35% │       90.62% │
+│      14 │        43.75% │       0 │   0.00% │       90.62% │
+│      15 │        46.88% │       0 │   0.00% │       90.62% │
+│      16 │        50.00% │       1 │   0.35% │       90.97% │
+│      17 │        53.12% │       2 │   0.69% │       91.67% │
+│      18 │        56.25% │       0 │   0.00% │       91.67% │
+│      19 │        59.38% │       2 │   0.69% │       92.36% │
+│      20 │        62.50% │       1 │   0.35% │       92.71% │
+│      21 │        65.62% │       8 │   2.78% │       95.49% │
+│      22 │        68.75% │       0 │   0.00% │       95.49% │
+│      23 │        71.88% │       1 │   0.35% │       95.83% │
+│      24 │        75.00% │       0 │   0.00% │       95.83% │
+│      25 │        78.12% │       3 │   1.04% │       96.88% │
+│      26 │        81.25% │       2 │   0.69% │       97.57% │
+│      27 │        84.38% │       1 │   0.35% │       97.92% │
+│      28 │        87.50% │       1 │   0.35% │       98.26% │
+│      29 │        90.62% │       1 │   0.35% │       98.61% │
+│      30 │        93.75% │       0 │   0.00% │       98.61% │
+│      31 │        96.88% │       1 │   0.35% │       98.96% │
+│      32 │       100.00% │       3 │   1.04% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     210 │  72.92% │       72.92% │
+│ 25–50%       │     9–16 │      52 │  18.06% │       90.97% │
+│ 50–75%       │    17–24 │      14 │   4.86% │       95.83% │
+│ 75–100%      │    25–32 │      12 │   4.17% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 44/50 (seed 85) ===
+Time: 4.036s | Tokens: 512 | Time per token: 0.007882s/token | Tokens/s: 126.870
+Layer executions: 5216 | Layers/token: 10.188 | Classifier calls: 2816
+Layer executions by phase | Prefill: 0 | Draft: 2816 | Verification: 2368 | Decode: 32
+Acceptance rate: 98.87%
+Draft exit depths — 443 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       0 │   0.00% │        0.00% │
+│       4 │        12.50% │      58 │  13.09% │       13.09% │
+│       5 │        15.62% │      81 │  18.28% │       31.38% │
+│       6 │        18.75% │      60 │  13.54% │       44.92% │
+│       7 │        21.88% │     219 │  49.44% │       94.36% │
+│       8 │        25.00% │       3 │   0.68% │       95.03% │
+│       9 │        28.12% │      14 │   3.16% │       98.19% │
+│      10 │        31.25% │       2 │   0.45% │       98.65% │
+│      11 │        34.38% │       0 │   0.00% │       98.65% │
+│      12 │        37.50% │       3 │   0.68% │       99.32% │
+│      13 │        40.62% │       0 │   0.00% │       99.32% │
+│      14 │        43.75% │       0 │   0.00% │       99.32% │
+│      15 │        46.88% │       0 │   0.00% │       99.32% │
+│      16 │        50.00% │       0 │   0.00% │       99.32% │
+│      17 │        53.12% │       0 │   0.00% │       99.32% │
+│      18 │        56.25% │       0 │   0.00% │       99.32% │
+│      19 │        59.38% │       1 │   0.23% │       99.55% │
+│      20 │        62.50% │       0 │   0.00% │       99.55% │
+│      21 │        65.62% │       0 │   0.00% │       99.55% │
+│      22 │        68.75% │       0 │   0.00% │       99.55% │
+│      23 │        71.88% │       0 │   0.00% │       99.55% │
+│      24 │        75.00% │       0 │   0.00% │       99.55% │
+│      25 │        78.12% │       0 │   0.00% │       99.55% │
+│      26 │        81.25% │       0 │   0.00% │       99.55% │
+│      27 │        84.38% │       0 │   0.00% │       99.55% │
+│      28 │        87.50% │       0 │   0.00% │       99.55% │
+│      29 │        90.62% │       0 │   0.00% │       99.55% │
+│      30 │        93.75% │       1 │   0.23% │       99.77% │
+│      31 │        96.88% │       1 │   0.23% │      100.00% │
+│      32 │       100.00% │       0 │   0.00% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     421 │  95.03% │       95.03% │
+│ 25–50%       │     9–16 │      19 │   4.29% │       99.32% │
+│ 50–75%       │    17–24 │       1 │   0.23% │       99.55% │
+│ 75–100%      │    25–32 │       2 │   0.45% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 45/50 (seed 86) ===
+Time: 4.529s | Tokens: 512 | Time per token: 0.008845s/token | Tokens/s: 113.061
+Layer executions: 5920 | Layers/token: 11.562 | Classifier calls: 3263
+Layer executions by phase | Prefill: 0 | Draft: 3264 | Verification: 2624 | Decode: 32
+Acceptance rate: 88.11%
+Draft exit depths — 488 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       0 │   0.00% │        0.00% │
+│       4 │        12.50% │      81 │  16.60% │       16.60% │
+│       5 │        15.62% │      70 │  14.34% │       30.94% │
+│       6 │        18.75% │      71 │  14.55% │       45.49% │
+│       7 │        21.88% │     236 │  48.36% │       93.85% │
+│       8 │        25.00% │       4 │   0.82% │       94.67% │
+│       9 │        28.12% │       3 │   0.61% │       95.29% │
+│      10 │        31.25% │       1 │   0.20% │       95.49% │
+│      11 │        34.38% │       0 │   0.00% │       95.49% │
+│      12 │        37.50% │       3 │   0.61% │       96.11% │
+│      13 │        40.62% │       4 │   0.82% │       96.93% │
+│      14 │        43.75% │       0 │   0.00% │       96.93% │
+│      15 │        46.88% │       0 │   0.00% │       96.93% │
+│      16 │        50.00% │       0 │   0.00% │       96.93% │
+│      17 │        53.12% │       2 │   0.41% │       97.34% │
+│      18 │        56.25% │       1 │   0.20% │       97.54% │
+│      19 │        59.38% │       1 │   0.20% │       97.75% │
+│      20 │        62.50% │       2 │   0.41% │       98.16% │
+│      21 │        65.62% │       2 │   0.41% │       98.57% │
+│      22 │        68.75% │       0 │   0.00% │       98.57% │
+│      23 │        71.88% │       1 │   0.20% │       98.77% │
+│      24 │        75.00% │       0 │   0.00% │       98.77% │
+│      25 │        78.12% │       0 │   0.00% │       98.77% │
+│      26 │        81.25% │       0 │   0.00% │       98.77% │
+│      27 │        84.38% │       1 │   0.20% │       98.98% │
+│      28 │        87.50% │       0 │   0.00% │       98.98% │
+│      29 │        90.62% │       1 │   0.20% │       99.18% │
+│      30 │        93.75% │       2 │   0.41% │       99.59% │
+│      31 │        96.88% │       1 │   0.20% │       99.80% │
+│      32 │       100.00% │       1 │   0.20% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     462 │  94.67% │       94.67% │
+│ 25–50%       │     9–16 │      11 │   2.25% │       96.93% │
+│ 50–75%       │    17–24 │       9 │   1.84% │       98.77% │
+│ 75–100%      │    25–32 │       6 │   1.23% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 46/50 (seed 87) ===
+Time: 6.449s | Tokens: 512 | Time per token: 0.012596s/token | Tokens/s: 79.389
+Layer executions: 8549 | Layers/token: 16.697 | Classifier calls: 5367
+Layer executions by phase | Prefill: 0 | Draft: 5381 | Verification: 3136 | Decode: 32
+Acceptance rate: 70.89%
+Draft exit depths — 584 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       1 │   0.17% │        0.17% │
+│       4 │        12.50% │     143 │  24.49% │       24.66% │
+│       5 │        15.62% │      68 │  11.64% │       36.30% │
+│       6 │        18.75% │      50 │   8.56% │       44.86% │
+│       7 │        21.88% │     121 │  20.72% │       65.58% │
+│       8 │        25.00% │      39 │   6.68% │       72.26% │
+│       9 │        28.12% │      30 │   5.14% │       77.40% │
+│      10 │        31.25% │       3 │   0.51% │       77.91% │
+│      11 │        34.38% │       7 │   1.20% │       79.11% │
+│      12 │        37.50% │      13 │   2.23% │       81.34% │
+│      13 │        40.62% │       6 │   1.03% │       82.36% │
+│      14 │        43.75% │       0 │   0.00% │       82.36% │
+│      15 │        46.88% │       5 │   0.86% │       83.22% │
+│      16 │        50.00% │       6 │   1.03% │       84.25% │
+│      17 │        53.12% │      11 │   1.88% │       86.13% │
+│      18 │        56.25% │      10 │   1.71% │       87.84% │
+│      19 │        59.38% │       8 │   1.37% │       89.21% │
+│      20 │        62.50% │       6 │   1.03% │       90.24% │
+│      21 │        65.62% │       4 │   0.68% │       90.92% │
+│      22 │        68.75% │       2 │   0.34% │       91.27% │
+│      23 │        71.88% │       1 │   0.17% │       91.44% │
+│      24 │        75.00% │       4 │   0.68% │       92.12% │
+│      25 │        78.12% │       5 │   0.86% │       92.98% │
+│      26 │        81.25% │       5 │   0.86% │       93.84% │
+│      27 │        84.38% │       4 │   0.68% │       94.52% │
+│      28 │        87.50% │       6 │   1.03% │       95.55% │
+│      29 │        90.62% │       4 │   0.68% │       96.23% │
+│      30 │        93.75% │       4 │   0.68% │       96.92% │
+│      31 │        96.88% │       4 │   0.68% │       97.60% │
+│      32 │       100.00% │      14 │   2.40% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     422 │  72.26% │       72.26% │
+│ 25–50%       │     9–16 │      70 │  11.99% │       84.25% │
+│ 50–75%       │    17–24 │      46 │   7.88% │       92.12% │
+│ 75–100%      │    25–32 │      46 │   7.88% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 47/50 (seed 88) ===
+Time: 4.084s | Tokens: 288 | Time per token: 0.014179s/token | Tokens/s: 70.527
+Layer executions: 5341 | Layers/token: 18.545 | Classifier calls: 3290
+Layer executions by phase | Prefill: 0 | Draft: 3293 | Verification: 2016 | Decode: 32
+Acceptance rate: 59.79%
+Draft exit depths — 378 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       0 │   0.00% │        0.00% │
+│       4 │        12.50% │      72 │  19.05% │       19.05% │
+│       5 │        15.62% │      60 │  15.87% │       34.92% │
+│       6 │        18.75% │      18 │   4.76% │       39.68% │
+│       7 │        21.88% │      84 │  22.22% │       61.90% │
+│       8 │        25.00% │      23 │   6.08% │       67.99% │
+│       9 │        28.12% │      29 │   7.67% │       75.66% │
+│      10 │        31.25% │      15 │   3.97% │       79.63% │
+│      11 │        34.38% │       6 │   1.59% │       81.22% │
+│      12 │        37.50% │       8 │   2.12% │       83.33% │
+│      13 │        40.62% │       5 │   1.32% │       84.66% │
+│      14 │        43.75% │       0 │   0.00% │       84.66% │
+│      15 │        46.88% │       6 │   1.59% │       86.24% │
+│      16 │        50.00% │       0 │   0.00% │       86.24% │
+│      17 │        53.12% │       6 │   1.59% │       87.83% │
+│      18 │        56.25% │      13 │   3.44% │       91.27% │
+│      19 │        59.38% │       7 │   1.85% │       93.12% │
+│      20 │        62.50% │       8 │   2.12% │       95.24% │
+│      21 │        65.62% │       5 │   1.32% │       96.56% │
+│      22 │        68.75% │       2 │   0.53% │       97.09% │
+│      23 │        71.88% │       1 │   0.26% │       97.35% │
+│      24 │        75.00% │       0 │   0.00% │       97.35% │
+│      25 │        78.12% │       1 │   0.26% │       97.62% │
+│      26 │        81.25% │       1 │   0.26% │       97.88% │
+│      27 │        84.38% │       0 │   0.00% │       97.88% │
+│      28 │        87.50% │       1 │   0.26% │       98.15% │
+│      29 │        90.62% │       1 │   0.26% │       98.41% │
+│      30 │        93.75% │       1 │   0.26% │       98.68% │
+│      31 │        96.88% │       2 │   0.53% │       99.21% │
+│      32 │       100.00% │       3 │   0.79% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     257 │  67.99% │       67.99% │
+│ 25–50%       │     9–16 │      69 │  18.25% │       86.24% │
+│ 50–75%       │    17–24 │      42 │  11.11% │       97.35% │
+│ 75–100%      │    25–32 │      10 │   2.65% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 48/50 (seed 89) ===
+Time: 4.657s | Tokens: 512 | Time per token: 0.009096s/token | Tokens/s: 109.942
+Layer executions: 6062 | Layers/token: 11.840 | Classifier calls: 3371
+Layer executions by phase | Prefill: 0 | Draft: 3374 | Verification: 2656 | Decode: 32
+Acceptance rate: 87.20%
+Draft exit depths — 492 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │       0 │   0.00% │        0.00% │
+│       4 │        12.50% │      65 │  13.21% │       13.21% │
+│       5 │        15.62% │     129 │  26.22% │       39.43% │
+│       6 │        18.75% │     106 │  21.54% │       60.98% │
+│       7 │        21.88% │     137 │  27.85% │       88.82% │
+│       8 │        25.00% │       6 │   1.22% │       90.04% │
+│       9 │        28.12% │      19 │   3.86% │       93.90% │
+│      10 │        31.25% │       4 │   0.81% │       94.72% │
+│      11 │        34.38% │       1 │   0.20% │       94.92% │
+│      12 │        37.50% │       1 │   0.20% │       95.12% │
+│      13 │        40.62% │       0 │   0.00% │       95.12% │
+│      14 │        43.75% │       0 │   0.00% │       95.12% │
+│      15 │        46.88% │       0 │   0.00% │       95.12% │
+│      16 │        50.00% │       0 │   0.00% │       95.12% │
+│      17 │        53.12% │       0 │   0.00% │       95.12% │
+│      18 │        56.25% │       2 │   0.41% │       95.53% │
+│      19 │        59.38% │       0 │   0.00% │       95.53% │
+│      20 │        62.50% │       6 │   1.22% │       96.75% │
+│      21 │        65.62% │       1 │   0.20% │       96.95% │
+│      22 │        68.75% │       2 │   0.41% │       97.36% │
+│      23 │        71.88% │       0 │   0.00% │       97.36% │
+│      24 │        75.00% │       1 │   0.20% │       97.56% │
+│      25 │        78.12% │       2 │   0.41% │       97.97% │
+│      26 │        81.25% │       1 │   0.20% │       98.17% │
+│      27 │        84.38% │       1 │   0.20% │       98.37% │
+│      28 │        87.50% │       1 │   0.20% │       98.58% │
+│      29 │        90.62% │       1 │   0.20% │       98.78% │
+│      30 │        93.75% │       2 │   0.41% │       99.19% │
+│      31 │        96.88% │       1 │   0.20% │       99.39% │
+│      32 │       100.00% │       3 │   0.61% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     443 │  90.04% │       90.04% │
+│ 25–50%       │     9–16 │      25 │   5.08% │       95.12% │
+│ 50–75%       │    17–24 │      12 │   2.44% │       97.56% │
+│ 75–100%      │    25–32 │      12 │   2.44% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 49/50 (seed 90) ===
+Time: 4.500s | Tokens: 512 | Time per token: 0.008789s/token | Tokens/s: 113.775
+Layer executions: 5849 | Layers/token: 11.424 | Classifier calls: 3401
+Layer executions by phase | Prefill: 0 | Draft: 3417 | Verification: 2400 | Decode: 32
+Acceptance rate: 97.11%
+Draft exit depths — 450 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │      33 │   7.33% │        7.33% │
+│       4 │        12.50% │     150 │  33.33% │       40.67% │
+│       5 │        15.62% │      65 │  14.44% │       55.11% │
+│       6 │        18.75% │       2 │   0.44% │       55.56% │
+│       7 │        21.88% │      77 │  17.11% │       72.67% │
+│       8 │        25.00% │      11 │   2.44% │       75.11% │
+│       9 │        28.12% │      38 │   8.44% │       83.56% │
+│      10 │        31.25% │       1 │   0.22% │       83.78% │
+│      11 │        34.38% │       0 │   0.00% │       83.78% │
+│      12 │        37.50% │       7 │   1.56% │       85.33% │
+│      13 │        40.62% │      33 │   7.33% │       92.67% │
+│      14 │        43.75% │       2 │   0.44% │       93.11% │
+│      15 │        46.88% │       0 │   0.00% │       93.11% │
+│      16 │        50.00% │       2 │   0.44% │       93.56% │
+│      17 │        53.12% │       1 │   0.22% │       93.78% │
+│      18 │        56.25% │       2 │   0.44% │       94.22% │
+│      19 │        59.38% │       1 │   0.22% │       94.44% │
+│      20 │        62.50% │       0 │   0.00% │       94.44% │
+│      21 │        65.62% │       0 │   0.00% │       94.44% │
+│      22 │        68.75% │       0 │   0.00% │       94.44% │
+│      23 │        71.88% │       2 │   0.44% │       94.89% │
+│      24 │        75.00% │       1 │   0.22% │       95.11% │
+│      25 │        78.12% │       0 │   0.00% │       95.11% │
+│      26 │        81.25% │       1 │   0.22% │       95.33% │
+│      27 │        84.38% │       0 │   0.00% │       95.33% │
+│      28 │        87.50% │       0 │   0.00% │       95.33% │
+│      29 │        90.62% │       2 │   0.44% │       95.78% │
+│      30 │        93.75% │       2 │   0.44% │       96.22% │
+│      31 │        96.88% │       1 │   0.22% │       96.44% │
+│      32 │       100.00% │      16 │   3.56% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     338 │  75.11% │       75.11% │
+│ 25–50%       │     9–16 │      83 │  18.44% │       93.56% │
+│ 50–75%       │    17–24 │       7 │   1.56% │       95.11% │
+│ 75–100%      │    25–32 │      22 │   4.89% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+=== Run 50/50 (seed 91) ===
+Time: 5.172s | Tokens: 512 | Time per token: 0.010101s/token | Tokens/s: 98.997
+Layer executions: 6731 | Layers/token: 13.146 | Classifier calls: 3910
+Layer executions by phase | Prefill: 0 | Draft: 3915 | Verification: 2784 | Decode: 32
+Acceptance rate: 82.52%
+Draft exit depths — 515 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │      32 │   6.21% │        6.21% │
+│       4 │        12.50% │     154 │  29.90% │       36.12% │
+│       5 │        15.62% │     107 │  20.78% │       56.89% │
+│       6 │        18.75% │      11 │   2.14% │       59.03% │
+│       7 │        21.88% │      55 │  10.68% │       69.71% │
+│       8 │        25.00% │      10 │   1.94% │       71.65% │
+│       9 │        28.12% │      41 │   7.96% │       79.61% │
+│      10 │        31.25% │       4 │   0.78% │       80.39% │
+│      11 │        34.38% │       7 │   1.36% │       81.75% │
+│      12 │        37.50% │      29 │   5.63% │       87.38% │
+│      13 │        40.62% │      10 │   1.94% │       89.32% │
+│      14 │        43.75% │       3 │   0.58% │       89.90% │
+│      15 │        46.88% │       6 │   1.17% │       91.07% │
+│      16 │        50.00% │       1 │   0.19% │       91.26% │
+│      17 │        53.12% │       7 │   1.36% │       92.62% │
+│      18 │        56.25% │       3 │   0.58% │       93.20% │
+│      19 │        59.38% │       1 │   0.19% │       93.40% │
+│      20 │        62.50% │       2 │   0.39% │       93.79% │
+│      21 │        65.62% │      13 │   2.52% │       96.31% │
+│      22 │        68.75% │       2 │   0.39% │       96.70% │
+│      23 │        71.88% │       1 │   0.19% │       96.89% │
+│      24 │        75.00% │       0 │   0.00% │       96.89% │
+│      25 │        78.12% │       3 │   0.58% │       97.48% │
+│      26 │        81.25% │       4 │   0.78% │       98.25% │
+│      27 │        84.38% │       1 │   0.19% │       98.45% │
+│      28 │        87.50% │       2 │   0.39% │       98.83% │
+│      29 │        90.62% │       0 │   0.00% │       98.83% │
+│      30 │        93.75% │       0 │   0.00% │       98.83% │
+│      31 │        96.88% │       1 │   0.19% │       99.03% │
+│      32 │       100.00% │       5 │   0.97% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │     369 │  71.65% │       71.65% │
+│ 25–50%       │     9–16 │     101 │  19.61% │       91.26% │
+│ 50–75%       │    17–24 │      29 │   5.63% │       96.89% │
+│ 75–100%      │    25–32 │      16 │   3.11% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+
+Completed 50 runs | Total tokens: 23169 | Generation time: 263.886s | 
+ Time per token: 0.011390s/token | Tokens/s: 87.799
+Mean per-run acceptance rate: 78.25%
+Total layer executions: 346038 | Layers/token: 14.935 | Total classifier calls: 212211
+Layer executions by phase | Prefill: 0 | Draft: 212982 | Verification: 131456 | Decode: 1600
+Draft exit depths across all runs — 24,516 drafts
+Includes rejected drafts and depth-limit fallbacks; excludes prefill and verification.
+
+┌─────────┬───────────────┬─────────┬─────────┬──────────────┐
+│   Layer │   Model depth │   Exits │   Share │   Cumulative │
+├─────────┼───────────────┼─────────┼─────────┼──────────────┤
+│       1 │         3.12% │       0 │   0.00% │        0.00% │
+│       2 │         6.25% │       0 │   0.00% │        0.00% │
+│       3 │         9.38% │     402 │   1.64% │        1.64% │
+│       4 │        12.50% │    5463 │  22.28% │       23.92% │
+│       5 │        15.62% │    3804 │  15.52% │       39.44% │
+│       6 │        18.75% │    1785 │   7.28% │       46.72% │
+│       7 │        21.88% │    5288 │  21.57% │       68.29% │
+│       8 │        25.00% │    1260 │   5.14% │       73.43% │
+│       9 │        28.12% │    1449 │   5.91% │       79.34% │
+│      10 │        31.25% │     366 │   1.49% │       80.83% │
+│      11 │        34.38% │     288 │   1.17% │       82.01% │
+│      12 │        37.50% │     715 │   2.92% │       84.92% │
+│      13 │        40.62% │     440 │   1.79% │       86.72% │
+│      14 │        43.75% │      89 │   0.36% │       87.08% │
+│      15 │        46.88% │     141 │   0.58% │       87.66% │
+│      16 │        50.00% │     107 │   0.44% │       88.09% │
+│      17 │        53.12% │     350 │   1.43% │       89.52% │
+│      18 │        56.25% │     231 │   0.94% │       90.46% │
+│      19 │        59.38% │     131 │   0.53% │       91.00% │
+│      20 │        62.50% │     158 │   0.64% │       91.64% │
+│      21 │        65.62% │     174 │   0.71% │       92.35% │
+│      22 │        68.75% │     106 │   0.43% │       92.78% │
+│      23 │        71.88% │      89 │   0.36% │       93.15% │
+│      24 │        75.00% │      69 │   0.28% │       93.43% │
+│      25 │        78.12% │     106 │   0.43% │       93.86% │
+│      26 │        81.25% │     115 │   0.47% │       94.33% │
+│      27 │        84.38% │      96 │   0.39% │       94.72% │
+│      28 │        87.50% │     129 │   0.53% │       95.25% │
+│      29 │        90.62% │     109 │   0.44% │       95.69% │
+│      30 │        93.75% │     102 │   0.42% │       96.11% │
+│      31 │        96.88% │     183 │   0.75% │       96.86% │
+│      32 │       100.00% │     771 │   3.14% │      100.00% │
+└─────────┴───────────────┴─────────┴─────────┴──────────────┘
+
+Model-depth summary (cutoffs rounded up; cumulative = exited by this depth)
+
+┌──────────────┬──────────┬─────────┬─────────┬──────────────┐
+│ Depth band   │   Layers │   Exits │   Share │   Cumulative │
+├──────────────┼──────────┼─────────┼─────────┼──────────────┤
+│ 0–25%        │      1–8 │   18002 │  73.43% │       73.43% │
+│ 25–50%       │     9–16 │    3595 │  14.66% │       88.09% │
+│ 50–75%       │    17–24 │    1308 │   5.34% │       93.43% │
+│ 75–100%      │    25–32 │    1611 │   6.57% │      100.00% │
+└──────────────┴──────────┴─────────┴─────────┴──────────────┘
+
+Layer 32 is full depth, not an early exit.
+Work counts include prompt prefill and discarded drafts; classifier calls count GRU exit decisions.
+Timing excludes model loading, tokenization, decoding, graph setup, and warmup runs.
+Saved terminal output to experiment_logs/llama2-7b-Paris-eecmax-threshold08-noc6-N50-maxstep-512-sample-true.txt

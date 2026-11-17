@@ -13,28 +13,26 @@ from self_speculation.generator_base import GenerationConfig
 from train_ee_cnn import EarlyExitGRU
 
 
-@pytest.mark.parametrize("layers,fraction,expected", [
-    (32, .25, [8, 12, 14] + list(range(15, 33))),
-    (35, .25, [9, 14, 17] + list(range(19, 36))),
-    (35, .125, [5, 8] + list(range(10, 36))),
-    (8, .5, [4] + list(range(6, 9))),
-    (8, 1., [8]),
-    (8, .001, list(range(1, 9))),
-    (1, .25, [1]),
+@pytest.mark.parametrize("layers,start,expected", [
+    (32, 1, list(range(1, 33))),
+    (35, 9, list(range(9, 36))),
+    (8, 4, list(range(4, 9))),
+    (8, 8, [8]),
+    (1, 1, [1]),
 ])
-def test_halving_schedule(layers, fraction, expected):
-    assert exit_check_layers(layers, initial_fraction=fraction) == expected
+def test_layer_by_layer_schedule(layers, start, expected):
+    assert exit_check_layers(layers, classifier_start_layer=start) == expected
 
 
-def test_cap_does_not_change_the_fraction_of_total_model_layers():
-    assert exit_check_layers(35, 16, .25) == [9, 14, 16]
-    assert exit_check_layers(35, 8, .25) == [8]
+def test_cap_preserves_start_layer_or_forces_exit_before_it():
+    assert exit_check_layers(35, 16, 9) == list(range(9, 17))
+    assert exit_check_layers(35, 8, 9) == [8]
 
 
-@pytest.mark.parametrize("fraction", [0, -1, 1.1, float("nan"), float("inf")])
-def test_invalid_fraction(fraction):
-    with pytest.raises(ValueError, match="ee_initial_fraction"):
-        exit_check_layers(32, initial_fraction=fraction)
+@pytest.mark.parametrize("start", [0, -1, 33, 1.5, True, float("nan"), float("inf")])
+def test_invalid_start_layer(start):
+    with pytest.raises(ValueError, match="ee-classifier-start-layer"):
+        exit_check_layers(32, classifier_start_layer=start)
 
 
 def tiny_model(attention="sdpa", device="cpu", dtype=torch.float32, layers=8):
@@ -49,7 +47,7 @@ def tiny_model(attention="sdpa", device="cpu", dtype=torch.float32, layers=8):
 
 
 @torch.inference_mode()
-def test_grouped_checks_consume_all_gru_states_once_and_reset_per_token():
+def test_delayed_checks_consume_all_gru_states_once_and_reset_per_token():
     model = tiny_model()
     classifier = EarlyExitGRU(16, 4, num_layers=2).eval()
     classifier.head.weight.zero_()
@@ -60,12 +58,35 @@ def test_grouped_checks_consume_all_gru_states_once_and_reset_per_token():
         lambda module, args: seen.append((args[0].shape[1], args[1] is None))
     )
     try:
-        runner.draft_logits(classifier, .5, 8, .5)
+        runner.draft_logits(classifier, .5, 8, 4)
         runner.append(3)
-        runner.draft_logits(classifier, .5, 8, .5)
+        runner.draft_logits(classifier, .5, 8, 4)
     finally:
         hook.remove()
-    assert seen == [(4, True), (2, False), (1, False)] * 2
+    assert seen == ([(4, True)] + [(1, False)] * 3) * 2
+
+
+@pytest.mark.parametrize("start,cap,expected_depth,expected_calls", [
+    (1, 8, 1, 1), (4, 8, 4, 1), (4, 4, 4, 0), (6, 4, 4, 0),
+])
+@torch.inference_mode()
+def test_first_exit_respects_start_layer_and_cap(start, cap, expected_depth, expected_calls):
+    model = tiny_model()
+    classifier = EarlyExitGRU(16, 4).eval()
+    runner = _AdaptiveDraftCache(model, DynamicCache(), torch.tensor([[1, 5, 9]]))
+    _, depth = runner.draft_logits(classifier, 0, cap, start)
+    assert depth == expected_depth
+    assert runner.counters.total_classifier_calls == expected_calls
+
+
+def test_start_beyond_model_depth_fails_on_portable_path():
+    from self_speculation.early_exit_speculation_generator import VerifiedSpeculativeGenerationStrategy
+
+    strategy = VerifiedSpeculativeGenerationStrategy(
+        EarlyExitGRU(16, 4), classifier_start_layer=9, gpu_branching="off",
+    )
+    with pytest.raises(ValueError, match="exceeds the model's number of layers"):
+        strategy.prepare_for_generation(tiny_model(), [1, 5, 9], GenerationConfig())
 
 
 @torch.inference_mode()
@@ -74,7 +95,7 @@ def test_grouped_gru_matches_training_scores_at_scheduled_layers():
     classifier = EarlyExitGRU(16, 4, num_layers=2).eval()
     ids = torch.tensor([[1, 5, 9]])
     runner = _AdaptiveDraftCache(model, DynamicCache(), ids)
-    checks = exit_check_layers(35, initial_fraction=.25)
+    checks = exit_check_layers(35, classifier_start_layer=9)
     for next_token in [3, 7, 2]:
         raw = []
         hooks = [layer.register_forward_hook(
@@ -88,7 +109,7 @@ def test_grouped_gru_matches_training_scores_at_scheduled_layers():
         scores = classifier(torch.stack(raw, dim=1))[0, :, 0].sigmoid()
         threshold = scores[torch.tensor(checks[:-1]) - 1].mean().item()
         expected_depth = next((depth for depth in checks[:-1] if scores[depth - 1] >= threshold), 35)
-        logits, depth = runner.draft_logits(classifier, threshold, 35, .25)
+        logits, depth = runner.draft_logits(classifier, threshold, 35, 9)
         assert depth == expected_depth
         expected_logits = model.lm_head(model.model.norm(raw[depth - 1]))[:, 0]
         torch.testing.assert_close(logits, expected_logits)
@@ -96,19 +117,24 @@ def test_grouped_gru_matches_training_scores_at_scheduled_layers():
         ids = torch.cat([ids, ids.new_tensor([[next_token]])], dim=1)
 
 
-def test_cli_initial_fraction_and_gpu_mode():
-    from generate import process_cli_arguments
+@pytest.mark.parametrize("repeat", [False, True])
+def test_cli_start_layer_default_validation_and_removed_fraction(repeat):
+    from generate import process_cli_arguments as parse_generate
+    from generate_n_times import process_cli_arguments as parse_repeat
 
-    _, options, _ = process_cli_arguments([
-        "--model", "unused", "--generation_strategy", "early_exit_speculative",
-        "--num_speculations", "6", "--ee_initial_fraction", "0.125", "--ee_gpu_branching", "off",
-    ])
-    assert options.ee_initial_fraction == .125 and options.ee_gpu_branching == "off"
-    with pytest.raises(SystemExit):
-        process_cli_arguments([
-            "--model", "unused", "--generation_strategy", "early_exit_speculative",
-            "--num_speculations", "6", "--ee_initial_fraction", "0",
-        ])
+    parse = parse_repeat if repeat else parse_generate
+    arguments = ["--model", "unused", "--generation_strategy", "early_exit_speculative",
+                 "--num_speculations", "6"]
+    if repeat:
+        arguments += ["--prompt", "hello"]
+    assert parse(arguments)[1].ee_classifier_start_layer == 1
+    options = parse(arguments + ["--ee-classifier-start-layer", "4", "--ee_gpu_branching", "off"])[1]
+    assert options.ee_classifier_start_layer == 4 and options.ee_gpu_branching == "off"
+    for invalid in ["0", "-1", "1.5"]:
+        with pytest.raises(SystemExit):
+            parse(arguments + ["--ee-classifier-start-layer", invalid])
+    with pytest.raises(ValueError, match="not used"):
+        parse(arguments + ["--ee_initial_fraction", "0.25"])
 
 
 @pytest.mark.parametrize("dtype", [torch.float32, torch.float16, torch.bfloat16])
@@ -132,7 +158,7 @@ def test_cuda_graphs_skip_layers_and_preserve_cache_across_depth_changes_and_rej
     model = tiny_model(attention, "cuda", torch.float16)
     classifier = EarlyExitGRU(16, 4, num_layers=2).cuda().half().eval()
     classifier.head.weight.zero_()
-    checks = exit_check_layers(8, initial_fraction=.5)
+    checks = exit_check_layers(8, classifier_start_layer=4)
     engine = ConditionalDraftGraphs(model, classifier, checks, .5, 32, 3)
     ids = torch.tensor([[1, 5, 9]], device="cuda")
     engine.prefill(ids)
@@ -143,8 +169,8 @@ def test_cuda_graphs_skip_layers_and_preserve_cache_across_depth_changes_and_rej
         full = ids.clone()
         for index, (bias, token) in enumerate([(10, 3), (-10, 7), (10, 2)]):
             classifier.head.bias.fill_(bias)
-            expected, expected_depth = eager.draft_logits(classifier, .5, 8, .5)
-            actual, depth = engine.draft_logits(classifier, .5, 8, .5)
+            expected, expected_depth = eager.draft_logits(classifier, .5, 8, 4)
+            actual, depth = engine.draft_logits(classifier, .5, 8, 4)
             torch.testing.assert_close(actual, expected, atol=2e-3, rtol=2e-3)
             assert depth.item() == expected_depth == (4 if bias > 0 else 8)
             if index == 0:

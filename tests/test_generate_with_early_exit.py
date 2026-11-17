@@ -88,9 +88,9 @@ def test_matches_full_sequence_training_policy_and_skips_later_layers(setup, thr
         for i, layer in enumerate(model.model.layers)
     ]
     try:
-        answer = generation.generate_with_early_exit(
+        answer, stats = generation.generate_with_early_exit(
             "Why?", path, model=model, tokenizer=tokenizer,
-            max_new_tokens=4, threshold=threshold,
+            max_new_tokens=4, threshold=threshold, return_stats=True,
         )
     finally:
         for hook in hooks:
@@ -99,6 +99,9 @@ def test_matches_full_sequence_training_policy_and_skips_later_layers(setup, thr
     assert answer == " ".join(map(str, expected))
     assert tokenizer.prompt == "Question: Why?\nAnswer:"
     assert visited == [layer for depth in exits for layer in range(1, depth + 1)]
+    assert stats.num_tokens_generated == 4
+    assert stats.total_layer_executions == len(visited)
+    assert stats.total_classifier_calls == sum(min(depth, 2) for depth in exits)
     assert all(parameter.grad is None for parameter in model.parameters())
 
 

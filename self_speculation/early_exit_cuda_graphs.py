@@ -8,6 +8,8 @@ large workspaces and affected PyTorch builds leak its pools after destruction.
 
 import torch
 
+from self_speculation.generator_base import GenerationCounters
+
 
 def conditional_graphs_available(model):
     return (
@@ -67,6 +69,12 @@ class ConditionalDraftGraphs:
         self.active = torch.ones((), device=self.device, dtype=torch.bool)
         self.invalid_score = torch.zeros((), device=self.device, dtype=torch.bool)
         self.exit_depth = torch.zeros((), device=self.device, dtype=torch.long)
+        # These increments are captured inside the executed branches. Python
+        # counters/hooks would count capture bodies and miss graph replays.
+        # Draft layer calls, classifier calls, verification layer calls.
+        self.work_counts = torch.zeros(3, device=self.device, dtype=torch.long)
+        self.exit_counts = torch.zeros(len(model.model.layers), device=self.device, dtype=torch.long)
+        self.exit_increment = torch.ones(1, device=self.device, dtype=torch.long)
         self.gru_state = parameter.new_zeros((classifier.config["num_layers"], 1, classifier.config["hidden_size"]))
         self.selected_raw = parameter.new_zeros((1, 1, hidden))
         self.draft_output = parameter.new_zeros((1, model.config.vocab_size))
@@ -110,7 +118,7 @@ class ConditionalDraftGraphs:
             data[missing] = positions, position_ids, mask, rotary
         return data
 
-    def _layer(self, index, width, position_data, graph):
+    def _layer(self, index, width, position_data, graph, draft):
         # During capture every possible body is recorded, not executed. On
         # replay the device completion counter selects only the missing suffix.
         for missing, (positions, position_ids, mask, rotary) in position_data.items():
@@ -125,6 +133,7 @@ class ConditionalDraftGraphs:
             raw = result[0] if isinstance(result, tuple) else result
             self.states[index + 1][:, width - missing:width].copy_(raw)
             self.completed[index].fill_(width)
+            self.work_counts[0 if draft else 2].add_(1)
             if graph is not None:
                 graph.end_capture_to_conditional_node()
 
@@ -139,7 +148,7 @@ class ConditionalDraftGraphs:
                 if graph is not None:
                     graph.begin_capture_to_if_node(self.active)
                 for index in range(start, depth):
-                    self._layer(index, width, positions, graph)
+                    self._layer(index, width, positions, graph, draft=True)
                 raw = self.states[depth][:, width - 1:width]
                 self.selected_raw.copy_(raw)
                 self.exit_depth.fill_(depth)
@@ -150,6 +159,7 @@ class ConditionalDraftGraphs:
                     states, state = self.classifier.gru(inputs, self.gru_state)
                     self.gru_state.copy_(state)
                     score = self.classifier.head(states[:, -1]).sigmoid().reshape(())
+                    self.work_counts[1].add_(1)
                     finite = torch.isfinite(score)
                     self.invalid_score.logical_or_(~finite)
                     self.active.copy_(finite & (score < self.threshold))
@@ -158,16 +168,19 @@ class ConditionalDraftGraphs:
                 if graph is not None:
                     graph.end_capture_to_conditional_node()
                 start = depth
+            self.exit_counts.index_add_(0, (self.exit_depth - 1).reshape(1), self.exit_increment)
             self.draft_output.copy_(self.model.lm_head(self.model.model.norm(self.selected_raw))[:, 0])
         else:
             for index in range(len(self.model.model.layers)):
-                self._layer(index, width, positions, graph)
+                self._layer(index, width, positions, graph, draft=False)
             raw = self.states[-1][:, :width]
             self.verify_output[:, :width].copy_(self.model.lm_head(self.model.model.norm(raw)))
 
     @torch.inference_mode()
     def prefill(self, input_ids):
         """Initialize all layers' verified prefix, excluding its final token."""
+        self.work_counts.zero_()
+        self.exit_counts.zero_()
         prefix_length = input_ids.shape[1] - 1
         if prefix_length:
             result = self.model.model(input_ids[:, :-1], use_cache=True)
@@ -175,6 +188,17 @@ class ConditionalDraftGraphs:
                 keys, values = result.past_key_values[index]
                 self.cache.key_cache[index][:, :, :prefix_length].copy_(keys)
                 self.cache.value_cache[index][:, :, :prefix_length].copy_(values)
+
+    def generation_counters(self):
+        # A single transfer at the end of generation; no new host exit checks.
+        draft, classifier, verification = self.work_counts.tolist()
+        counters = GenerationCounters(total_classifier_calls=classifier)
+        counters.record_layers(draft, "draft")
+        counters.record_layers(verification, "verification")
+        return counters
+
+    def generation_exit_counts(self):
+        return self.exit_counts.tolist()
 
     def begin_round(self, context):
         self.length = 1
@@ -188,7 +212,7 @@ class ConditionalDraftGraphs:
         self.token_ids[:, self.length].fill_(token)
         self.length += 1
 
-    def draft_logits(self, classifier, threshold, max_depth, initial_fraction=0.25):
+    def draft_logits(self, classifier, threshold, max_depth, classifier_start_layer=1):
         self.draft_graphs[self.length].replay()
         # Clone because the next graph replay reuses this output buffer.
         return self.draft_output.clone(), self.exit_depth
@@ -247,6 +271,8 @@ class GroupedDraftGraphs:
         self.draft_graphs, self.verify_graphs, self.head_graphs = {}, {}, {}
         self.completed = {start: 0 for start, _ in self.groups}
         self.length, self.base = 1, 0
+        self.counters = GenerationCounters()
+        self.exit_counts = [0] * len(model.model.layers)
         self.pool = torch.cuda.graph_pool_handle()
         stream = torch.cuda.Stream(device=self.device)
         stream.wait_stream(torch.cuda.current_stream(self.device))
@@ -315,11 +341,16 @@ class GroupedDraftGraphs:
         self.position_start.fill_(self.base + completed)
         graphs = self.draft_graphs if draft else self.verify_graphs
         graphs[start, missing].replay()
+        self.counters.record_layers(end - start, "draft" if draft else "verification")
+        if draft and end != self.checks[-1]:
+            self.counters.total_classifier_calls += 1
         self.states[end][:, completed:self.length].copy_(self.hidden_output[:, :missing])
         self.completed[start] = self.length
 
     @torch.inference_mode()
     def prefill(self, input_ids):
+        self.counters = GenerationCounters()
+        self.exit_counts = [0] * len(self.model.model.layers)
         prefix_length = input_ids.shape[1] - 1
         if prefix_length:
             result = self.model.model(input_ids[:, :-1], use_cache=True)
@@ -327,6 +358,12 @@ class GroupedDraftGraphs:
                 keys, values = result.past_key_values[index]
                 self.cache.key_cache[index][:, :, :prefix_length].copy_(keys)
                 self.cache.value_cache[index][:, :, :prefix_length].copy_(values)
+
+    def generation_counters(self):
+        return self.counters
+
+    def generation_exit_counts(self):
+        return self.exit_counts.copy()
 
     def begin_round(self, context):
         self.length, self.base = 1, context.shape[1] - 1
@@ -340,7 +377,7 @@ class GroupedDraftGraphs:
         self.states[0][:, self.length:self.length + 1].copy_(self.model.model.embed_tokens(ids))
         self.length += 1
 
-    def draft_logits(self, classifier, threshold, max_depth, initial_fraction=0.25):
+    def draft_logits(self, classifier, threshold, max_depth, classifier_start_layer=1):
         if self.gru_state is not None:
             self.gru_state.zero_()
         for start, end in self.groups:
@@ -354,6 +391,7 @@ class GroupedDraftGraphs:
                 break
         self.hidden_input[:, :1].copy_(self.states[end][:, self.length - 1:self.length])
         self.head_graphs[1].replay()
+        self.exit_counts[end - 1] += 1
         return self.draft_output.clone(), end
 
     def verification_logits(self, count):

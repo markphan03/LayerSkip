@@ -5,6 +5,7 @@
 # LICENSE file in the root directory of this source tree.
 #
 
+from dataclasses import asdict
 from typing import List, Optional
 
 import torch
@@ -12,6 +13,7 @@ import torch
 import transformers
 from self_speculation.generator_base import (
     GenerationConfig,
+    GenerationCounters,
     GenerationStrategy,
     GenerationStrategyResult,
 )
@@ -40,7 +42,9 @@ class AutoRegressiveGenerationStrategy(GenerationStrategy):
         output_ids: List[int] = []
 
         exit_query_cache = None
-        for _ in range(generation_config.max_steps):
+        counters = GenerationCounters()
+        depth = len(model.model.layers[:generation_config.exit_layer]) if generation_config.exit_layer > 0 else len(model.model.layers)
+        for step in range(generation_config.max_steps):
             if generation_config.exit_layer > 0:
                 model_output = forward_early(
                     model,
@@ -55,6 +59,7 @@ class AutoRegressiveGenerationStrategy(GenerationStrategy):
                     input_ids,
                     past_key_values,
                 )
+            counters.record_layers(depth, "prefill" if step == 0 else "decode")
             logits = model_output.logits
             if logits_processors:
                 logits = logits_processors(input_ids, logits)
@@ -77,4 +82,5 @@ class AutoRegressiveGenerationStrategy(GenerationStrategy):
         return GenerationStrategyResult(
             predicted_tokens=output_ids,
             acceptance_rate=None,
+            **asdict(counters),
         )
