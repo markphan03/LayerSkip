@@ -214,7 +214,7 @@ class VerifiedSpeculativeGenerationStrategy(GenerationStrategy):
             raise ValueError("input_ids must contain one nonempty prompt.")
         required = len(input_ids) + config.max_steps - 1
         if required > model.config.max_position_embeddings:
-            raise ValueError("The prompt and max_steps exceed the model context length.")
+            raise ValueError("The prompt and max_steps exceed the model context length. prepare_for_generation")
         capacity = min(((required + 127) // 128) * 128, model.config.max_position_embeddings)
         max_drafts = min(config.num_speculations, config.max_steps - 1)
         key = (id(model), parameter.device, parameter.dtype, capacity, max_drafts, tuple(checks), self.threshold, self.gpu_branching)
@@ -259,7 +259,8 @@ class VerifiedSpeculativeGenerationStrategy(GenerationStrategy):
         if context.ndim != 2 or context.shape[1] == 0:
             raise ValueError("input_ids must contain one nonempty prompt.")
         if context.shape[1] + config.max_steps - 1 > model.config.max_position_embeddings:
-            raise ValueError("The prompt and max_steps exceed the model context length.")
+            print(f"{context.shape[1]} + {config.max_steps - 1} > {model.config.max_position_embeddings}")
+            raise ValueError("The prompt and max_steps exceed the model context length. generate_token_ids")
         self.prepare_for_generation(model, input_ids, config)
         eos = set(eos_token_ids or [])
         model_eos = model.generation_config.eos_token_id

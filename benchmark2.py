@@ -12,10 +12,10 @@ The original benchmark.py is intentionally kept unchanged.
 #   --generation_strategy self_speculative \
 #   --exit_layer 8 \
 #   --num_speculations 6 \
-#   --max_steps 256 \
-#   --sample false \
+#   --max_steps 512 \
+#   --sample true \
 #   --seed 42 \
-#   --warmup 1 \
+#   --warmup 0 \
 #   --output logs/benchmark2_fixed.json
 
 # # Classifier-controlled LayerSkip, after extending benchmark.py
@@ -26,14 +26,14 @@ The original benchmark.py is intentionally kept unchanged.
 #   --evaluation_file benchmark_inputs_200.jsonl \
 #   --generation_strategy early_exit_speculative \
 #   --ee_checkpoint checkpoints/ee_cnn/best_model/final.pt \
-#   --ee_threshold 0.5 \
+#   --ee_threshold 0.8 \
 #   --ee_classifier_start_layer 1 \
 #   --exit_layer 8 \
 #   --num_speculations 6 \
-#   --max_steps 256 \
-#   --sample false \
+#   --max_steps 512 \
+#   --sample true \
 #   --seed 42 \
-#   --warmup 1 \
+#   --warmup 0 \
 #   --output logs/benchmark2_classifier.json
 
 from dataclasses import asdict, dataclass, field
@@ -300,6 +300,11 @@ def main(args, bench, generate_args, config):
         return {"num_examples": len(examples), "inputs_sha256": digest}
     transformers.utils.logging.set_verbosity_error()
     model, tokenizer = load_model_and_tokenizer(args, device=device)
+
+    model.config.max_position_embeddings = 4096
+
+    print("model.config.max_position_embeddings:", model.config.max_position_embeddings)
+
     metrics, summary, runs = benchmark(model, tokenizer, examples, bench, generate_args, config, args.seed)
     report = {
         "arguments": asdict(args), "benchmark_arguments": asdict(bench),
